@@ -1,0 +1,12 @@
+{
+  "name": "happy_project",
+  "version": "1.0.0",
+  "description": "This application will serve as an auto-ship solution for gathering the required information needed to ship Satcom Direct's products both domestically and internationally",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Kyle Miller",
+  "license": "ISC"
+}
