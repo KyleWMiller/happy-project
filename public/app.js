@@ -1,9 +1,11 @@
 (function() {
+
+  
 angular.module('happyApp', [])
   .controller('projectHappyCtl', projectHappyController)
 
   function projectHappyController() {
-    var this = 
+    var this =
     var fromAddress = {
       name: "Satcom Direct",
       street1:"1050 Satcom Lane",
