@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app='happyApp'>
+
+<head>
+    <meta charset="utf-8">
+    <title>Project Happy</title>
+    <!-- Compiled and minified Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+</head>
+
+<body ng-controller="projectHappyCtl as projHpyctl" class="container cyan darken-3 white-text">
+
+    <div class="row">
+        <div class="">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col l6">
+        <!--  -->
+            <h2>Customer address</h2>
+            <form class="blue-grey darken-4">
+                <input ng-model="name" placeholder="Name">
+                <input ng-model="street1" placeholder="Street 1">
+                <input ng-model="street2" placeholder="Street 2">
+                <input ng-model="city" placeholder=" City">
+                <input ng-model="state" placeholder="State">
+                <input ng-model="zip" placeholder="zip">
+                <input ng-model="country" placeholder="country">
+            </form>
+        </div>
+        <div class="col l6">
+            <h2>Satcom Direct</h2>
+            <h4>1901 Highway A1A</h4>
+            <h4>Satellite Beach</h4>
+            <h4>FL</h4>
+            <h4>32937</h4>
+            <h4>+1-321-777-3000</h4>
+            <h4>www.satcomdirect.com</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <ul id="dropdown2" class="dropdown-content">
+            <li><a href="#!">one<span class="badge">1</span></a></li>
+            <li><a href="#!">two<span class="new badge">1</span></a></li>
+            <li><a href="#!">three</a></li>
+        </ul>
+        <a class="btn dropdown-button" href="#!" data-activates="dropdown2">Dropdown<i class="mdi-navigation-arrow-drop-down right"></i></a>
+        <select class="" name="">
+        <option value="SDR">SDR</option>
+        <option value="Mounting Plate">Mounting Plate</option>
+      </select>
+        <input type="text" name="product" label="">
+        <input type="text" name="product">
+        <input type="text" name="product">
+    </div>
+    <!-- AngularJS 1.5 -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+    <!-- Compiled and minified Materalize JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+</body>
+
+</html>
