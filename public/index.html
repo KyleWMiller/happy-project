@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
 </head>
 
-<body ng-controller="projectHappyCtl as projHpyctl" class="container cyan darken-3 white-text">
+<body ng-controller="projectHappyCtl as phc" class="container cyan darken-3 white-text">
 
     <div class="row">
         <div class="">
@@ -31,13 +31,15 @@
             </form>
         </div>
         <div class="col l6">
-            <h2>Satcom Direct</h2>
-            <h4>1901 Highway A1A</h4>
-            <h4>Satellite Beach</h4>
-            <h4>FL</h4>
-            <h4>32937</h4>
-            <h4>+1-321-777-3000</h4>
-            <h4>www.satcomdirect.com</h4>
+            <h2>{{phc.fromAddress.name}}</h2>
+            <div class="blue-grey darken-4">
+              <h4>{{phc.fromAddress.street1}}</h4>
+              <h4>{{phc.fromAddress.city}}</h4>
+              <h4>{{phc.fromAddress.state}}</h4>
+              <h4>{{phc.fromAddress.country}}</h4>
+              <h4>{{phc.fromAddress.phone}}</h4>
+              <h4>{{phc.fromAddress.email}}</h4>
+            </div>
         </div>
     </div>
 

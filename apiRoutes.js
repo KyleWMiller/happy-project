@@ -1,15 +1,20 @@
 var
     apiRouter = require('express').Router(),
-    pctrl     = require('./bcontroller/product_route_controller.js'),
-    ep        = require('easyPostRoutes.js')
+    ep        = require('./bcontroller/easyPost.js')
+
+
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
-// route to create user //
+//                 Easy Post routes                  //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 
+
+// Verity Address
 apiRouter.route('/epAddress')
-  .post(validate )
+    .post(ep.verifi)
 
-
+//  Create Shippment
+apiRouter.route('/epShipment')
+    .post(ep.create)
 
 module.exports = apiRouter
