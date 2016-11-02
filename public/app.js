@@ -1,7 +1,7 @@
 (function() {
 
 
-angular.module('happyApp', [])
+angular.module('happyApp', ['epController','epFactory'])
   .controller('projectHappyCtl', projectHappyController)
 
 

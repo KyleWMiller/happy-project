@@ -59,7 +59,8 @@ module.exports = {
     },
 
     createParcel: function(req,res){
-      console.log(req.body)
+      console.log('request to create parcel recieved')
+
       easypost.Parcel.create({
          parcel : req.body
         }, function(err,response){
@@ -73,7 +74,6 @@ module.exports = {
 
     createShipment: function (req, res) {
 
-      console.log('request to create parcel recieved')
       console.log(req.body)
       easypost.Shipment.create({
           to_address: req.body.toAddress,
@@ -81,15 +81,19 @@ module.exports = {
           parcel: req.body.parcel
               // customs_info: customsInfo
       }, function(err, shipment) {
-          // buy postage label with one of the rate objectsato
+          // buy postage label with one of the rate objects
+          console.log(shipment.rates)
           console.log(shipment)
           // shipment.buy({
-          //     rate: shipment.lowestRate(['USPS', 'ups']),
-          //     insurance: 100.00},
-          //  function(err, shipment) {
-          //     console.log(shipment.tracking_code);
-          //     console.log(shipment.postage_label.label_url);
-          // })
+          //     rate: {}
+          // }, function(err, shipment) {
+          //     console.log('========================================')
+          //     // console.log(err)
+          //     console.log(shipment.rates)
+          //     console.log('========================================')
+          //     console.log(shipment.tracking_code)
+          //     console.log(shipment.postage_label.label_url)
+          // });
       })
     }
   }

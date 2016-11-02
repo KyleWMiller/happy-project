@@ -1,6 +1,6 @@
 var
     apiRouter = require('express').Router(),
-    ep        = require('./bcontroller/easyPost.js')
+    ep = require('./bcontroller/easyPost.js')
 
 
 
@@ -23,7 +23,8 @@ apiRouter.route('/epShipment')
     .post(ep.createShipment)
 
 // Buy Rate
-
+// apiRouter.route('/epBuy')
+//     .post(ep.buyShipment)
 
 
 // Test Server link
