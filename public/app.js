@@ -6,7 +6,7 @@ angular.module('happyApp', [])
 
 
 
-  console.log(fromAddress, toAddress, parcel)
+  // console.log(fromAddress, toAddress, parcel)
 
   function projectHappyController() {
     var phc = this
@@ -23,7 +23,7 @@ angular.module('happyApp', [])
     }
     phc.toAddress = {
       name: "George Costanza",
-      company: "Vandelay Industries"
+      company: "Vandelay Industries",
       street1: "1 E 161st St.",
       city: "Bronx",
       state: "NY",

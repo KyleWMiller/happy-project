@@ -4,17 +4,33 @@ var
 
 
 
+
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 //                 Easy Post routes                  //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 
 
-// Verity Address
+// Create To/From Address
 apiRouter.route('/epAddress')
-    .post(ep.verifi)
+    .post(ep.verifyAddress)
+
+// Create Parcel
+apiRouter.route('/epParcel')
+    .post(ep.createParcel)
 
 //  Create Shippment
 apiRouter.route('/epShipment')
-    .post(ep.create)
+    .post(ep.createShipment)
+
+// Buy Rate
+
+
+
+// Test Server link
+// apiRouter.route('/')
+//   .get(function(req,res){
+//     res.send('hola')
+//   })
+
 
 module.exports = apiRouter

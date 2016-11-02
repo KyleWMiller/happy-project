@@ -3,8 +3,8 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 
 
-var easypost = require('node-easypost')(apiKey),
-    apiKey = "SXMggE7i1n5Eq6CAlXQNYw"
+var apiKey = "SXMggE7i1n5Eq6CAlXQNYw",
+    easypost = require('node-easypost')(apiKey)
 
 // Objects needed and models
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
@@ -19,11 +19,11 @@ var easypost = require('node-easypost')(apiKey),
 //         email: "SDR@satcomdirect.com"
 //     },
 //     toAddress = {
-//         name: "Kyle Miller",
-//         street1: "165 Maplewood N",
-//         city: "Kyle",
-//         state: "TX",
-//         zip: "78640",
+//         name: "Mr President",
+//         street1: "1600 Pennsylvania Ave NW",
+//         city: "Washington",
+//         state: "DC",
+//         zip: "2500",
 //         country: "US",
 //         phone: "970-964-8364",
 //         email: "miller.kwill@gmail.com"
@@ -35,45 +35,61 @@ var easypost = require('node-easypost')(apiKey),
 //         weight: "176"
 //     }
 
-//TO DO: Troubleshoot `fromAddress.verify : "Not a Function"`
 module.exports = {
-    verifi: function (request, response){
+    verifyAddress: function (req, res){
+
       console.log('request to verify address recieved')
-      // console.log(request.body)
-      console.log(request.body.fromAddress)
-      var fromAddress = request.body.fromAddress
-      easypost.Address.create(fromAddress, function(err, fromAddress) {
-        console.log(fromAddress, "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-        fromAddress.verify(function(err, response) {
-        if (err) {
-          console.log('Address is invalid.')
-        } else if (response.message !== undefined && response.message != null) {
-          console.log('Address is valid but has an issue:', response.message)
-          var verifiedAddress = response.address
-        } else {
-          var verifiedAddress = response
-        }
-          console.log(verifiedAddress)
 
+        var address = easypost.Address.create(req.body, function(err, fromAddress) {
+          var verifiedAddress = {}
+          fromAddress.verify(function (err,response){
+            console.log("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+            if (err) {
+              console.log('Address is invalid.')
+            } else if (response.message !== undefined && response.message != null) {
+              console.log('Address is valid but has an issue:', response.message)
+              var verifiedAddress = response.address
+            } else {
+
+              verifiedAddress = response.address
+            }
+            console.log(verifiedAddress)
+          })
+        })
+    },
+
+    createParcel: function(req,res){
+      console.log(req.body)
+      easypost.Parcel.create({
+         parcel : req.body
+        }, function(err,response){
+          if(err) {
+            console.log(err)
+          } else {
+            console.log(response)
+          }
       })
-    })
-  },
+    },
 
-    create: function (req, res) {
+    createShipment: function (req, res) {
+
+      console.log('request to create parcel recieved')
+      console.log(req.body)
       easypost.Shipment.create({
-          to_address: toAddress,
-          from_address: fromAddress,
-          parcel: parcel
+          to_address: req.body.toAddress,
+          from_address: req.body.fromAddress,
+          parcel: req.body.parcel
               // customs_info: customsInfo
       }, function(err, shipment) {
-          // buy postage label with one of the rate objects
-          shipment.buy({
-              rate: shipment.lowestRate(['USPS', 'ups']),
-              insurance: 100.00
-          }, function(err, shipment) {
-              console.log(shipment.tracking_code);
-              console.log(shipment.postage_label.label_url);
-          });
+          // buy postage label with one of the rate objectsato
+          console.log(shipment)
+          // shipment.buy({
+          //     rate: shipment.lowestRate(['USPS', 'ups']),
+          //     insurance: 100.00},
+          //  function(err, shipment) {
+          //     console.log(shipment.tracking_code);
+          //     console.log(shipment.postage_label.label_url);
+          // })
       })
     }
   }
