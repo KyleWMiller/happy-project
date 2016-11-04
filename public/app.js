@@ -1,7 +1,7 @@
 (function() {
 
 
-angular.module('happyApp', ['epController','epFactory'])
+angular.module('happyApp', ['epControllers','epFactory'])
   .controller('projectHappyCtl', projectHappyController)
 
 
@@ -13,10 +13,10 @@ angular.module('happyApp', ['epController','epFactory'])
 
     phc.fromAddress= {
       company: "Satcom Direct",
-      street1: "1901 Highway A1A",
-      city: "Satellite Beach",
+      street1: "1050 Satcom Lane",
+      city: "Melbourne",
       state: "FL",
-      zip: "32937",
+      zip: "32940",
       country: "US",
       phone: "+1-321-777-3000",
       email: "SDR@satcomdirect.com"

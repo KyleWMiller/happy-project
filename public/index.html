@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
 </head>
 
-<body ng-controller="projectHappyCtl as phc" class="container cyan darken-3 white-text">
+<body class="container cyan darken-3 white-text">
 
     <div class="row">
         <div class="">
@@ -17,20 +17,22 @@
     </div>
 
     <div class="row">
-        <div class="col l6">
+        <div ng-controller="easypostController as epc" class="col l6">
         <!--  -->
             <h2>Customer address</h2>
             <form class="blue-grey darken-4">
-                <input ng-model="name" placeholder="Name">
-                <input ng-model="street1" placeholder="Street 1">
-                <input ng-model="street2" placeholder="Street 2">
-                <input ng-model="city" placeholder=" City">
-                <input ng-model="state" placeholder="State">
-                <input ng-model="zip" placeholder="zip">
-                <input ng-model="country" placeholder="country">
+                <input ng-model="epc.address.name" placeholder="Name">
+                <input ng-model="epc.address.street1" placeholder="Street 1">
+                <input ng-model="epc.address.street2" placeholder="Street 2">
+                <input ng-model="epc.address.city" placeholder=" City">
+                <input ng-model="epc.address.state" placeholder="State">
+                <input ng-model="epc.address.zip" placeholder="Zip">
+                <input ng-model="epc.address.country" placeholder="Country">
+                <input ng-model="epc.address.phone" placeholder="Phone">
+                <a class="waves-effect waves-light btn" ng-click="epc.sendAddress()">Verify</a>
             </form>
         </div>
-        <div class="col l6">
+        <div ng-controller="projectHappyCtl as phc" class="col l6">
             <h2>{{phc.fromAddress.company}}</h2>
             <div class="blue-grey darken-4">
               <h4>{{phc.fromAddress.street1}}</h4>
@@ -62,7 +64,13 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
     <!-- Compiled and minified Materalize JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-    <script type="text/javascript" src="app.js"></script>
+  <!-- Main JS file -->
+  <script type="text/javascript" src="app.js"></script>
+  <!-- Supporting JS files -->
+  <script type="text/javascript" src="js/controllers/epController.js"></script>
+  <script type="text/javascript" src="js/factories/epFactory.js">
+
+  </script>
 </body>
 
 </html>
