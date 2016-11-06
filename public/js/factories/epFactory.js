@@ -7,13 +7,12 @@
     easypostFactory.$inject = ['$http']
 
     function easypostFactory($http) {
-        var epf = this,
-            address = {},
+        var address = {},
             addressUrl = 'api/v1/epAddress'
 
         address.send = function(address) {
             return $http.post(addressUrl, address)
-            // epf.resId = address
+                // epf.resId = address
             console.log(address, "=====")
         }
         return address

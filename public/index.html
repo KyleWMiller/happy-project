@@ -6,9 +6,12 @@
     <title>Project Happy</title>
     <!-- Compiled and minified Materialize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <!-- Jquery 3.1 -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+
 </head>
 
-<body class="container cyan darken-3 white-text">
+<body ng-controller="projectHappyCtl as phc" class="cyan darken-3 white-text">
 
     <div class="row">
         <div class="">
@@ -17,60 +20,119 @@
     </div>
 
     <div class="row">
-        <div ng-controller="easypostController as epc" class="col l6">
-        <!--  -->
-            <h2>Customer address</h2>
-            <form class="blue-grey darken-4">
-                <input ng-model="epc.address.name" placeholder="Name">
-                <input ng-model="epc.address.street1" placeholder="Street 1">
-                <input ng-model="epc.address.street2" placeholder="Street 2">
-                <input ng-model="epc.address.city" placeholder=" City">
-                <input ng-model="epc.address.state" placeholder="State">
-                <input ng-model="epc.address.zip" placeholder="Zip">
-                <input ng-model="epc.address.country" placeholder="Country">
-                <input ng-model="epc.address.phone" placeholder="Phone">
-                <a class="waves-effect waves-light btn" ng-click="epc.sendAddress()">Verify</a>
+        <div ng-controller="easypostController as epc" class="col l5 offset-l1 blue-grey darken-4">
+            <!--  -->
+            <h3>To:</h3>
+            <form>
+                <div class="col l12 s12">
+                    <input ng-model="epc.address.name" placeholder="Name">
+                </div>
+                <div class="col l12 s12">
+                    <input ng-model="epc.address.street1" placeholder="Street 1">
+                </div>
+                <div class="col l12 s12">
+                    <input ng-model="epc.address.street2" placeholder="Street 2">
+                </div>
+                <div class="col l5 s6">
+                    <input ng-model="epc.address.city" placeholder=" City">
+                </div>
+                <div class="col l3 s6">
+                    <input ng-model="epc.address.state" placeholder="State">
+                </div>
+                <div class="col l4 s6">
+                    <input ng-model="epc.address.zip" placeholder="Zip">
+                </div>
+                <div class="col l6 s6">
+                    <input ng-model="epc.address.country" placeholder="Country">
+                </div>
+                <div class="col l6 s12">
+                    <input ng-model="epc.address.phone" placeholder="Phone">
+                </div>
+                <div class="right-align">
+                    <a class="waves-effect waves-light btn col l4 offset-l7" ng-click="epc.sendAddress()">Verify</a>
+                </div>
             </form>
         </div>
-        <div ng-controller="projectHappyCtl as phc" class="col l6">
-            <h2>{{phc.fromAddress.company}}</h2>
-            <div class="blue-grey darken-4">
-              <h4>{{phc.fromAddress.street1}}</h4>
-              <h4>{{phc.fromAddress.city}}</h4>
-              <h4>{{phc.fromAddress.state}}</h4>
-              <h4>{{phc.fromAddress.country}}</h4>
-              <h4>{{phc.fromAddress.phone}}</h4>
-              <h4>{{phc.fromAddress.email}}</h4>
-            </div>
+        <div class="col l5 blue-grey darken-4">
+            <h3>From:</h3>
+            <form>
+                <div class="col l12 s12">
+                    <input value="Satcom Direct" placeholder="Satcom Direct" ng-model="epc.address.company">
+                </div>
+                <div class="col l12 s12">
+                    <input value="1050 Satcom Lane" placeholder="1050 Satcom Lane" ng-model="epc.address.street1">
+                </div>
+                <div class="col l12 s12">
+                    <input placeholder="Street 2" ng-model="epc.address.street2">
+                </div>
+                <div class="col l5 s6">
+                    <input value="Melborne" placeholder="Melbourne" ng-model="epc.address.city">
+                </div>
+                <div class="col l3 s6">
+                    <input value="FL" placeholder="FL" ng-model="epc.address.state">
+                </div>
+                <div class="col l4 s6">
+                    <input value="32940" placeholder="32940" ng-model="epc.address.zip">
+                </div>
+                <div class="col l6 s6">
+                    <input value="US" placeholder="US" ng-model="epc.address.country">
+                </div>
+                <div class="col l6 s12">
+                    <input value="+1-321-777-3000" placeholder="+1 (321) 777-3000" ng-model="epc.address.phone">
+                </div>
+                <a class="waves-effect waves-light btn col l4 offset-l7" ng-click="epc.sendAddress()">Verify</a>
+            </form>
         </div>
     </div>
 
     <div class="row">
-        <ul id="dropdown2" class="dropdown-content">
-            <li><a href="#!">one<span class="badge">1</span></a></li>
-            <li><a href="#!">two<span class="new badge">1</span></a></li>
-            <li><a href="#!">three</a></li>
-        </ul>
-        <a class="btn dropdown-button" href="#!" data-activates="dropdown2">Dropdown<i class="mdi-navigation-arrow-drop-down right"></i></a>
-        <select class="" name="">
-        <option value="SDR">SDR</option>
-        <option value="Mounting Plate">Mounting Plate</option>
-      </select>
-        <input type="text" name="product" label="">
-        <input type="text" name="product">
-        <input type="text" name="product">
-    </div>
-    <!-- AngularJS 1.5 -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
-    <!-- Compiled and minified Materalize JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-  <!-- Main JS file -->
-  <script type="text/javascript" src="app.js"></script>
-  <!-- Supporting JS files -->
-  <script type="text/javascript" src="js/controllers/epController.js"></script>
-  <script type="text/javascript" src="js/factories/epFactory.js">
 
-  </script>
+        <div class="col l7 offset-l1">
+            <h3>Products</h3>
+            <div class="container">
+                <div class="row">
+                    <div class="">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <div class="container">
+        <div ng-controller="addressController as addc" class="row">
+            <a class="waves-effect waves-light btn" ng-click="addc.getAdds()">IDs</a>
+            <script type="text/javascript">
+                $(document).ready(addc.getAdds)
+            </script>
+            <h4>Address Ids</h4>
+            <div class="center-align col l5">
+                <div ng-controller="ExampleController">
+                    <form name="myForm">
+                        <label for="repeatSelect"> Repeat select: </label>
+                        <select ng-model="data.repeatSelect">
+                          <option ng-repeat="address in addc.addresses" value="{{option.id}}">{{address.id}} : {{address.name}}{{address.company}}</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <!-- AngularJS 1.5 -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+        <!-- Compiled and minified Materalize JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+        <!-- Main JS file -->
+        <script type="text/javascript" src="app.js"></script>
+        <!-- Supporting JS files -->
+        <script type="text/javascript" src="js/controllers/epController.js"></script>
+        <script type="text/javascript" src="js/factories/epFactory.js"></script>
+        <script type="text/javascript" src="js/controllers/addController.js"></script>
+        <script type="text/javascript" src="js/factories/addFactory.js">
+        </script>
 </body>
 
 </html>

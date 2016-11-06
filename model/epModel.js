@@ -1,12 +1,12 @@
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
-// Schema for Products
+// Schemas for EasyPost
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
 
-
+// formats information recieved from ep.verifyAddress
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     address = new Schema ({
-      id: ,
+      id: String,
       object: String,
       created_at: String,
       updated_at: String,

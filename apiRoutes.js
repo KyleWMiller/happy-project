@@ -1,6 +1,7 @@
 var
     apiRouter = require('express').Router(),
-    ep = require('./bcontroller/easyPost.js')
+    ep = require('./bcontroller/easyPost.js'),
+    dbq = require('./bcontroller/db.js')
 
 
 
@@ -26,12 +27,9 @@ apiRouter.route('/epShipment')
 // apiRouter.route('/epBuy')
 //     .post(ep.buyShipment)
 
+apiRouter.route('/addresses')
+    .get(dbq.getAdds)
 
-// Test Server link
-// apiRouter.route('/')
-//   .get(function(req,res){
-//     res.send('hola')
-//   })
 
 
 module.exports = apiRouter

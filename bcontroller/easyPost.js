@@ -5,38 +5,11 @@
 
 var apiKey   = "SXMggE7i1n5Eq6CAlXQNYw",
     easypost = require('node-easypost')(apiKey),
-    db       = require('../models/epModel.js')
-
-// Objects needed and models
-// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
-// var fromAddress = {
-//         name: "Satcom Direct",
-//         street1: "1901 Highway A1A",
-//         city: "Satellite Beach",
-//         state: "FL",
-//         zip: "32937",
-//         country: "US",
-//         phone: "+1-321-777-3000",
-//         email: "SDR@satcomdirect.com"
-//     },
-//     toAddress = {
-//         name: "Mr President",
-//         street1: "1600 Pennsylvania Ave NW",
-//         city: "Washington",
-//         state: "DC",
-//         zip: "2500",
-//         country: "US",
-//         phone: "970-964-8364",
-//         email: "miller.kwill@gmail.com"
-//     },
-//     parcel = {
-//         height: "15",
-//         width: "10",
-//         length: "7",
-//         weight: "176"
-//     }
+    db       = require('../model/epModel.js')
 
 module.exports = {
+    // verifyAddress sends the sser's input to the EasyPost API and stores that
+    //   response in the addresses DB.
     verifyAddress: function(req, res) {
 
       console.log(req.body)
@@ -71,7 +44,7 @@ module.exports = {
 
         })
     },
-
+    // createParcel returns the parcel id for Shipment
     createParcel: function(req, res) {
         console.log('request to create parcel recieved')
 
@@ -86,6 +59,7 @@ module.exports = {
         })
     },
 
+    //  TODO: Not FKn blow
     createShipment: function(req, res) {
 
         console.log(req.body)
