@@ -29,5 +29,5 @@ var mongoose = require('mongoose'),
     })
 
 module.exports = {
-  Address: mongoose.model('Adresses', address)
+  Address: mongoose.model('Addresses', address)
 }

@@ -19,8 +19,8 @@
         </div>
     </div>
 
-    <div class="row">
-        <div ng-controller="easypostController as epc" class="col l5 offset-l1 blue-grey darken-4">
+    <div ng-controller="easypostController as epc" class="row">
+        <div class="col l5 offset-l1 blue-grey darken-4">
             <!--  -->
             <h3>To:</h3>
             <form>
@@ -80,7 +80,7 @@
                 <div class="col l6 s12">
                     <input value="+1-321-777-3000" placeholder="+1 (321) 777-3000" ng-model="epc.address.phone">
                 </div>
-                <a class="waves-effect waves-light btn col l4 offset-l7" ng-click="epc.sendAddress()">Verify</a>
+                <!-- <a class="waves-effect waves-light btn col l4 offset-l7" ng-click="epc.sendAddress()">Verify</a> -->
             </form>
         </div>
     </div>
@@ -89,11 +89,25 @@
 
         <div class="col l7 offset-l1">
             <h3>Products</h3>
-            <div class="container">
-                <div class="row">
-                    <div class="">
+            <div class="row">
+                <th>
+                  <td>
+                    Product
+                  </td>
+                  <td>
+                    serial#
+                  </td>
+                </th>
+                <tr>
+                  <select>
+                    <option value="SDR">SDR</option>
+                    <option value="Wifi antenna">Wifi Antenna</option>
+                  </select>
+                </tr>
+            </div>
+            <div class="row">
+                <div class="">
 
-                    </div>
                 </div>
             </div>
         </div>
