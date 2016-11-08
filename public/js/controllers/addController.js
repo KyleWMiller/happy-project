@@ -12,9 +12,9 @@
         addc.addresses = []
         addc.getAdds = function() {
 
-            addressFactory.getAll()
+            addressFactory.addressList()
                 .then(function(res) {
-                    console.log("Successfully got adds")
+                    // console.log("Successfully got adds")
                     addc.addresses = res.data
                     // console.log(addc.addresses)
                 })

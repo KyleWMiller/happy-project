@@ -10,9 +10,9 @@
         var addressId = {},
             apiUrl = '/api/v1/addresses'
 
-        addressId.getAll = function() {
-            console.log('getting Adds')
-            console.log('add list')
+        addressId.addressList = function() {
+            // console.log('getting Adds')
+            // console.log('add list')
             return $http.get(apiUrl)
         }
         return addressId
