@@ -4,7 +4,6 @@
     angular.module('addController', [])
         .controller('addressController', addressController)
 
-    addressController.$inject = ['addressFactory']
 
     function addressController(addressFactory) {
         var addc = this
@@ -16,7 +15,7 @@
                 .then(function(res) {
                     // console.log("Successfully got adds")
                     addc.addresses = res.data
-                    // console.log(addc.addresses)
+                        // console.log(addc.addresses)
                 })
         }
 

@@ -9,8 +9,18 @@ var mongoose = require('mongoose'),
         id: String,
         name: String,
         company: String
+    }),
+    parcelRes = new Schema({
+        id: String,
+        created_at: String,
+        length: String,
+        width: String,
+        height: String,
+        weight: String
     })
 
+
 module.exports = {
-    Add = mongoose.model('Adds', addressResId)
+    Add = mongoose.model('Adds', addressResId),
+    Parcel = mongoose.model('Parcels', parcelRes)
 }

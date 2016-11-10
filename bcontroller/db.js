@@ -15,6 +15,16 @@ module.exports = {
                     res.json(add)
                 }
             })
+    },
+    getParcels: function(req, res) {
+        console.log('getting Parcels')
+        dbq.Parcel.find({}, function(err, parcels) {
+            if (err) {
+                res.json(err)
+            } else {
+                res.json(parcels)
+            }
+        })
     }
 
 }

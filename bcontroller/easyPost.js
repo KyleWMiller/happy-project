@@ -3,19 +3,19 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 
 
-var apiKey   = "SXMggE7i1n5Eq6CAlXQNYw",
+var apiKey = "SXMggE7i1n5Eq6CAlXQNYw",
     easypost = require('node-easypost')(apiKey),
-    db       = require('../model/epModel.js')
+    db = require('../model/epModel.js')
 
 module.exports = {
     // verifyAddress sends the sser's input to the EasyPost API and stores that
     //   response in the addresses DB.
     verifyAddress: function(req, res) {
 
-      console.log(req.body)
+        console.log(req.body)
 
         console.log('request to verify address recieved')
-        // console.log(req.body)
+            // console.log(req.body)
         var address = easypost.Address.create(req.body, function(err, fromAddress) {
             var verifiedAddress = {}
             fromAddress.verify(function(err, response) {
@@ -28,14 +28,16 @@ module.exports = {
                 } else {
                     verifiedAddress = response.address
                     console.log(verifiedAddress)
-                    // Send the address to the DB for storage
+                        // Send the address to the DB for storage
                     var address = new db.Address(verifiedAddress)
-                    address.save({verifiedAddress}, function(err,address){
-                      if(err) {
-                        res.json(err)
-                      } else {
-                        res.json(address)
-                      }
+                    address.save({
+                        verifiedAddress
+                    }, function(err, address) {
+                        if (err) {
+                            res.json(err)
+                        } else {
+                            res.json(address)
+                        }
                     })
 
                 }
@@ -50,11 +52,21 @@ module.exports = {
 
         easypost.Parcel.create({
             parcel: req.body
-        }, function(err, response) {
+        }, function(err, res) {
             if (err) {
                 console.log(err)
             } else {
-                console.log(response)
+                console.log(res)
+                var parcel = new db.Parcel(res)
+                parcel.save({
+                  res
+                }, function(err, parcel) {
+                  if(err) {
+                    res.json(err)
+                  } else {
+                    res.json(parcel)
+                  }
+                })
             }
         })
     },

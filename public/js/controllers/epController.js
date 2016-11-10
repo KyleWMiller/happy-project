@@ -4,7 +4,6 @@
     angular.module('epControllers', [])
         .controller('easypostController', easypostController)
 
-    easypostController.$inject = ['easypostFactory']
     function easypostController(easypostFactory) {
         var epc = this
 
