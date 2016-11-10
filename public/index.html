@@ -134,38 +134,36 @@
     </div>
 
     <!-- container for testing information -->
-    <div class="container">
-      <div ng-controller="shipmentController as sc">
+    <div ng-controller="projectHappyController as phc" class="container">
+        <div>
 
-        <!-- addressController controlls the flow of address back from the db -->
-        <div ng-controller="addressController as addc" ng-init="addc.getAdds()" class="row">
+            <!-- addressController controlls the flow of address back from the db -->
+            <div ng-init="phc.getAdds()" class="row">
 
-            <!-- <a class="waves-effect waves-light btn" ng-click="addc.getAdds()">IDs</a> -->
-            <h4>Address Ids</h4>
-            <div class="center-align">
-                <div ng-repeat="address in addc.addresses">
+                <!-- <a class="waves-effect waves-light btn" ng-click="addc.getAdds()">IDs</a> -->
+                <h4>Address Ids</h4>
+                <div ng-repeat="address in phc.addresses">
                     {{address.name}}{{address.company}} : {{address.id}}
 
                 </div>
             </div>
-        </div>
 
-        <div ng-controller="parcelController as pc" ng-init="pc.getParcelIds()" class="row">
+            <div ng-init="phc.getParcels()" class="row">
 
-            <!-- <a class="waves-effect waves-light btn" ng-click="pc.getParcelIds()">IDs</a> -->
-            <h4>Parcel Ids</h4>
-            <div class="center-align">
-                <div ng-repeat="parcel in pc.parcels">
+                <!-- <a class="waves-effect waves-light btn" ng-click="pc.getParcelIds()">IDs</a> -->
+                <h4>Parcel Ids</h4>
+                <div ng-repeat="parcel in phc.parcels">
                     {{parcel.id}}
                 </div>
             </div>
+
+            <div class="row center align">
+                <h5>shipment</h5> {{phc.shipment.fromAddress}} {{phc.shipment.toAddress}} {{phc.shipment.parcel}}
+            </div>
+
         </div>
 
-        <div>
-          {{sc.shipment}}
-        </div>
-
-      </div>
+    </div>
     </div>
 
 
@@ -179,13 +177,11 @@
     <!-- EasyPost -->
     <script type="text/javascript" src="js/controllers/epController.js"></script>
     <script type="text/javascript" src="js/factories/epFactory.js"></script>
-    <!-- Shipments -->
-    <script type="text/javascript" src="js/controllers/shipController.js"></script>
+    <!-- HappyShip Controller -->
+    <script type="text/javascript" src="js/controllers/projectHappyController.js"></script>
     <!-- Addresses -->
-    <script type="text/javascript" src="js/controllers/addController.js"></script>
     <script type="text/javascript" src="js/factories/addFactory.js"></script>
     <!-- Parcels -->
-    <script type="text/javascript" src="js/controllers/parcelController.js"></script>
     <script type="text/javascript" src="js/factories/parcelFactory.js"></script>
 </body>
 

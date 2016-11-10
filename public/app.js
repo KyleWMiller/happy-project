@@ -1,7 +1,7 @@
 (function() {
 
 
-    angular.module('happyApp', ['epControllers', 'epFactory', 'shipController', 'addController', 'addFactory', 'parcelController', 'parcelFactory'])
-      
+    angular.module('happyApp', ['epControllers', 'epFactory', 'projectHappyCtrl', 'addFactory', 'parcelFactory'])
+
 
 }());
