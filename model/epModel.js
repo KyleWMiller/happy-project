@@ -34,6 +34,20 @@ var mongoose = require('mongoose'),
         width: String,
         height: String,
         weight: String
+    }),
+    shipment = new Schema({
+        created_at: String,
+        updated_at: String,
+        customs_info: Object,
+        from_address: Object,
+        insurance: Object,
+        parcel: Object,
+        rates: Array,
+        to_address: Object,
+        usps_zone: Number,
+        return_address: Object,
+        buyer_address: Object,
+        id: String
     })
 
 module.exports = {
