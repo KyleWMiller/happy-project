@@ -2,38 +2,62 @@
 //                    Easy Post                      //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 
+// Helper functions - primarily Promise wrappers for natively async functions
 
-var apiKey = "SXMggE7i1n5Eq6CAlXQNYw",
-    easypost = require('node-easypost')(apiKey),
-    db = require('../model/epModel.js')
+// this function's construction assumes that toAddress has a similar .verify() method
+// and has been generified accordingly
+const addressCreate = (req) => {
+  return new Promise((fulfill, reject) => {
+    easypost.Address.create(req.body, (err, address) => {
+      if(err) {
+        reject(err)
+      }
+      fulfill(address)
+    })
+  })
+}
+
+const addressVerify = (address) => {
+    return new Promise((fulfill, reject) => {
+          address.verify((err, response) => {
+              if(err) {
+                  reject(err)
+              } else if (!response.address) {
+                  reject(`address.verify() returned without address: ${response}`)
+              }
+              fulfill(response)
+          })
+      })
+}
+
+const addressPersist = (db, address) => {
+  return new Promise((fulfill, reject) => {
+    const addressToPersist = new db.Address(address)
+    addressToPersist.save((err, savedAddress) => {
+      if(err) {
+        reject(err)
+      }
+      fulfill(savedAddress)
+    })
+  })
+}
+// /helpers
+
+const easypost = require('node-easypost')(apiKey),
+        apiKey = "SXMggE7i1n5Eq6CAlXQNYw",
+            db = require('../model/epModel.js')
 
 module.exports = {
-    // verifyAddress sends the sser's input to the EasyPost API and stores that
+    // verifyAddress sends the user's input to the EasyPost API and stores that
     //   response in the addresses DB.
-    verifyAddress: function(req, res) {
-        console.log('request to verify address recieved')
-        var address = easypost.Address.create(req.body, function(err, fromAddress) {
-            var verifiedAddress = {}
-            fromAddress.verify(function(err, response) {
-                if (err) {
-                } else if (response.message !== undefined && response.message != null) {
-                    var verifiedAddress = response.address
-                } else {
-                    verifiedAddress = response.address
-                        // Send the address to the DB for storage
-                    var address = new db.Address(verifiedAddress)
-                    address.save({
-                        verifiedAddress
-                    }, function(err, address) {
-                        if (err) {
-                            res.json(err)
-                        } else {
-                            res.json(address)
-                        }
-                    })
-                }
-            })
+    verifyAddress: (req, res) => {
+      addressCreate(req)
+        .then(addressVerify)
+        .then(addressPersist.bind(null, db))
+        .then((savedAddress) => {
+          res.json(savedAddress)
         })
+        .catch((err) => {console.log(`Error while verifying and saving an address: ${err}`)})
     },
     // createParcel returns the parcel id for Shipment
     createParcel: function(req, res) {
