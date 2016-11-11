@@ -63,15 +63,13 @@ module.exports = {
                 }, function(err, parcel) {
                   if(err) {
                     res.json(err)
-                  } else {
-                    res.json(parcel)
                   }
                 })
             }
         })
     },
 
-    //  TODO: Not FKn blow
+
     createShipment: function(req, res) {
 
         console.log(req.body)
@@ -82,18 +80,19 @@ module.exports = {
                 // customs_info: customsInfo
         }, function(err, shipment) {
             // buy postage label with one of the rate objects
+            console.log(err)
             console.log(shipment.rates)
             console.log(shipment)
-                // shipment.buy({
-                //     rate: {}
-                // }, function(err, shipment) {
-                //     console.log('========================================')
-                //     // console.log(err)
-                //     console.log(shipment.rates)
-                //     console.log('========================================')
-                //     console.log(shipment.tracking_code)
-                //     console.log(shipment.postage_label.label_url)
-                // });
+                shipment.buy({
+                    rate: {}
+                }, function(err, shipment) {
+                    console.log('========================================')
+                    // console.log(err)
+                    console.log(shipment.rates)
+                    console.log('========================================')
+                    console.log(shipment.tracking_code)
+                    console.log(shipment.postage_label.label_url)
+                });
         })
     }
 }

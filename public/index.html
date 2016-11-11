@@ -157,8 +157,12 @@
                 </div>
             </div>
 
-            <div class="row center align">
-                <h5>shipment</h5> {{phc.shipment.fromAddress}} {{phc.shipment.toAddress}} {{phc.shipment.parcel}}
+            <div class="row">
+                <h5>shipment</h5>
+                <div class="row">To {{phc.shipment.toAddress}}</div>
+                <div class="row">From {{phc.shipment.fromAddress}}</div>
+                <div class="row">Parcel {{phc.shipment.parcel}}</div>
+
             </div>
 
         </div>
