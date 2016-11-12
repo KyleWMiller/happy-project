@@ -4,10 +4,9 @@
     angular.module('projectHappyCtrl',[])
       .controller('projectHappyController', projectHappyController)
 
-      function projectHappyController(addressFactory, parcelFactory) {
+      function projectHappyController(addressFactory, parcelFactory, shipmentFactory) {
         var phc = this
 
-        phc.shipment = {}
 
         // Gets addresses from db for storage in shipment
         phc.addresses = []
@@ -32,9 +31,15 @@
             })
         }
 
-        // if(shipment !==null) {
-        //
-        // }
+        // Gets shipment rates
+        phc.shipment = {}
+        phc.getRates = function() {
+
+          shipmentFactory.getShipmentRates()
+            .then(function(res) {
+              phc.shipment = res.data
+            })
+        }
 
 
       }

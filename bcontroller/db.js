@@ -5,10 +5,10 @@
 var dbq = require('../model/epModel.js')
 
 module.exports = {
-    getAdds: function(req, res) {
+    getAdds: (req, res) => {
         console.log('getting Adds')
         dbq.Address.find({},
-            function(err, add) {
+            (err, add) => {
                 if (err) {
                     res.json(err)
                 } else {
@@ -16,15 +16,25 @@ module.exports = {
                 }
             })
     },
-    getParcels: function(req, res) {
+    getParcels: (req, res) => {
         console.log('getting Parcels')
-        dbq.Parcel.find({}, function(err, parcels) {
+        dbq.Parcel.find({}, (err, parcels) => {
             if (err) {
                 res.json(err)
             } else {
                 res.json(parcels)
             }
         })
+    },
+    getShipmentRates: (req, res) => {
+      console.log('getting shipment')
+      dbq.Shipment.find({}, (err, shipment) => {
+        if(err) {
+          res.json(err)
+        } else {
+          res.json(shipment)
+        }
+      })
     }
 
 }

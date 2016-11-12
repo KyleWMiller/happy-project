@@ -1,6 +1,7 @@
 var
     apiRouter = require('express').Router(),
     ep = require('./bcontroller/easyPost.js'),
+    // Data Base Queries
     dbq = require('./bcontroller/db.js')
 
 
@@ -24,8 +25,8 @@ apiRouter.route('/epShipment')
     .post(ep.createShipment)
 
 // Buy Rate
-// apiRouter.route('/epBuy')
-//     .post(ep.buyShipment)
+apiRouter.route('/epBuy')
+    .post(ep.buyShipment)
 
 // Retrive address ids
 apiRouter.route('/addresses')
@@ -34,5 +35,8 @@ apiRouter.route('/addresses')
 // Retrive parcel ids
 apiRouter.route('/parcels')
   .get(dbq.getParcels)
+
+apiRouter.route('/shipments')
+  .get(dbq.getShipmentRates)
 
 module.exports = apiRouter

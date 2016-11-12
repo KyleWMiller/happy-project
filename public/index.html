@@ -19,11 +19,6 @@
 
 <body class="cyan darken-3 white-text">
 
-    <div class="row">
-        <div class="">
-
-        </div>
-    </div>
     <!-- easypostController handles the flow of information to the easypost API -->
     <div ng-controller="easypostController as epc" class="row">
         <div class="col l5 offset-l1 blue-grey darken-4">
@@ -159,15 +154,23 @@
 
             <div class="row">
                 <h5>shipment</h5>
-                <div class="row">To {{phc.shipment.toAddress}}</div>
-                <div class="row">From {{phc.shipment.fromAddress}}</div>
-                <div class="row">Parcel {{phc.shipment.parcel}}</div>
+                <div class="row" ng-model="phc.shipment.toAddress">To {{phc.shipment.toAddress}}</div>
+                <div class="row" ng-model="phc.shipment.fromAddress">From {{phc.shipment.fromAddress}}</div>
+                <div class="row" ng-model="phc.shipment.parcel">Parcel {{phc.shipment.parcel}}</div>
+            </div>
 
+            <div class="row" ng-init="phc.getRates()">
+              <h5>Rates</h5>
+              <div class="row">
+                {{phc.shipment[0].id}}
+              </div>
+              <div class="row">
+                {{phc.shipment[0].rates}}
+              </div>
             </div>
 
         </div>
 
-    </div>
     </div>
 
 
@@ -187,6 +190,8 @@
     <script type="text/javascript" src="js/factories/addFactory.js"></script>
     <!-- Parcels -->
     <script type="text/javascript" src="js/factories/parcelFactory.js"></script>
+    <!-- Shipments -->
+    <script type="text/javascript" src="js/factories/shipFactory.js"></script>
 </body>
 
 </html>

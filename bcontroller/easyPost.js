@@ -8,13 +8,13 @@ var apiKey = "SXMggE7i1n5Eq6CAlXQNYw",
     db = require('../model/epModel.js')
 
 module.exports = {
-    // verifyAddress sends the sser's input to the EasyPost API and stores that
+    // verifyAddress sends the user's input to the EasyPost API and stores that
     //   response in the addresses DB.
-    verifyAddress: function(req, res) {
+    verifyAddress: (req, res) => {
         console.log('request to verify address recieved')
-        var address = easypost.Address.create(req.body, function(err, fromAddress) {
+        var address = easypost.Address.create(req.body, (err, fromAddress) => {
             var verifiedAddress = {}
-            fromAddress.verify(function(err, response) {
+            fromAddress.verify((err, response) => {
                 if (err) {
                 } else if (response.message !== undefined && response.message != null) {
                     var verifiedAddress = response.address
@@ -24,7 +24,7 @@ module.exports = {
                     var address = new db.Address(verifiedAddress)
                     address.save({
                         verifiedAddress
-                    }, function(err, address) {
+                    }, (err, address) => {
                         if (err) {
                             res.json(err)
                         } else {
@@ -36,12 +36,12 @@ module.exports = {
         })
     },
     // createParcel returns the parcel id for Shipment
-    createParcel: function(req, res) {
+    createParcel: (req, res) => {
         console.log('request to create parcel recieved')
 
         easypost.Parcel.create({
             parcel: req.body
-        }, function(err, res) {
+        }, (err, res) => {
             if (err) {
                 console.log(err)
             } else {
@@ -49,7 +49,7 @@ module.exports = {
                 var parcel = new db.Parcel(res)
                 parcel.save({
                   res
-                }, function(err, parcel) {
+                }, (err, parcel) => {
                   if(err) {
                     res.json(err)
                   }
@@ -59,7 +59,7 @@ module.exports = {
     },
 
 
-    createShipment: function(req, res) {
+    createShipment: (req, res) => {
 
         // console.log(req.body.to_address)
         // console.log(req.body.from_address)
@@ -74,23 +74,32 @@ module.exports = {
         }
         // console.log(shipmentDetails)
 
-        easypost.Shipment.create(shipmentDetails, function(err, shipment) {
+        easypost.Shipment.create(shipmentDetails, (err, shipment) => {
             // buy postage label with one of the rate objects
             // console.log(shipment.rates)
             console.log(shipment)
+            const parcel = new db.Shipment(shipment)
+            parcel.save({
+              shipment
+            }, function(err, shipment){
+              if(err) {
+                res.json(err)
+              }
+            })
         })
-    }
+    },
 
-    // buyShipment: (req, res) => {
-    //   // var shipment = req.body.shipment
-    //
-    //   easypost[req.body.shipment]buy({
-    //     rate = {id: req.body.rate}
-    //   } (err, shipment) => {
-    //     console.log(shipment)
-    //     // console.log(shipment.rates)
-    //     // console.log(shipment.tracking_code)
-    //     // console.log(shipment.postage_lable.lable_url)
-    //   })
-    // }
+    buyShipment: (req, res) => {
+      // var shipment = req.body.shipment
+      let rate = {
+        rate: req.body
+      }
+
+      easypost.Shipment.buy(rate , (err, shipment) => {
+        console.log(shipment)
+        // console.log(shipment.rates)
+        // console.log(shipment.tracking_code)
+        // console.log(shipment.postage_lable.lable_url)
+      })
+    }
 }

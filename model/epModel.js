@@ -52,5 +52,6 @@ var mongoose = require('mongoose'),
 
 module.exports = {
     Address: mongoose.model('Addresses', address),
-    Parcel: mongoose.model('Parcels', parcel)
+    Parcel: mongoose.model('Parcels', parcel),
+    Shipment: mongoose.model('Shipments', shipment)
 }
