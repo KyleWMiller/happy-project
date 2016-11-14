@@ -38,6 +38,7 @@
           shipmentFactory.getShipmentRates()
             .then(function(res) {
               phc.shipment = res.data
+              console.log(phc.shipment)
             })
         }
 
