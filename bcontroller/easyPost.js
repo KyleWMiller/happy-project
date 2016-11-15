@@ -30,14 +30,14 @@ module.exports = {
     createParcel: (req, res) => {
         console.log('request to create parcel recieved')
         let prcl = req.body
-        easypost.Parcel.create(prcl, (err, res) => {
+        easypost.Parcel.create(prcl, (err, response) => {
             if (err) {
                 console.log(err)
             } else {
               console.log("res",res)
-              let verifiedParcel = res
+              let verifiedParcel = response
               // console.log(verifiedParcel)
-              // res.status(201)
+              res.status(201).json(verifiedParcel)
             }
         })
     },
@@ -45,34 +45,19 @@ module.exports = {
 
     createShipment: (req, res) => {
 
-        // console.log(req.body.to_address)
-        // console.log(req.body.from_address)
-        // console.log(req.body.parcel)
-
         const shipmentDetails = {
             to_address: {id: req.body.to_address},
             from_address: {id: req.body.from_address},
             parcel: {id: req.body.parcel},
-            customs_info: null
-                // customs_info: customsInfo
+            customs_info: req.body.customsInfo
         }
-        // console.log(shipmentDetails)
-
         easypost.Shipment.create(shipmentDetails, (err, shipment) => {
-            // buy postage label with one of the rate objects
-            // console.log(shipment.rates)
-            console.log(shipment)
             const shpmnt = new db.Shipment(shipment)
-            shpmnt.save({
-              shipment
-            }, (err, shipment) => {
-              if(err) {
-                res.json(err)
-              } else {
-                res.status(201).json(shipment)
-
-              }
-            })
+            if(err) {
+              res.json(err)
+            } else {
+              res.status(201).json(shipment)
+            }
         })
     },
 

@@ -25,12 +25,14 @@
           length: 7,
           weight: 176
         }
+        epc.shpmt = {}
 
 
         // Variables that store responses from EasyPost
         epc.toAddress = {}
         epc.fromAddress ={}
         epc.parcel = {}
+        epc.shipment = {}
 
 
         // Gets to address response object w/ id
@@ -39,6 +41,8 @@
               epc.toAddress = address
               console.log("To address")
               console.log(epc.toAddress)
+              epc.shpmt.toAddress = epc.toAddress.id
+
             })
         }
         // Gets from address response object w/ id
@@ -47,6 +51,7 @@
               epc.fromAddress = address
               console.log("From address")
               console.log(epc.fromAddress)
+              epc.shpmt.fromAddress = epc.fromAddress.id
             })
         }
         // Gets parcel response oject w/ id
@@ -55,6 +60,15 @@
             epc.parcel = parcel
             console.log("Parcel")
             console.log(epc.parcel)
+            epc.shpmt.parcel = epc.parcel.id
+          })
+        }
+        // Gets shipment response object w/ id + rates array
+        epc.sendShipment = function() {
+          easypostFactory.sendShipment(epc.shpmt, function(shipment){
+            epc.shipment = shipment
+            console.log("Shipment")
+            console.log(epc.shipment)
           })
         }
     }
