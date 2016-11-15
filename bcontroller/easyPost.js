@@ -78,28 +78,38 @@ module.exports = {
             // buy postage label with one of the rate objects
             // console.log(shipment.rates)
             console.log(shipment)
-            const parcel = new db.Shipment(shipment)
-            parcel.save({
+            const shpmnt = new db.Shipment(shipment)
+            shpmnt.save({
               shipment
-            }, function(err, shipment){
+            }, (err, shipment) => {
               if(err) {
                 res.json(err)
+              } else {
+                res.status(201).json(shipment)
+
               }
             })
         })
     },
 
     buyShipment: (req, res) => {
-      // var shipment = req.body.shipment
-      let rate = {
-        rate: req.body
-      }
 
-      easypost.Shipment.buy(rate , (err, shipment) => {
-        console.log(shipment)
-        // console.log(shipment.rates)
-        // console.log(shipment.tracking_code)
-        // console.log(shipment.postage_lable.lable_url)
-      })
+      // var shipment = req.body.shipment
+      let rate     = req.body.rate,
+          shipment = req.body.shipment,
+          hunterShip = easypost.Shipment.retrieve(req.params.id, (err, shipment) => {
+            if(err) {
+              res.json(err)
+            }
+
+            shipment.buy(rate, (err, purchase) => {
+              if(err){
+                res.json(err)
+              } else {
+                console.log(purchase)
+                res.json(purchase)
+              }
+            })
+          })
     }
 }

@@ -25,7 +25,7 @@ apiRouter.route('/epShipment')
     .post(ep.createShipment)
 
 // Buy Rate
-apiRouter.route('/epBuy')
+apiRouter.route('/epBuy/:id')
     .post(ep.buyShipment)
 
 // Retrive address ids
@@ -37,6 +37,6 @@ apiRouter.route('/parcels')
   .get(dbq.getParcels)
 
 apiRouter.route('/shipments')
-  .get(dbq.getShipmentRates)
+  .get(dbq.getShipments)
 
 module.exports = apiRouter

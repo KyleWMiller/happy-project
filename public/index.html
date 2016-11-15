@@ -26,34 +26,34 @@
             <h5>To:</h5>
             <form>
                 <div class="col l12 s12">
-                    <input ng-model="epc.address.name" placeholder="Name">
+                    <input ng-model="epc.tAddress.name" type="text" placeholder="Name">
                 </div>
                 <div class="col l12 s12">
-                    <input ng-model="epc.address.street1" placeholder="Street 1">
+                    <input ng-model="epc.tAddress.street1" type="text" placeholder="Street 1">
                 </div>
                 <div class="col l12 s12">
-                    <input ng-model="epc.address.street2" placeholder="Street 2">
+                    <input ng-model="epc.tAddress.street2" type="text" placeholder="Street 2">
                 </div>
                 <div class="col l5 s6">
-                    <input ng-model="epc.address.city" placeholder=" City">
+                    <input ng-model="epc.tAddress.city" type="text" placeholder="City">
                 </div>
                 <div class="col l3 s6">
-                    <input ng-model="epc.address.state" placeholder="State">
+                    <input ng-model="epc.tAddress.state" type="text" placeholder="State">
                 </div>
                 <div class="col l4 s6">
-                    <input ng-model="epc.address.zip" placeholder="Zip">
+                    <input ng-model="epc.tAddress.zip" type="text" placeholder="Zip">
                 </div>
                 <div class="col l6 s6">
-                    <input ng-model="epc.address.country" placeholder="Country">
+                    <input ng-model="epc.tAddress.country" type="text" placeholder="Country">
                 </div>
                 <div class="col l6 s12">
-                    <input ng-model="epc.address.phone" placeholder="Phone">
+                    <input ng-model="epc.tAddress.phone" type="text" placeholder="Phone">
                 </div>
                 <div class="col l12 s12">
-                    <input ng-model="epc.address.email" placeholder="Email">
+                    <input ng-model="epc.tAddress.email" type="text" placeholder="Email">
                 </div>
                 <div class="right-align">
-                    <a class="waves-effect waves-light btn col l4 offset-l7" ng-click="epc.sendAddress()">Verify</a>
+                    <a class="waves-effect waves-light btn col l4 offset-l7" ng-click="epc.sendTAddress()">Verify</a>
                 </div>
             </form>
         </div>
@@ -63,115 +63,37 @@
             <h5>From:</h5>
             <form>
                 <div class="col l12 s12">
-                    <input value="Satcom Direct" placeholder="Satcom Direct" ng-model="epc.address.company">
+                    <input type="text" ng-model="epc.fAddress.company">
                 </div>
                 <div class="col l12 s12">
-                    <input value="1050 Satcom Lane" placeholder="1050 Satcom Lane" ng-model="epc.address.street1">
+                    <input type="text" ng-model="epc.fAddress.street1">
                 </div>
                 <div class="col l12 s12">
-                    <input placeholder="Street 2" ng-model="epc.address.street2">
+                    <input type="text" placeholder="Street 2" ng-model="epc.fAddress.street2">
                 </div>
                 <div class="col l5 s6">
-                    <input value="Melborne" placeholder="Melbourne" ng-model="epc.address.city">
+                    <input type="text" ng-model="epc.fAddress.city">
                 </div>
                 <div class="col l3 s6">
-                    <input value="FL" placeholder="FL" ng-model="epc.address.state">
+                    <input type="text" ng-model="epc.fAddress.state">
                 </div>
                 <div class="col l4 s6">
-                    <input value="32940" placeholder="32940" ng-model="epc.address.zip">
+                    <input type="text" ng-model="epc.fAddress.zip">
                 </div>
                 <div class="col l6 s6">
-                    <input value="US" placeholder="US" ng-model="epc.address.country">
+                    <input type="text" ng-model="epc.fAddress.country">
                 </div>
                 <div class="col l6 s12">
-                    <input value="+1-321-777-3000" placeholder="+1 (321) 777-3000" ng-model="epc.address.phone">
+                    <input type="text" ng-model="epc.fAddress.phone">
                 </div>
                 <div class="col l12 s12">
-                    <input ng-model="epc.address.email" placeholder="SDR@satcomdirect.com">
+                    <input type="text" ng-model="epc.fAddress.email" >
                 </div>
-                <!-- <a class="waves-effect waves-light btn col l4 offset-l7" ng-click="epc.sendAddress()">Verify</a> -->
+                <a class="waves-effect waves-light btn col l4 offset-l7" ng-click="epc.sendFAddress()">Update</a>
             </form>
         </div>
     </div>
 
-    <div class="row">
-
-        <div class="col l7 offset-l1">
-            <h3>Products</h3>
-            <div class="row">
-                <table>
-                    <thead>
-                        <tr>
-                            <th data-field="id">Product</th>
-                            <th data-field="name">Serial#</th>
-                            <th data-field="price">Item Price</th>
-                        </tr>
-                        <!-- <tr ng-repeat="parcel in pc.parcels">
-                          <th>{{parcel}}</th>
-                        </tr> -->
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>Alvin</td>
-                            <td>Eclair</td>
-                            <td>$0.87</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="row">
-                <div class="">
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- container for testing information -->
-    <div ng-controller="projectHappyController as phc" class="container">
-        <div>
-
-            <!-- addressController controlls the flow of address back from the db -->
-            <div ng-init="phc.getAdds()" class="row">
-
-                <!-- <a class="waves-effect waves-light btn" ng-click="addc.getAdds()">IDs</a> -->
-                <h4>Address Ids</h4>
-                <div ng-repeat="address in phc.addresses">
-                    {{address.name}}{{address.company}} : {{address.id}}
-
-                </div>
-            </div>
-
-            <div ng-init="phc.getParcels()" class="row">
-
-                <!-- <a class="waves-effect waves-light btn" ng-click="pc.getParcelIds()">IDs</a> -->
-                <h4>Parcel Ids</h4>
-                <div ng-repeat="parcel in phc.parcels">
-                    {{parcel.id}}
-                </div>
-            </div>
-
-            <div class="row">
-                <h5>shipment</h5>
-                <div class="row" ng-model="phc.shipment.toAddress">To {{phc.shipment.toAddress}}</div>
-                <div class="row" ng-model="phc.shipment.fromAddress">From {{phc.shipment.fromAddress}}</div>
-                <div class="row" ng-model="phc.shipment.parcel">Parcel {{phc.shipment.parcel}}</div>
-            </div>
-
-            <div class="row" ng-init="phc.getRates()">
-              <h5>Rates</h5>
-              <div class="row">
-                {{phc.shipment[0].id}}
-              </div>
-              <div class="row">
-                {{phc.shipment[0].rates}}
-              </div>
-            </div>
-
-        </div>
-
-    </div>
 
 
     <!-- AngularJS 1.5 -->
@@ -184,14 +106,6 @@
     <!-- EasyPost -->
     <script type="text/javascript" src="js/controllers/epController.js"></script>
     <script type="text/javascript" src="js/factories/epFactory.js"></script>
-    <!-- HappyShip Controller -->
-    <script type="text/javascript" src="js/controllers/projectHappyController.js"></script>
-    <!-- Addresses -->
-    <script type="text/javascript" src="js/factories/addFactory.js"></script>
-    <!-- Parcels -->
-    <script type="text/javascript" src="js/factories/parcelFactory.js"></script>
-    <!-- Shipments -->
-    <script type="text/javascript" src="js/factories/shipFactory.js"></script>
 </body>
 
 </html>

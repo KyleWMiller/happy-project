@@ -26,7 +26,7 @@ module.exports = {
             }
         })
     },
-    getShipmentRates: (req, res) => {
+    getShipments: (req, res) => {
       console.log('getting shipment')
       dbq.Shipment.find({}, (err, shipment) => {
         if(err) {
