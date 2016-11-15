@@ -3,7 +3,7 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 
 
-var apiKey = "SXMggE7i1n5Eq6CAlXQNYw",
+let apiKey = "SXMggE7i1n5Eq6CAlXQNYw",
     easypost = require('node-easypost')(apiKey),
     db = require('../model/epModel.js')
 
@@ -12,25 +12,16 @@ module.exports = {
     //   response in the addresses DB.
     verifyAddress: (req, res) => {
         console.log('request to verify address recieved')
-        var address = easypost.Address.create(req.body, (err, fromAddress) => {
-            var verifiedAddress = {}
+        let add = req.body
+        let address = easypost.Address.create(add, (err, fromAddress) => {
+            let verifiedAddress = {}
             fromAddress.verify((err, response) => {
                 if (err) {
-                } else if (response.message !== undefined && response.message != null) {
-                    var verifiedAddress = response.address
+                } else if (response.message !== undefined && response.message !== null) {
+                    let verifiedAddress = response.address
                 } else {
                     verifiedAddress = response.address
-                        // Send the address to the DB for storage
-                    var address = new db.Address(verifiedAddress)
-                    address.save({
-                        verifiedAddress
-                    }, (err, address) => {
-                        if (err) {
-                            res.json(err)
-                        } else {
-                            res.json(address)
-                        }
-                    })
+                    res.status(201).json(verifiedAddress)
                 }
             })
         })
@@ -38,22 +29,15 @@ module.exports = {
     // createParcel returns the parcel id for Shipment
     createParcel: (req, res) => {
         console.log('request to create parcel recieved')
-
-        easypost.Parcel.create({
-            parcel: req.body
-        }, (err, res) => {
+        let prcl = req.body
+        easypost.Parcel.create(prcl, (err, res) => {
             if (err) {
                 console.log(err)
             } else {
-                console.log(res)
-                var parcel = new db.Parcel(res)
-                parcel.save({
-                  res
-                }, (err, parcel) => {
-                  if(err) {
-                    res.json(err)
-                  }
-                })
+              console.log("res",res)
+              let verifiedParcel = res
+              // console.log(verifiedParcel)
+              // res.status(201)
             }
         })
     },
@@ -94,7 +78,7 @@ module.exports = {
 
     buyShipment: (req, res) => {
 
-      // var shipment = req.body.shipment
+      // let shipment = req.body.shipment
       let rate     = req.body.rate,
           shipment = req.body.shipment,
           hunterShip = easypost.Shipment.retrieve(req.params.id, (err, shipment) => {

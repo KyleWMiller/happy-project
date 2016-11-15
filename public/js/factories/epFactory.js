@@ -8,7 +8,8 @@
 
     function easypostFactory($http) {
         var ef = {},
-            addressUrl = 'api/v1/epAddress'
+            addressUrl = 'api/v1/epAddress',
+            parcelUrl = 'api/v1/epParcel'
 
 
         ef.sendAddress = function(address, callback) {
@@ -22,6 +23,7 @@
             return $http.post(parcelUrl, parcel)
                 .then(function(res) {
                   callback(res.data)
+                  console.log(res.data)
                 })
         }
 

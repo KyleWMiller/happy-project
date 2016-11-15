@@ -35,25 +35,25 @@
 
         // Gets to address response object w/ id
         epc.sendTAddress = function() {
-
             easypostFactory.sendAddress(epc.tAddress, function(address){
               epc.toAddress = address
-              // console.log(epc.toAddress)
+              console.log("To address")
+              console.log(epc.toAddress)
             })
         }
         // Gets from address response object w/ id
         epc.sendFAddress = function() {
-
             easypostFactory.sendAddress(epc.fAddress, function(address){
               epc.fromAddress = address
+              console.log("From address")
               console.log(epc.fromAddress)
             })
         }
         // Gets parcel response oject w/ id
         epc.sendParcel = function() {
-
           easypostFactory.sendParcel(epc.prcl, function(parcel){
             epc.parcel = parcel
+            console.log("Parcel")
             console.log(epc.parcel)
           })
         }
