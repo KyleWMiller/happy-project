@@ -11,72 +11,101 @@ module.exports = {
     // verifyAddress sends the user's input to the EasyPost API and stores that
     //   response in the addresses DB.
     verifyAddress: (req, res) => {
-        console.log('request to verify address recieved')
-        let add = req.body
-        let address = easypost.Address.create(add, (err, fromAddress) => {
-            let verifiedAddress = {}
-            fromAddress.verify((err, response) => {
-                if (err) {
-                } else if (response.message !== undefined && response.message !== null) {
-                    let verifiedAddress = response.address
-                } else {
-                    verifiedAddress = response.address
-                    res.status(201).json(verifiedAddress)
-                }
-            })
+        const address = req.body
+
+        epResourceCreate('Address', address)
+        .then(addressVerify)
+        .then(addressVerifyResponse => {
+          if(!response.message) {
+            return Promise.reject('address verification failed')
+          }
+          return Promise.fulfill(response.address)
         })
+        .then(respond)
+        .catch(respondError)
     },
     // createParcel returns the parcel id for Shipment
     createParcel: (req, res) => {
-        console.log('request to create parcel recieved')
-        let prcl = req.body
-        easypost.Parcel.create(prcl, (err, response) => {
-            if (err) {
-                console.log(err)
-            } else {
-              let verifiedParcel = response
-              // console.log(verifiedParcel)
-              res.status(201).json(verifiedParcel)
-            }
-        })
+        const parcel = req.body
+
+        epResourceCreate('Parcel', parcel)
+        .then(respond)
+        .catch(respondError)
     },
 
-
     createShipment: (req, res) => {
-
         const shipmentDetails = {
             to_address: {id: req.body.to_address},
             from_address: {id: req.body.from_address},
             parcel: {id: req.body.parcel},
             customs_info: req.body.customsInfo
         }
-        easypost.Shipment.create(shipmentDetails, (err, shipment) => {
-            const shpmnt = new db.Shipment(shipment)
-            if(err) {
-              res.json(err)
-            } else {
-              res.status(201).json(shipment)
-            }
-        })
+
+        epResourceCreate('Shipment', shipmentDetails)
+        .then(respond)
+        .catch(respondError)
     },
 
     buyShipment: (req, res) => {
+      const rate       = req.body.rate
+      const shipmentId = req.params.id
 
-      // let shipment = req.body.shipment
-      let rate     = req.body.rate
-          easypost.Shipment.retrieve(req.params.id, (err, shipment) => {
-            if(err) {
-              res.json(err)
-            }
-
-            shipment.buy(rate, (err, purchase) => {
-              if(err){
-                res.json(err)
-              } else {
-                console.log(purchase)
-                res.status(201).json(purchase)
-              }
-            })
-          })
+      epShipmentRetrieve(shipmentId)
+      .then(epBuy.bind(null, rate))
+      .then(respond)
+      .catch(respondError)
     }
+}
+
+const epAddressVerify = address => {
+  return new Promise((fulfill, reject) => {
+    address.verify((err, verifiedAddress) => {
+      if(err) {
+        reject(err)
+      }
+      fulfill(verifiedAddress)
+    })
+  })
+}
+
+const epShipmentRetrieve = (shipmentId) => {
+  return new Promise((fulfill, reject) => {
+    easypost.Shipment.retrieve(req.params.id, (err, shipment) => {
+      if(err) {
+        reject(err)
+      }
+      fulfill(shipment)
+    })
+  })
+}
+
+const epBuy = (rate, shipment) => {
+  return new Promise((fulfill, reject) => {
+    shipment.buy(rate, (err, purchase) => {
+      if(err) {
+        reject(err)
+      }
+      fulfill(purchase)
+    })
+  })
+}
+
+const epResourceCreate = (resourceType, details) => {
+  return new Promise((fulfill, reject) => {
+    easypost[resourceType].create(details, (err, createdResource) => {
+        if(err) {
+          reject(err)
+        }
+        fulfill(createdResource)
+    })
+  })
+}
+
+const respond = successObject => {
+  console.log(successObject)
+  res.status(201).json(successObject)
+}
+
+const respondError = err => {
+  res.json(err)
 }
