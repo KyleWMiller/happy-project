@@ -36,7 +36,11 @@
         }
 
         ef.buyRate = function(rateid, shipmentid, callback) {
-          return $http.post(buyUrl + '&id=' + shipmentid, rateid)
+          // ES6 - String Literals
+          const buyUrl = `${buyUrl}$id=${shipmentId}`
+          const composedRateId = JSON.stringify({id: rateid})
+          // Simple variable names on multi-argument function calls
+          return $http.post(buyUrl, composedRateId)
               .then(function(res) {
                 callback(res.data)
               })
