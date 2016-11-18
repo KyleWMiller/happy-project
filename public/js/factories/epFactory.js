@@ -10,7 +10,8 @@
         var ef = {},
             addressUrl = 'api/v1/epAddress',
             parcelUrl = 'api/v1/epParcel',
-            shipmentUrl = 'api/v1/epShipment'
+            shipmentUrl = 'api/v1/epShipment',
+            buyUrl = 'api/v1/epBuy'
 
 
         ef.sendAddress = function(address, callback) {
@@ -32,6 +33,13 @@
                 .then(function(res) {
                   callback(res.data)
                 })
+        }
+
+        ef.buyRate = function(rateid, shipmentid, callback) {
+          return $http.post(buyUrl + '&id=' + shipmentid, rateid)
+              .then(function(res) {
+                callback(res.data)
+              })
         }
         return ef
     }

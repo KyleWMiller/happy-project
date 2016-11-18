@@ -34,7 +34,6 @@ module.exports = {
             if (err) {
                 console.log(err)
             } else {
-              console.log("res",res)
               let verifiedParcel = response
               // console.log(verifiedParcel)
               res.status(201).json(verifiedParcel)
@@ -64,9 +63,8 @@ module.exports = {
     buyShipment: (req, res) => {
 
       // let shipment = req.body.shipment
-      let rate     = req.body.rate,
-          shipment = req.body.shipment,
-          hunterShip = easypost.Shipment.retrieve(req.params.id, (err, shipment) => {
+      let rate     = req.body.rate
+          easypost.Shipment.retrieve(req.params.id, (err, shipment) => {
             if(err) {
               res.json(err)
             }
@@ -76,7 +74,7 @@ module.exports = {
                 res.json(err)
               } else {
                 console.log(purchase)
-                res.json(purchase)
+                res.status(201).json(purchase)
               }
             })
           })

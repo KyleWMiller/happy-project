@@ -14,7 +14,7 @@
           street1: "1050 Satcom Lane",
           city: "Melbourne",
           state: "FL",
-          zip: 32940,
+          zip: "32940-7010",
           country: "US",
           phone: "+1(321) 777-3000",
           email: "SDR@satcomdirect.com"
@@ -26,6 +26,7 @@
           weight: 176
         }
         epc.shpmt = {}
+        epc.rts = []
 
 
         // Variables that store responses from EasyPost
@@ -33,6 +34,8 @@
         epc.fromAddress ={}
         epc.parcel = {}
         epc.shipment = {}
+        epc.rate = {}
+
 
 
         // Gets to address response object w/ id
@@ -41,7 +44,7 @@
               epc.toAddress = address
               console.log("To address")
               console.log(epc.toAddress)
-              epc.shpmt.toAddress = epc.toAddress.id
+              epc.shpmt.to_address = epc.toAddress.id
 
             })
         }
@@ -51,7 +54,7 @@
               epc.fromAddress = address
               console.log("From address")
               console.log(epc.fromAddress)
-              epc.shpmt.fromAddress = epc.fromAddress.id
+              epc.shpmt.from_address = epc.fromAddress.id
             })
         }
         // Gets parcel response oject w/ id
@@ -69,6 +72,15 @@
             epc.shipment = shipment
             console.log("Shipment")
             console.log(epc.shipment)
+            epc.rts = epc.shipment.rates
+            epc.rate = epc.rts[0].id
+
+          })
+        }
+        // Purchases specific rate using shipment id and returns lable
+        epc.purchase = function() {
+          easypostFactory.buyRate(epc.rate, epc.shipment.id, function(lable){
+            console.log(lable)
           })
         }
     }
