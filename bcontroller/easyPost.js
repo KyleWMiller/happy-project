@@ -51,7 +51,6 @@ module.exports = {
             customs_info: req.body.customsInfo
         }
         easypost.Shipment.create(shipmentDetails, (err, shipment) => {
-            const shpmnt = new db.Shipment(shipment)
             if(err) {
               res.json(err)
             } else {
@@ -63,12 +62,14 @@ module.exports = {
     buyShipment: (req, res) => {
 
       // let shipment = req.body.shipment
-      let rate     = req.body.rate
-          easypost.Shipment.retrieve(req.params.id, (err, shipment) => {
-            if(err) {
-              res.json(err)
-            }
+      let rate     = JSON.stringify(req.body),
+          shipmentParam = req.params.id
 
+          console.log(rate)
+          easypost.Shipment.retrieve(shipmentParam, (err, shipment) => {
+            if(err) {
+              console.log(err)
+            }
             shipment.buy(rate, (err, purchase) => {
               if(err){
                 res.json(err)

@@ -1,95 +1,134 @@
-<div class="cyan darken-3 white-text">
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('select').material_select()
+    })
+</script>
+<div class="paperBorder">
+  <div class="mainBackground white-text">
 
     <!-- easypostController handles the flow of information to the easypost API -->
-    <div ng-controller="easypostController as epc" class="row">
-        <div class="col l5 offset-l1 blue-grey darken-4">
+    <div ng-controller="easypostController as epc" class="container">
+      <div class="row">
+        <div class="col l5 tileBackground">
 
-            <h5>To:</h5>
-            <form>
-                <div class="col l12 s12">
-                    <input ng-model="epc.tAddress.name" type="text" placeholder="Name">
-                </div>
-                <div class="col l12 s12">
-                    <input ng-model="epc.tAddress.street1" type="text" placeholder="Street 1">
-                </div>
-                <div class="col l12 s12">
-                    <input ng-model="epc.tAddress.street2" type="text" placeholder="Street 2">
-                </div>
-                <div class="col l5 s6">
-                    <input ng-model="epc.tAddress.city" type="text" placeholder="City">
-                </div>
-                <div class="col l3 s6">
-                    <input ng-model="epc.tAddress.state" type="text" placeholder="State">
-                </div>
-                <div class="col l4 s6">
-                    <input ng-model="epc.tAddress.zip" type="text" placeholder="Zip">
-                </div>
-                <div class="col l6 s6">
-                    <input ng-model="epc.tAddress.country" type="text" placeholder="Country">
-                </div>
-                <div class="col l6 s12">
-                    <input ng-model="epc.tAddress.phone" type="text" placeholder="Phone">
-                </div>
-                <div class="col l12 s12">
-                    <input ng-model="epc.tAddress.email" type="text" placeholder="Email">
-                </div>
-                <div class="right-align">
-                    <a class="waves-effect waves-light btn col l4 offset-l7" ng-click="epc.sendTAddress()">Verify</a>
-                </div>
-            </form>
+          <h5>To:</h5>
+          <form>
+            <div class="col l12 s12">
+              <input ng-model="epc.tAddress.name" type="text" placeholder="Name">
+            </div>
+            <div class="col l12 s12">
+              <input ng-model="epc.tAddress.street1" type="text" placeholder="Street 1">
+            </div>
+            <div class="col l12 s12">
+              <input ng-model="epc.tAddress.street2" type="text" placeholder="Street 2">
+            </div>
+            <div class="col l5 s6">
+              <input ng-model="epc.tAddress.city" type="text" placeholder="City">
+            </div>
+            <div class="col l3 s6">
+              <input ng-model="epc.tAddress.state" type="text" placeholder="State">
+            </div>
+            <div class="col l4 s6">
+              <input ng-model="epc.tAddress.zip" type="text" placeholder="Zip">
+            </div>
+            <div class="col l6 s6">
+              <input ng-model="epc.tAddress.country" type="text" placeholder="Country">
+            </div>
+            <div class="col l6 s12">
+              <input ng-model="epc.tAddress.phone" type="text" placeholder="Phone">
+            </div>
+            <div class="col l12 s12">
+              <input ng-model="epc.tAddress.email" type="text" placeholder="Email">
+            </div>
+            <div class="right-align">
+              <a class="waves-effect waves-light btn col l4 offset-l7 buttonBackground verifyGreen" ng-click="epc.sendTAddress()">Verify</a>
+            </div>
+          </form>
         </div>
 
-        <div class="col l5 blue-grey darken-4">
+        <div class="col l5 offset-l1 tileBackground">
 
-            <h5>From:</h5>
-            <form>
-                <div class="col l12 s12">
-                    <input type="text" ng-model="epc.fAddress.company">
-                </div>
-                <div class="col l12 s12">
-                    <input type="text" ng-model="epc.fAddress.street1">
-                </div>
-                <div class="col l12 s12">
-                    <input type="text" placeholder="Street 2" ng-model="epc.fAddress.street2">
-                </div>
-                <div class="col l5 s6">
-                    <input type="text" ng-model="epc.fAddress.city">
-                </div>
-                <div class="col l3 s6">
-                    <input type="text" ng-model="epc.fAddress.state">
-                </div>
-                <div class="col l4 s6">
-                    <input type="text" ng-model="epc.fAddress.zip">
-                </div>
-                <div class="col l6 s6">
-                    <input type="text" ng-model="epc.fAddress.country">
-                </div>
-                <div class="col l6 s12">
-                    <input type="text" ng-model="epc.fAddress.phone">
-                </div>
-                <div class="col l12 s12">
-                    <input type="text" ng-model="epc.fAddress.email">
-                </div>
-                <a class="waves-effect waves-light btn col l4 offset-l7" ng-click="epc.sendFAddress()">Update</a>
-            </form>
+          <h5>From:</h5>
+            <div class="col l12 s12">
+              <input type="text" ng-model="epc.fAddress.company">
+            </div>
+            <div class="col l12 s12">
+              <input type="text" ng-model="epc.fAddress.street1">
+            </div>
+            <div class="col l12 s12">
+              <input type="text" placeholder="Street 2" ng-model="epc.fAddress.street2">
+            </div>
+            <div class="col l5 s6">
+              <input type="text" ng-model="epc.fAddress.city">
+            </div>
+            <div class="col l3 s6">
+              <input type="text" ng-model="epc.fAddress.state">
+            </div>
+            <div class="col l4 s6">
+              <input type="text" ng-model="epc.fAddress.zip">
+            </div>
+            <div class="col l6 s6">
+              <input type="text" ng-model="epc.fAddress.country">
+            </div>
+            <div class="col l6 s12">
+              <input type="text" ng-model="epc.fAddress.phone">
+            </div>
+            <div class="col l12 s12">
+              <input type="text" ng-model="epc.fAddress.email">
+            </div>
+            <a class="waves-effect waves-light btn buttonBackground updateBlue col l4 offset-l7" ng-click="epc.sendFAddress()">Update</a>
+          </form>
+        </div>
+
+        <div class="row tileBackground">
+          <h5>Products</h5>
+          <table>
+            <tr>
+              <th>Product</th>
+              <th>Qty</th>
+              <th>Serial#</th>
+              <th>Manufacturing#</th>
+              <th>Item#</th>
+              <th>Model#</th>
+              <th>Price</th>
+            </tr>
+            <tr>
+              <td class="input-field col s12">
+                <select>
+                  <option value="" disabled selected>Product</option>
+                  <option value="SDR" ng-model="product.name">SDR</option>
+                  <option value="SDRmountingPlate" ng-model="product.name">SDR Mounting Plate</option>
+                  <option value="SDRconnectorKit" ng-model="product.name">SDR Connector Kit</option>
+                  <option value="InterfaceCable" ng-model="product.name">Interface Cable</option>
+                  <option value="Air8023G" ng-model="product.name">Air802 3G Antenna</option>
+                  <option value="Air802WIFI" ng-model="product.name">Air802 WIFI Antenna</option>
+                </select>
+              </td>
+              <td><input type="text" ng-model=""></td>
+              <td><input type="text" ng-model=""></td>
+              <td><input type="text" ng-model=""></td>
+              <td><input type="text" ng-model=""></td>
+              <td><input type="text" ng-model=""></td>
+              <td><input type="text" ng-model=""></td>
+            </tr>
+          </table>
+          <a class="waves-effect waves-light btn col l4 offset-l7" ng-click="epc.sendParcel()">Get Parcel</a>
         </div>
         <div class="row">
-            <a class="waves-effect waves-light btn col l4 offset-l7" ng-click="epc.sendParcel()">Get Parcel</a>
-        </div>
-        <div class="row">
-            <a class="waves-effect waves-light btn col l4 offset-l7" ng-click="epc.sendShipment()">Get Shipment</a>
+          <a class="waves-effect waves-light btn col l4 offset-l7" ng-click="epc.sendShipment()">Get Shipment</a>
 
-            <div class="row">
-                <div ng-repeat="rate in epc.rts">
-                    {{rate}}
-                </div>
+          <div class="row">
+            <div ng-repeat="rate in epc.rts">
+              {{rate}}
             </div>
+          </div>
 
-            <div class="row">
-                <a class="waves-effect waves-light btn col l4 offset-l7" ng-click="epc.purchase()">Purchase</a>
+          <div class="row">
+            <a class="waves-effect waves-light btn col l4 offset-l7" ng-click="epc.purchase()">Purchase</a>
 
-            </div>
+          </div>
 
         </div>
+      </div>
     </div>
 </div>

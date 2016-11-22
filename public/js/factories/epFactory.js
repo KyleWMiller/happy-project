@@ -36,7 +36,11 @@
         }
 
         ef.buyRate = function(rateid, shipmentid, callback) {
-          return $http.post(buyUrl + '&id=' + shipmentid, rateid)
+          var updatedBuyUrl = `${buyUrl}/${shipmentid}`
+          var rate = JSON.stringify({id: rateid})
+          console.log(rate)
+
+          return $http.post(updatedBuyUrl, rate)
               .then(function(res) {
                 callback(res.data)
               })

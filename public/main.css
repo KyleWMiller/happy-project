@@ -1,0 +1,25 @@
+.mainBackground {
+  background-color: #29597D;
+}
+.tileBackground{
+  background-color: #152C3F;
+}
+.buttonBackground {
+  background-color: #5B6167;
+}
+.verifyGreen {
+  color: #00F001;
+  font-weight: bold;
+}
+.verifyGreen:hover {
+  background-color: #00F001;
+  color: #5B6167;
+}
+.updateBlue{
+  color: #00A7D6;
+  font-weight: bold;
+}
+.updateBlue:hover {
+  background-color: #00A7D6;
+  color: #5B6167;
+}
