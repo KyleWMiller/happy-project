@@ -1,3 +1,59 @@
+/* Normalizing */
+input[type=text] {
+  margin: 0 0 5px 0;
+}
+
+
+/* Form Set-up */
+.paperBorder {
+  margin-left: 10vw;
+  margin-top: 3vw;
+}
+.toTile {
+  width: 39vw;
+  padding: 15px;
+  margin-right: 2vw;
+  display: inline-block;
+}
+.toTile h5 {
+  display: inline-block;
+}
+.fromTile {
+  width: 39vw;
+  padding: 15px;
+  display: inline-block;
+}
+.fromTile h5 {
+  display: inline-block;
+}
+.productTile {
+  width: 50vw;
+  padding: 15px;
+  margin-right: 5vw;
+  display: inline-block;
+}
+.customsTile {
+  width: 25vw;
+  padding: 15px;
+  display: inline-block;
+}
+.rateTile {
+  width: 50vw;
+  padding:15px;
+  margin-right: 5vw;
+  display: inline-block;
+}
+.lableTile {
+  width: 25vw;
+  padding: 15px;
+  display: inline-block;
+}
+
+/*table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}*/
+/* */
 .mainBackground {
   background-color: #29597D;
 }
@@ -8,11 +64,11 @@
   background-color: #5B6167;
 }
 .verifyGreen {
-  color: #00F001;
+  color: #00b300;
   font-weight: bold;
 }
 .verifyGreen:hover {
-  background-color: #00F001;
+  background-color: #00b300;
   color: #5B6167;
 }
 .updateBlue{
