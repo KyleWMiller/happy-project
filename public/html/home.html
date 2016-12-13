@@ -79,56 +79,14 @@
         <!-- Product Input -->
         <div class="productTile tileBackground">
             <h5 class="grey-text text-darken-2">Products</h5>
-            <div class="col l2 s2" ng-repeat="product in epc.products"></div>
-            <!-- <form> -->
-                <table>
-                    <tr>
-                        <!-- JS for <select>  -->
-                        <script type="text/javascript">
-                            $(document).ready(function() {
-                                $('select').material_select();
-                            });
-                        </script>
-                        <td class="input-field col s12">
-                            <select ng-model="epc.product.item">
-                <!-- <option value="" disabled selected>Product</option> -->
-                              <option value="SDR">SDR</option>
-                              <option value="SDRmountingPlate">SDR Mounting Plate</option>
-                              <option value="SDRconnectorKit">SDR Connector Kit</option>
-                              <option value="InterfaceCable">Interface Cable</option>
-                              <option value="Air8023G">Air802 3G Antenna</option>
-                              <option value="Air802WIFI">Air802 WIFI Antenna</option>
-                            </select>
-                        </td>
-                        <td>
-                            <input type="text" ng-model="epc.product.quantity" placeholder="Qty">
-                        </td>
-                        <td>
-                            <input type="text" ng-model="epc.product.serialNum" placeholder="Seial#">
-                        </td>
-                        <td>
-                            <input type="text" ng-model="epc.product.mfgNum" placeholder="Mfg#">
-                        </td>
-                        <td>
-                            <input type="text" ng-model="epc.product.itemNum" placeholder="Item#">
-                        </td>
-                        <td>
-                            <input type="text" ng-model="epc.product.modelNum" placeholder="Model#">
-                        </td>
-                        <td>
-                            <input type="text" ng-model="epc.product.price" placeholder="$ Price">
-                        </td>
-                        <td>
-                            <a class="btn-floating waves-effect waves-light buttonBackground" ng-click="epc.addProduct()"><i class="material-icons">add</i></a>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-            <div class="col l12 s12">
-                {{epc.parcelArray}}
+            <div class="col l2 s2" ng-repeat="product in epc.products" ng-model="epc.item">
+              <input value="{{product.name}}" >
+              <a class="waves-effect waves-light btn buttonBackground col l12" ng-click="epc.addProduct()">Add</a>
+
             </div>
-            <div class="col l12 s12" ng-repeat="item in epc.parcelArray track by $index">
-                {{item.item}}
+
+            <div class="col l12 s12" ng-repeat="item in epc.parcelArray" >
+
             </div>
             <a class="waves-effect waves-light btn buttonBackground col l4 offset-l7" ng-click="epc.sendParcel()">Get Parcel</a>
         </div>
@@ -162,32 +120,49 @@
             </form>
         </div>
 
-        <div class="row">
-            <a class="waves-effect waves-light btn col l4 offset-l7" ng-click="epc.createShipment()">Create Shipment</a>
+      </div>
+      <div class="row center">
+        <a class="waves-effect waves-light btn col l4 offset-l4" ng-click="epc.createShipment()">Create Shipment</a>
 
-        </div>
+      </div>
+      <div class="row">
         <div class="rateTile tileBackground">
-            <h5 class="grey-text text-darken-2">Rates</h5>
-            <div ng-repeat=" rate in epc.rts">
-              <table>
-                <td>
-                  {{rate.carrier}}
-                </td>
-                <td>
-                  {{rate.service}}
-                </td>
-                <td>
-                  {{rate.rate}}
-                </td>
-              </table>
-
-                <a class="waves-effect waves-light btn col l4 offset-l7" ng-click="epc.purchase()">Purchase</a>
+          <h5 class="grey-text text-darken-2">Rates</h5>
+          <div class="col l3 s3">
+            <h6 class="center">Carrier</h6>
+          </div>
+          <div class="col l3 s3">
+            <h6 class="center">Delivery Date</h6>
+          </div>
+          <div class="col l3 s3">
+            <h6 class="center">$ Rate</h6>
+          </div>
+          <div class="col l3 s3">
+            <p class="hidden">sup</p>
+          </div>
+          <div ng-repeat=" rate in epc.rts">
+            <div class="col l3 s3">
+              <p class="center">{{rate.carrier}}</p>
+              <p class="center">{{rate.service}}</p>
             </div>
+            <div class="col l3 s3">
+              <p class="center">{{rate.delivery_date}}</p>
+            </div>
+            <div class="col l3 s3">
+              <p class="center">${{rate.rate}}</p>
+            </div>
+            <div class="col l3 s3 center-align">
+              <input class="hidden" ng-model="rate.id">
+              <a class="waves-effect waves-light btn" ng-click="epc.purchase(rate.id)">Purchase</a>
+            </div>
+
+          </div>
         </div>
 
-        <div class="row">
-            {{epc.lable.postage_lable.lable_url}}
+        <div class="lableTile tileBackground">
+          <h5 class="grey-text text-darken-2">Lable</h5>
+            {{epc.label.postage_label.label_url}}
+            <a href="{{epc.lable.postage_label.label_url}}">lable</a>
         </div>
-    </div>
-
+      </div>
 </div>

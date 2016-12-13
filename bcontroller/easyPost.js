@@ -52,7 +52,6 @@ module.exports = {
             parcel: {id: req.body.parcel},
             customs_info: req.body.customsInfo
         }
-        console.log("sd",shipmentDetails)
         easypost.Shipment.create(shipmentDetails, (err, shipment) => {
             if(err) {
               res.json(err)

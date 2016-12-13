@@ -7,7 +7,7 @@
     function easypostController(easypostFactory) {
         var epc = this
 
-        // Variables for Ids
+        // Variables for local app
         epc.tAddress = {}
         epc.fAddress = {
             company: "Satcom Direct",
@@ -27,6 +27,7 @@
         }
         epc.shpmt = {}
         epc.rts = []
+        epc.rateId = {}
         epc.customsItem = [{
                 description: "Satcom Direct Router",
                 hs_tarrif_number: "851762",
@@ -81,7 +82,15 @@
             customs_items: [epc.customsItem[0]],
             eel_pfc: "NOEEI 30.37(a)"
         }
-        epc.product = {}
+        epc.products = [
+          {name:"SDR"},
+          {name:"SDR Mounting Plate"},
+          {name:"SDR Connector Kit"},
+          {name:"Interface Cable"},
+          {name:"Air802 3G Antenna"},
+          {name:"Air802 WIFI Antenna"}
+        ]
+        epc.item ={}
         epc.parcelArray = []
 
 
@@ -90,8 +99,8 @@
         epc.fromAddress = {}
         epc.parcel = {}
         epc.shipment = {}
-        epc.rate = []
-        epc.lable = {}
+        epc.rate = {}
+        epc.label = {}
 
             // Gets from address response object w/ id
         epc.sendFAddress = function() {
@@ -104,7 +113,7 @@
             }
             // Moves products to an array for shipments with multiple items
         epc.addProduct = function() {
-                epc.parcelArray.push(epc.product)
+                epc.parcelArray.push(epc.item)
             }
             // Gets parcel response oject w/ id
         epc.sendParcel = function() {
@@ -115,29 +124,34 @@
                     epc.shpmt.parcel = epc.parcel.id
                 })
             }
+
             // Creates shipment with: verified fromAddress, toAess, optional customsInfo (consisting of customItem(s)), and a parcel
         epc.createShipment = function() {
                 epc.shpmt.to_address = epc.tAddress
+
                 // omits customs info is the to_address is within the US
                 if (epc.shpmt.to_address.country.toLowerCase() === "us" || epc.shpmt.to_address.country.toLowerCase() === "united states") {
                     epc.shpmt.customsInfo = null
                 } else if (epc.shpmt.to_address.country.toLowerCase() !== "us" || epc.shpmt.to_address.country.toLowerCase() !== "united states") {
                     epc.shpmt.customsInfo = epc.customsInfo
                 }
+
                 easypostFactory.sendShipment(epc.shpmt, function(shipment) {
                     epc.shipment = shipment
                     console.log('created shipement')
                     console.log(epc.shipment)
                     epc.rts = epc.shipment.rates
-                    epc.rate = epc.rts[0]
                 })
             }
             // Purchases specific rate using shipment id and returns lable
-        epc.purchase = function() {
-            easypostFactory.buyRate(epc.rate.id, epc.shipment.id, function(lable) {
-                epc.lable = lable
-                console.log(epc.lable)
+        epc.purchase = function(rate) {
+          console.log(rate)
+            easypostFactory.buyRate(rate, epc.shipment.id, function(label) {
+                epc.label = label
             })
+        }
+        epc.log = function(x) {
+          console.log(x)
         }
     }
 

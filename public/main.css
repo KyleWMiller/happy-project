@@ -32,6 +32,10 @@ input[type=text] {
   margin-right: 5vw;
   display: inline-block;
 }
+.productTile input {
+  border: none;
+  word-wrap: normal;
+}
 .customsTile {
   width: 25vw;
   padding: 15px;
@@ -43,16 +47,15 @@ input[type=text] {
   margin-right: 5vw;
   display: inline-block;
 }
+.rateTile h6 {
+  border-bottom: 1px solid white;
+}
 .lableTile {
   width: 25vw;
   padding: 15px;
   display: inline-block;
 }
 
-/*table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-}*/
 /* */
 .mainBackground {
   background-color: #29597D;
@@ -78,4 +81,7 @@ input[type=text] {
 .updateBlue:hover {
   background-color: #00A7D6;
   color: #5B6167;
+}
+.hidden {
+  visibility: hidden;
 }
