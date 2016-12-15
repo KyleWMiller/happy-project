@@ -82,15 +82,20 @@
             customs_items: [epc.customsItem[0]],
             eel_pfc: "NOEEI 30.37(a)"
         }
-        epc.products = [
-          {name:"SDR"},
-          {name:"SDR Mounting Plate"},
-          {name:"SDR Connector Kit"},
-          {name:"Interface Cable"},
-          {name:"Air802 3G Antenna"},
-          {name:"Air802 WIFI Antenna"}
-        ]
-        epc.item ={}
+        // epc.products = [{
+        //     name: "SDR"
+        // }, {
+        //     name: "SDR Mounting Plate"
+        // }, {
+        //     name: "SDR Connector Kit"
+        // }, {
+        //     name: "Interface Cable"
+        // }, {
+        //     name: "Air802 3G Antenna"
+        // }, {
+        //     name: "Air802 WIFI Antenna"
+        // }]
+        epc.item = {}
         epc.parcelArray = []
 
 
@@ -102,7 +107,7 @@
         epc.rate = {}
         epc.label = {}
 
-            // Gets from address response object w/ id
+        // Gets from address response object w/ id
         epc.sendFAddress = function() {
                 easypostFactory.sendAddress(epc.fAddress, function(address) {
                     epc.fromAddress = address
@@ -117,15 +122,15 @@
             }
             // Gets parcel response oject w/ id
         epc.sendParcel = function() {
-                easypostFactory.sendParcel(epc.prcl, function(parcel) {
-                    epc.parcel = parcel
-                    console.log("Parcel")
-                    console.log(epc.parcel)
-                    epc.shpmt.parcel = epc.parcel.id
-                })
-            }
+            easypostFactory.sendParcel(epc.prcl, function(parcel) {
+                epc.parcel = parcel
+                console.log("Parcel")
+                console.log(epc.parcel)
+                epc.shpmt.parcel = epc.parcel.id
+            })
+        }
 
-            // Creates shipment with: verified fromAddress, toAess, optional customsInfo (consisting of customItem(s)), and a parcel
+        // Creates shipment with: verified fromAddress, toAess, optional customsInfo (consisting of customItem(s)), and a parcel
         epc.createShipment = function() {
                 epc.shpmt.to_address = epc.tAddress
 
@@ -145,13 +150,10 @@
             }
             // Purchases specific rate using shipment id and returns lable
         epc.purchase = function(rate) {
-          console.log(rate)
+            console.log(rate)
             easypostFactory.buyRate(rate, epc.shipment.id, function(label) {
                 epc.label = label
             })
-        }
-        epc.log = function(x) {
-          console.log(x)
         }
     }
 

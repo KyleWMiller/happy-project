@@ -2,6 +2,9 @@
 input[type=text] {
   margin: 0 0 5px 0;
 }
+.row{
+  margin-bottom: 2vw;
+}
 
 
 /* Form Set-up */
@@ -29,17 +32,20 @@ input[type=text] {
 .productTile {
   width: 50vw;
   padding: 15px;
-  margin-right: 5vw;
+  margin-right: 2vw;
   display: inline-block;
 }
 .productTile input {
   border: none;
-  word-wrap: normal;
+  word-wrap: break-word;
 }
 .customsTile {
-  width: 25vw;
+  width: 28vw;
   padding: 15px;
   display: inline-block;
+}
+.customsTile input {
+  height: auto;
 }
 .rateTile {
   width: 50vw;
@@ -57,6 +63,9 @@ input[type=text] {
 }
 
 /* */
+.navBackground {
+  background-color: #0A5181;
+}
 .mainBackground {
   background-color: #29597D;
 }

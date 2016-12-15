@@ -1,7 +1,7 @@
 <div class="paperBorder white-text" ng-controller="easypostController as epc">
     <div class="row">
         <!-- To Address Form -->
-        <div class="toTile tileBackground">
+        <div class="toTile tileBackground z-depth-2">
             <h5 class="grey-text text-darken-2">To</h5>
             <!-- <a class="waves-effect waves-light btn col l4 offset-l7 buttonBackground verifyGreen right" ng-click="epc.sendTAddress()">Verify</a> -->
             <form>
@@ -38,7 +38,7 @@
         </div>
 
         <!-- From Address Form -->
-        <div class="fromTile tileBackground">
+        <div class="fromTile tileBackground z-depth-2">
             <h5 class="grey-text text-darken-2">From</h5>
             <a class="waves-effect waves-light btn buttonBackground updateBlue col l4 right" ng-click="epc.sendFAddress()" ng-init="epc.sendFAddress()">Update</a>
 
@@ -77,56 +77,46 @@
 
     <div class="row">
         <!-- Product Input -->
-        <div class="productTile tileBackground">
+        <div class="productTile tileBackground z-depth-2">
+
             <h5 class="grey-text text-darken-2">Products</h5>
-            <div class="col l2 s2" ng-repeat="product in epc.products" ng-model="epc.item">
-              <input value="{{product.name}}" >
+            <div class="col l2 s2" ng-repeat="product in epc.customsItem track by $index" ng-model="epc.item">
+              
+              <input value="product.description" >
               <a class="waves-effect waves-light btn buttonBackground col l12" ng-click="epc.addProduct()">Add</a>
 
             </div>
 
-            <div class="col l12 s12" ng-repeat="item in epc.parcelArray" >
-
+            <div class="col l12 s12">
+              <!-- ng-repeat="item in epc.parcelArray" -->
+              {{epc.parcelArray}}
             </div>
             <a class="waves-effect waves-light btn buttonBackground col l4 offset-l7" ng-click="epc.sendParcel()">Get Parcel</a>
         </div>
 
         <!-- Customs Form -->
-        <div class="customsTile tileBackground">
+        <div class="customsTile tileBackground z-depth-2">
             <h5 class="grey-text text-darken-2">Customs Info</h5>
             <form>
-                <div class="col l12 s12">
-                    <input type="text" ng-model="epc.customsInfo" placeholder="Description">
+                <div class="col l6 s6">
+                    <input type="text" id="signer" ng-model="epc.customsInfo.customs_signer">
+                    <label for="signer">Customs Signer</label>
                 </div>
-                <div class="col l4 s4">
-                    <input type="text" ng-model="epc.customsInfo" placeholder="Qty">
-                </div>
-                <div class="col l4 s4">
-                    <input type="text" ng-model="epc.customsInfo" placeholder="Weight">
-                </div>
-                <div class="col l4 s4">
-                    <input type="text" ng-model="epc.customsInfo" placeholder="$ Value">
-                </div>
-                <div class="col l8 s8">
-                    <input type="text" ng-model="epc.customsInfo" placeholder="HS Tarrif #">
-                </div>
-                <div class="col l4 s4">
-                    <input type="text" ng-model="epc.customsInfo" placeholder="Origin">
-                </div>
-                <div class="col l3 offset-9">
-                    <a class="waves-effect waves-light btn col l4 offset-l7" ng-click="console.log(epc.customsItem)()">log</a>
-
+                <div class="col l6 s6">
+                    <input type="text" id="type" ng-model="epc.customsInfo.customs_type">
+                    <label for="type">Type</label>
                 </div>
             </form>
         </div>
 
       </div>
-      <div class="row center">
-        <a class="waves-effect waves-light btn col l4 offset-l4" ng-click="epc.createShipment()">Create Shipment</a>
 
+      <div class="row center-align">
+        <a class="waves-effect waves-light btn" ng-click="epc.createShipment()">Create Shipment</a>
       </div>
+
       <div class="row">
-        <div class="rateTile tileBackground">
+        <div class="rateTile tileBackground z-depth-2">
           <h5 class="grey-text text-darken-2">Rates</h5>
           <div class="col l3 s3">
             <h6 class="center">Carrier</h6>
@@ -159,10 +149,10 @@
           </div>
         </div>
 
-        <div class="lableTile tileBackground">
+        <div class="lableTile tileBackground z-depth-2">
           <h5 class="grey-text text-darken-2">Lable</h5>
-            {{epc.label.postage_label.label_url}}
-            <a href="{{epc.lable.postage_label.label_url}}">lable</a>
+            <!-- {{epc.label.postage_label.label_url}} -->
+            <a ng-href="{{epc.lable.postage_label.label_url}}">lable</a>
         </div>
       </div>
 </div>
