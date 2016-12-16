@@ -1,4 +1,7 @@
 /* Normalizing */
+body {
+  font-family: "Open Sans";
+}
 input[type=text] {
   margin: 0 0 5px 0;
 }
@@ -35,10 +38,6 @@ input[type=text] {
   margin-right: 2vw;
   display: inline-block;
 }
-.productTile input {
-  border: none;
-  word-wrap: break-word;
-}
 .customsTile {
   width: 28vw;
   padding: 15px;
@@ -46,6 +45,12 @@ input[type=text] {
 }
 .customsTile input {
   height: auto;
+}
+.createTile {
+  width: 80vw;
+}
+.createTile a {
+  font-size: 2rem;
 }
 .rateTile {
   width: 50vw;
@@ -75,13 +80,13 @@ input[type=text] {
 .buttonBackground {
   background-color: #5B6167;
 }
-.verifyGreen {
-  color: #00b300;
+.createGreen {
+  color: white;
   font-weight: bold;
 }
-.verifyGreen:hover {
-  background-color: #00b300;
-  color: #5B6167;
+.createGreen:hover {
+  background-color: #265B41;
+  color: white;
 }
 .updateBlue{
   color: #00A7D6;

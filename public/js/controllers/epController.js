@@ -82,19 +82,6 @@
             customs_items: [epc.customsItem[0]],
             eel_pfc: "NOEEI 30.37(a)"
         }
-        // epc.products = [{
-        //     name: "SDR"
-        // }, {
-        //     name: "SDR Mounting Plate"
-        // }, {
-        //     name: "SDR Connector Kit"
-        // }, {
-        //     name: "Interface Cable"
-        // }, {
-        //     name: "Air802 3G Antenna"
-        // }, {
-        //     name: "Air802 WIFI Antenna"
-        // }]
         epc.item = {}
         epc.parcelArray = []
 
@@ -118,8 +105,21 @@
             }
             // Moves products to an array for shipments with multiple items
         epc.addProduct = function() {
-                epc.parcelArray.push(epc.item)
+          function Item(product) {
+            var holding = {
+              name:        product.name,
+              quantity:    product.quantity,
+              serialNum:   product.serialNum,
+              mfgNum:      product.mfgNum,
+              itemNum:     product.itemNum,
+              modelNum:    product.modelNum,
+              price:       product.price
             }
+            return holding
+          }
+          var item = new Item(epc.product)
+          epc.parcelArray.push(item)
+        }
             // Gets parcel response oject w/ id
         epc.sendParcel = function() {
             easypostFactory.sendParcel(epc.prcl, function(parcel) {
