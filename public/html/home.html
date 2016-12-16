@@ -193,7 +193,11 @@
         <div class="lableTile tileBackground z-depth-2">
             <h5 class="grey-text text-darken-2">Lable</h5>
             <!-- {{epc.label.postage_label.label_url}} -->
-            <a ng-href="{{epc.lable.postage_label.label_url}}">lable</a>
+            <div class="col l12">
+              {{epc.label}}
+            </div>
+            <a target="_blank" ng-href="{{epc.label.postage_label.label_url}}">label</a>
         </div>
     </div>
+    <h1>Your code is awesome and you're awesome too!</h1>
 </div>

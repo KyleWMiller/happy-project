@@ -107,7 +107,7 @@
         epc.addProduct = function() {
           function Item(product) {
             var holding = {
-              name:        product.name,
+              item:        product.item,
               quantity:    product.quantity,
               serialNum:   product.serialNum,
               mfgNum:      product.mfgNum,
@@ -150,7 +150,6 @@
             }
             // Purchases specific rate using shipment id and returns lable
         epc.purchase = function(rate) {
-            console.log(rate)
             easypostFactory.buyRate(rate, epc.shipment.id, function(label) {
                 epc.label = label
             })
