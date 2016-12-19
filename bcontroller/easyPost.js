@@ -46,6 +46,7 @@ module.exports = {
 
     // create Shipment
     createShipment: (req, res) => {
+      console.log('request to creat shipment recieved')
         const shipmentDetails = {
             to_address: req.body.to_address,
             from_address: {id: req.body.from_address},
@@ -54,7 +55,7 @@ module.exports = {
         }
         easypost.Shipment.create(shipmentDetails, (err, shipment) => {
             if(err) {
-              res.json(err)
+              res.status(400).json(err)
             } else {
               res.status(201).json(shipment)
             }
@@ -62,12 +63,11 @@ module.exports = {
     },
 
     buyShipment: (req, res) => {
-
+      console.log('request to purchase rate recieved')
       // let shipment = req.body.shipment
       let rate     = req.body,
           shipmentParam = req.params.id
 
-          console.log(rate)
           easypost.Shipment.retrieve(shipmentParam, (err, shipment) => {
             if(err) {
               res.json(err)

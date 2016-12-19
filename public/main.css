@@ -2,6 +2,9 @@
 body {
   font-family: "Open Sans";
 }
+.mainBackground {
+  background-color: #29597D;
+}
 input[type=text] {
   margin: 0 0 5px 0;
 }
@@ -44,7 +47,7 @@ input[type=text] {
   display: inline-block;
 }
 .customsTile input {
-  height: auto;
+  font-size: 1.333rem;
 }
 .createTile {
   width: 80vw;
@@ -55,24 +58,21 @@ input[type=text] {
 .rateTile {
   width: 50vw;
   padding:15px;
-  margin-right: 5vw;
+  margin-right: 2vw;
   display: inline-block;
 }
 .rateTile h6 {
   border-bottom: 1px solid white;
 }
-.lableTile {
-  width: 25vw;
+.labelTile {
+  width: 28vw;
   padding: 15px;
   display: inline-block;
 }
 
-/* */
+/* Button CSS*/
 .navBackground {
   background-color: #0A5181;
-}
-.mainBackground {
-  background-color: #29597D;
 }
 .tileBackground{
   background-color: #152C3F;
@@ -96,6 +96,8 @@ input[type=text] {
   background-color: #00A7D6;
   color: #5B6167;
 }
+
+/* MISC */
 .hidden {
   visibility: hidden;
 }

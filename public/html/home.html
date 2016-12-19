@@ -129,20 +129,15 @@
             <div class="col l12 s12" ng-repeat="item in epc.parcelArray">
                 {{item}}
             </div>
-            <a class="waves-effect waves-light btn buttonBackground col l4 offset-l7 createGreen" ng-click="epc.sendParcel()">Get Parcel</a>
+            <a class="waves-effect waves-light btn buttonBackground col l4 offset-l7 createGreen" ng-click="epc.sendParcel()">Create Package</a>
         </div>
 
         <!-- Customs Form -->
         <div class="customsTile tileBackground z-depth-2">
-            <h5 class="grey-text text-darken-2">Customs Info</h5>
-            <form>
-                <div class="col l6 s6">
-                    <input type="text" id="signer" ng-model="epc.customsInfo.customs_signer">
-                    <label for="signer">Customs Signer</label>
-                </div>
-                <div class="col l6 s6">
-                    <input type="text" id="type" ng-model="epc.customsInfo.customs_type">
-                    <label for="type">Type</label>
+            <h5 class="grey-text text-darken-2">Customs Signer</h5>
+            <form  id="customs">
+                <div class="col l12">
+                    <input type="text" placeholder="Name" ng-model="epc.customsInfo.customs_signer">
                 </div>
             </form>
         </div>
@@ -184,19 +179,33 @@
                 </div>
                 <div class="col l3 s3 center-align">
                     <input class="hidden" ng-model="rate.id">
-                    <a class="waves-effect waves-light btn" ng-click="epc.purchase(rate.id)">Purchase</a>
+                    <a class="waves-effect waves-light btn buttonBackground" ng-click="epc.purchase(rate.id)">Purchase</a>
                 </div>
 
             </div>
         </div>
 
-        <div class="lableTile tileBackground z-depth-2">
-            <h5 class="grey-text text-darken-2">Lable</h5>
-            <!-- {{epc.label.postage_label.label_url}} -->
-            <div class="col l12">
+        <div class="labelTile tileBackground z-depth-2">
+            <h5 class="grey-text text-darken-2">Label</h5>
+            <!-- <div class="col l12">
               {{epc.label}}
+            </div> -->
+            <div class="col l12">
+              <div class="col l6">
+                <a id="label" target="_blank" ng-href="{{epc.label.postage_label.label_url}}" class="waves-effect waves-light btn buttonBackground col l12">Label</a>
+              </div>
+              <div class="col l6">
+                <a id="form" target="_blank" ng-href="{{epc.label.forms[0].form_url}}" class="waves-effect waves-light btn buttonBackground col l12">Commercial Invoice</a>
+              </div>
+              <div class="col l6">
+                <h6>Tracking #: {{epc.label.tracker.tracking_code}}</h6>
+              </div>
+              <div class="col l6">
+                <a id="tLable" target="_blank" ng-href="{{epc.label.tracker.public_url}}" class="waves-effect waves-light btn buttonBackground col l12">Tracking</a>
+
+              </div>
             </div>
-            <a target="_blank" ng-href="{{epc.label.postage_label.label_url}}">label</a>
+
         </div>
     </div>
     <h1>Your code is awesome and you're awesome too!</h1>
