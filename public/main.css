@@ -101,3 +101,6 @@ input[type=text] {
 .hidden {
   visibility: hidden;
 }
+.super {
+  vertical-align: super;
+}

@@ -80,18 +80,18 @@
         <div class="productTile tileBackground z-depth-2">
 
             <h5 class="grey-text text-darken-2">Products</h5>
+            <!-- JS for <select>  -->
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('select').material_select();
+                });
+            </script>
             <form>
                 <table>
                     <tr>
-                        <!-- JS for <select>  -->
-                        <script type="text/javascript">
-                            $(document).ready(function() {
-                                $('select').material_select();
-                            });
-                        </script>
                         <td class="input-field col s12">
                             <select ng-model="epc.product.item">
-                               <option value="SDR">SDR</option>
+                               <option value="SDR" >SDR</option>
                                <option value="SDRmountingPlate">SDR Mounting Plate</option>
                                <option value="SDRconnectorKit">SDR Connector Kit</option>
                                <option value="InterfaceCable">Interface Cable</option>
@@ -166,10 +166,8 @@
             </div>
             <div ng-repeat=" rate in epc.rts">
                 <div class="col l3 s3">
-                  <div class="valign-wrapper">
                     <p class="center">{{rate.carrier}}</p>
                     <p class="center">{{rate.service}}</p>
-                  </div>
                 </div>
                 <div class="col l3 s3">
                     <p class="center">{{rate.delivery_date}}</p>
@@ -178,8 +176,8 @@
                     <p class="center">${{rate.rate}}</p>
                 </div>
                 <div class="col l3 s3 center-align">
+                    <a class="waves-effect waves-light btn buttonBackground super" ng-click="epc.purchase(rate.id)">Purchase</a>
                     <input class="hidden" ng-model="rate.id">
-                    <a class="waves-effect waves-light btn buttonBackground" ng-click="epc.purchase(rate.id)">Purchase</a>
                 </div>
 
             </div>
@@ -208,5 +206,5 @@
 
         </div>
     </div>
-    <h1>Your code is awesome and you're awesome too!</h1>
+    <!-- <h1>Your code is awesome and you're awesome too!</h1> -->
 </div>
