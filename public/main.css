@@ -98,6 +98,9 @@ input[type=text] {
 }
 
 /* MISC */
+.logo {
+  font-size: 2.3rem;
+}
 .hidden {
   visibility: hidden;
 }

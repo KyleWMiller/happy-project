@@ -104,16 +104,13 @@
                             <input type="text" ng-model="epc.product.quantity" placeholder="Qty">
                         </td>
                         <td>
-                            <input type="text" ng-model="epc.product.serialNum" placeholder="Seial#">
+                            <input type="text" ng-model="epc.product.serialNum" placeholder="Serial#">
                         </td>
                         <td>
                             <input type="text" ng-model="epc.product.mfgNum" placeholder="Mfg#">
                         </td>
                         <td>
                             <input type="text" ng-model="epc.product.itemNum" placeholder="Item#">
-                        </td>
-                        <td>
-                            <input type="text" ng-model="epc.product.modelNum" placeholder="Model#">
                         </td>
                         <td>
                             <input type="text" ng-model="epc.product.price" placeholder="$ Price">
@@ -127,7 +124,25 @@
 
 
             <div class="col l12 s12" ng-repeat="item in epc.parcelArray">
-                {{item}}
+              <div class="col l2">
+                <p>{{item.item}}</p>
+              </div>
+              <div class="col l6">
+                <div class="col l6">
+                  <p>qty: {{item.quantity}}</p>
+                  <p>serial#: {{item.serialNum}}</p>
+                </div>
+                <div class="col l6">
+                  <p>mfg#: {{item.mfgNum}}</p>
+                  <p>part#: {{item.partNum}}</p>
+                </div>
+              </div>
+              <div class="col l3">
+                <p>Price: $ {{item.price}}</p>
+              </div>
+              <div class="col l1">
+                <a class="btn-floating waves-effect waves-light buttonBackground" ng-click="epc.addProduct()"><i class="material-icons">delete</i></a>
+              </div>
             </div>
             <a class="waves-effect waves-light btn buttonBackground col l4 offset-l7 createGreen" ng-click="epc.sendParcel()">Create Package</a>
         </div>
