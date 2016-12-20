@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('epControllers', [])
-        .controller('easypostController', ['easypostFactory', easypostController])
+        .controller('easypostController', ['easypostFactory', 'productFactory', easypostController])
 
-    function easypostController(easypostFactory) {
+    function easypostController(easypostFactory, productFactory) {
         var epc = this
 
         // Variables for local app
@@ -19,18 +19,13 @@
             phone: "+1(321) 777-3000",
             email: "SDR@satcomdirect.com"
         }
-        epc.products = 
-        epc.prcl = {
-            height: 15,
-            width: 10,
-            length: 7,
-            weight: 176
-        }
+        epc.products = productFactory.products
+        console.log("===",epc.products)
+        epc.prcl = productFactory.parcels[0]
         epc.shpmt = {}
         epc.rts = []
         epc.rateId = {}
         epc.customsItem = {}
-      ]
         epc.customsInfo = {
             customs_certify: true,
             customs_signer: null,
