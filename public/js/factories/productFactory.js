@@ -21,7 +21,8 @@
         }
 
 
-        pf.products = [{
+        pf.products = [
+            {
                 details: {
                     item: "SDR",
                     serialNum: null,

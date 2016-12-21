@@ -10,7 +10,6 @@ let apiKey = "SXMggE7i1n5Eq6CAlXQNYw",
 module.exports = {
     // verifyAddress sends the user's input to the EasyPost API and returns it to the Angular controller
 
-    //   response in the addresses DB.
     verifyAddress: (req, res) => {
         console.log('request to verify address recieved')
         let add = req.body
@@ -44,7 +43,7 @@ module.exports = {
         })
     },
 
-    // create Shipment
+    // createShipment sends bundeled to_address, from_address, parcel, and customsInfo (if outside of the us) and returns created shipment with array of rates
     createShipment: (req, res) => {
       console.log('request to creat shipment recieved')
         const shipmentDetails = {
@@ -62,9 +61,9 @@ module.exports = {
         })
     },
 
+    // buyShipment uses internal retrieve [node-easypost /main.js:393] to retireve created shipment with shipment_id the returns purchased rate
     buyShipment: (req, res) => {
       console.log('request to purchase rate recieved')
-      // let shipment = req.body.shipment
       let rate     = req.body,
           shipmentParam = req.params.id
 

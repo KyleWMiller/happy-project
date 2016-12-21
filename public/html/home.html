@@ -80,15 +80,14 @@
         <div class="productTile tileBackground z-depth-2">
 
             <h5 class="grey-text text-darken-2">Products</h5>
-            <!-- JS for <select>  -->
-            <script type="text/javascript">
-                $(document).ready(function() {
-                    $('select').material_select();
-                });
-            </script>
             <form>
               <div class="" ng-repeat="product in epc.products">
-                {{product}}
+                <div class="col l4" ng-model="epc.productHolding">
+                  {{product.details.item}}
+                  <a class="btn-floating waves-effect waves-light buttonBackground createGreen" ng-click="epc.addProduct()"><i class="material-icons">add</i></a>
+
+                </div>
+
               </div>
 
             </form>

@@ -20,7 +20,7 @@
             email: "SDR@satcomdirect.com"
         }
         epc.products = productFactory.products
-        console.log("===",epc.products)
+        epc.productHolding = {}
         epc.prcl = productFactory.parcels[0]
         epc.shpmt = {}
         epc.rts = []
@@ -40,7 +40,6 @@
 
 
         // Variables that store responses from EasyPost
-        epc.toAddress = {}
         epc.fromAddress = {}
         epc.parcel = {}
         epc.shipment = {}
@@ -56,24 +55,23 @@
                     epc.shpmt.from_address = epc.fromAddress.id
                 })
             }
-            // Moves products to an array for shipments with multiple items
+        // Moves products to an array for shipments with multiple items
         epc.addProduct = function() {
                 function Item(product) {
                     var holding = {
                         item: product.item,
                         quantity: product.quantity,
                         serialNum: product.serialNum,
-                        mfgNum: product.mfgNum,
                         itemNum: product.itemNum,
                         modelNum: product.modelNum,
                         price: product.price
                     }
                     return holding
                 }
-                var item = new Item(epc.product)
+                var item = new Item(epc.productHolding)
                 epc.parcelArray.push(item)
             }
-            // Gets parcel response oject w/ id
+        // Gets parcel response oject w/ id
         epc.sendParcel = function() {
                 easypostFactory.sendParcel(epc.prcl, function(parcel) {
                     epc.parcel = parcel
@@ -83,11 +81,11 @@
                     epc.shpmt.parcel = epc.parcel.id
                 })
             }
-            // Creates shipment with: verified fromAddress, toAess, optional customsInfo (consisting of customItem(s)), and a parcel
+        // Creates shipment with: verified fromAddress, toAess, optional customsInfo (consisting of customItem(s)), and a parcel
         epc.createShipment = function() {
                 epc.shpmt.to_address = epc.tAddress
 
-                // omits customs info is the to_address is within the US
+                // omits customs info if the to_address is within the US
                 if (epc.shpmt.to_address.country.toLowerCase() === "us" || epc.shpmt.to_address.country.toLowerCase() === "united states") {
                     epc.shpmt.customsInfo = null
                 } else if (epc.shpmt.to_address.country.toLowerCase() !== "us" || epc.shpmt.to_address.country.toLowerCase() !== "united states") {
@@ -108,7 +106,7 @@
                 epc.label = label
 
                 if (epc.label.forms[0]) {
-                    $("form").add("disabled")
+                    $("#form").add("disabled")
                 }
             })
         }

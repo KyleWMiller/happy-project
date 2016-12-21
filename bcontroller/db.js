@@ -1,6 +1,7 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 //                    Easy Post                      //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
+  // currently not en use use for template for future db calls
 
 var dbq = require('../model/epModel.js')
 

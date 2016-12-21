@@ -2,7 +2,7 @@
 // Schemas for EasyPost
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
 
-// formats information recieved from ep.verifyAddress
+// formats information recieved from ep.verifyAddress to be stored in db
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     address = new Schema({
