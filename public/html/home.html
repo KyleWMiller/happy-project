@@ -82,8 +82,13 @@
             <h5 class="grey-text text-darken-2">Products</h5>
             <form>
               <div class="" ng-repeat="product in epc.products">
-                <div class="col l4" ng-model="epc.productHolding">
-                  {{product.details.item}}
+
+                <div class="col l4 center" id="product">
+
+                  {{product.item}}
+
+                  <input class="hidden" value="{{product}}"  ng-model="epc.productHolding">
+
                   <a class="btn-floating waves-effect waves-light buttonBackground createGreen" ng-click="epc.addProduct()"><i class="material-icons">add</i></a>
 
                 </div>
@@ -93,7 +98,7 @@
             </form>
 
 
-            <div class="col l12 s12" ng-repeat="item in epc.parcelArray">
+            <div class="col l12 s12 center" ng-repeat="item in epc.parcelArray">
               <div class="col l2">
                 <p>{{item.item}}</p>
               </div>

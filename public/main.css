@@ -41,6 +41,9 @@ input[type=text] {
   margin-right: 2vw;
   display: inline-block;
 }
+#product {
+  margin-bottom: 20px;
+}
 .customsTile {
   width: 28vw;
   padding: 15px;
@@ -103,6 +106,8 @@ input[type=text] {
 }
 .hidden {
   visibility: hidden;
+  height: 0px !important;
+  margin: 0px !important;
 }
 .super {
   vertical-align: super;

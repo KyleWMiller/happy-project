@@ -58,26 +58,31 @@
         // Moves products to an array for shipments with multiple items
         epc.addProduct = function() {
                 function Item(product) {
+                  console.log(product)
                     var holding = {
-                        item: product.item,
+                        item: product.details.item,
                         quantity: product.quantity,
-                        serialNum: product.serialNum,
-                        itemNum: product.itemNum,
-                        modelNum: product.modelNum,
-                        price: product.price
+                        serialNum: product.details.serialNum,
+                        itemNum: product.details.itemNum,
+                        modelNum: product.details.modelNum,
+                        price: product.details.price,
+                        weight: product.customs.weight
                     }
+                    epc.prcl.weight = holding.weight
                     return holding
+                    console.log(holding)
                 }
+
                 var item = new Item(epc.productHolding)
                 epc.parcelArray.push(item)
             }
         // Gets parcel response oject w/ id
         epc.sendParcel = function() {
+          console.log(epc.prcl)
                 easypostFactory.sendParcel(epc.prcl, function(parcel) {
                     epc.parcel = parcel
                     console.log(epc.products)
                     console.log("Parcel")
-                    console.log(epc.parcel)
                     epc.shpmt.parcel = epc.parcel.id
                 })
             }
