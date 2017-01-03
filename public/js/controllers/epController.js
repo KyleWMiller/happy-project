@@ -19,9 +19,10 @@
             phone: "+1(321) 777-3000",
             email: "SDR@satcomdirect.com"
         }
-        epc.products = productFactory.products
         epc.parcels = productFactory.parcels
         epc.package = {}
+        epc.products = productFactory.products
+        epc.item = {}
         epc.shpmt = {}
         epc.rts = []
         epc.rateId = {}
@@ -56,19 +57,6 @@
             })
         }
 
-        // Creates a new package for shipment
-        epc.addPackage = function() {
-            function Package(x) {
-              console.log(epc.package)
-              var holding = {
-
-              }
-
-            }
-            var box = new Package(epc.package)
-            epc.shipmentItem.package = box
-        }
-
         // Adds items to package
         epc.addProduct = function() {
                 function Item(product) {
@@ -83,7 +71,7 @@
                     return holding
                 }
 
-                var item = new Item(epc.product)
+                var item = new Item(epc.item)
                 epc.parcelArray.push(item)
             }
             // Gets parcel response oject w/ id

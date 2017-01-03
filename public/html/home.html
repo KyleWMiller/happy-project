@@ -77,60 +77,19 @@
 
     <div class="row">
         <!-- Product Input -->
-        <div class="productTile tileBackground z-depth-2">
+        <div class="productsTile tileBackground z-depth-2">
 
-            <h5 class="grey-text text-darken-2">Products</h5>
-
-            <!-- <script type="text/javascript">
-                $(document).ready(function() {
-                    $('select').material_select()
-                })
-            </script> -->
-            <!-- Select for adding box(s) to shipment  -->
-            <div class="col s6">
-                <h6 class="grey-text text-darken-2">Package</h6>
-
-                <div class="input-field col s6" ng-repeat="package in epc.parcels">
-                    <input type="text" class="hidden" value="{{package.dimentions.height}}" ng-model="epc.package.height">
-                    {{package.size}}
-                    <input type="text" class="hidden" value="{{package.dimentions.width}}" ng-model="epc.package.width">
-                    <input type="text" class="hidden" value="{{package.dimentions.length}}" ng-model="epc.package.length">
-
-                    <a class="btn waves-effect waves-light buttonBackground" ng-click="epc.addPackage()">Add Package</a>
-
-                    <!-- <form>
-                    <select ng-model="epc.package.name">
-                      <option value="" disabled selected>Box</option>
-                      <option ng-repeat="package in epc.parcels">{{package.size}}</option>
-                    </select>
-                    <input type="text" class="hidden" value="{{package.dimentions.height}}" ng-model="epc.package.height">
-                    <input type="text" class="hidden" value="{{package.dimentions.width}}" ng-model="epc.package.width">
-                    <input type="text" class="hidden" value="{{package.dimentions.length}}" ng-model="epc.package.length">
-                  </form> -->
-                </div>
-
+            <h5 class="grey-text text-darken-2 col s7">Products</h5>
+            <div class="col s5">
+              <a id="package" class="btn wave-effect buttonBackground col s5 offset-s1" ng-repeat="parcel in epc.parcels">{{parcel.size}}</a>
             </div>
-
-            <!-- Select for adding item(s) to box -->
-            <div class="col s6">
-                <h6 class="grey-text text-darken-2">Item</h6>
-                <div class="input-field col s8">
-                    <select ng-model="epc.product.item">
-                  <option value="" disabled selected>Products</option>
-                  <option ng-repeat="product in epc.products" ng-model="epc.product" value="{{product}}">{{product.item}}</option>
-                </select>
-                </div>
-
-                <div class="col s4">
-                    <a class="btn waves-effect waves-light buttonBackground" ng-click="epc.addProduct">Add Product</a>
-                </div>
+            <div id="product" class="col s12 center">
+              <div class="col s3 itemTile" ng-repeat="product in epc.products track by $index">
+                <p>{{product.item}}</p>
+                <input type="text" class="hidden" value="{{product}}" ng-model="epc.item">
+                <a class="btn wave-effect buttonBackground" ng-click="epc.addProduct()">Add</a>
+              </div>
             </div>
-
-            <div class="col s12">
-                {{epc.shipmentArr}}
-            </div>
-
-            <a class="waves-effect waves-light btn buttonBackground col s4 offset-s7 createGreen" ng-click="epc.sendParcel()">Create Package</a>
         </div>
 
         <!-- Customs Form -->

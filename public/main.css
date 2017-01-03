@@ -35,14 +35,15 @@ input[type=text] {
 .fromTile h5 {
   display: inline-block;
 }
-.productTile {
+.productsTile {
   width: 50vw;
   padding: 15px;
   margin-right: 2vw;
   display: inline-block;
 }
-.products {
-  margin-bottom: 20px;
+.itemTile {
+  background-color: #222428;
+  margin: 7px;
 }
 .customsTile {
   width: 28vw;
@@ -96,8 +97,20 @@ input[type=text] {
   font-weight: bold;
 }
 .updateBlue:hover {
-  background-color: #00A7D6;
-  color: #5B6167;
+  background-color: #09789C;
+  color: white;
+}
+#package {
+  margin-top: 10px;
+}
+#package:hover {
+  background-color: #09789C;
+}
+#product a{
+  margin-bottom: 10px;
+}
+#product p{
+  margin: 10px 0 0 0;
 }
 
 /* MISC */
