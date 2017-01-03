@@ -20,8 +20,8 @@
             email: "SDR@satcomdirect.com"
         }
         epc.products = productFactory.products
-        epc.productHolding = {}
-        epc.prcl = productFactory.parcels[0]
+        epc.parcels = productFactory.parcels
+        epc.package = {}
         epc.shpmt = {}
         epc.rts = []
         epc.rateId = {}
@@ -35,8 +35,8 @@
             customs_items: [epc.customsItem[0]],
             eel_pfc: "NOEEI 30.37(a)"
         }
-        epc.item = {}
-        epc.parcelArray = []
+        epc.shipmentItem = {}
+        epc.shipmentArr = []
 
 
         // Variables that store responses from EasyPost
@@ -48,37 +48,47 @@
 
         // Gets from address response object w/ id
         epc.sendFAddress = function() {
-                easypostFactory.sendAddress(epc.fAddress, function(address) {
-                    epc.fromAddress = address
-                    console.log("From address")
-                    console.log(epc.fromAddress)
-                    epc.shpmt.from_address = epc.fromAddress.id
-                })
+            easypostFactory.sendAddress(epc.fAddress, function(address) {
+                epc.fromAddress = address
+                console.log("From address")
+                console.log(epc.fromAddress)
+                epc.shpmt.from_address = epc.fromAddress.id
+            })
+        }
+
+        // Creates a new package for shipment
+        epc.addPackage = function() {
+            function Package(x) {
+              console.log(epc.package)
+              var holding = {
+
+              }
+
             }
-        // Moves products to an array for shipments with multiple items
+            var box = new Package(epc.package)
+            epc.shipmentItem.package = box
+        }
+
+        // Adds items to package
         epc.addProduct = function() {
                 function Item(product) {
-                  console.log(product)
+                    console.log("input", product)
                     var holding = {
-                        item: product.details.item,
-                        quantity: product.quantity,
-                        serialNum: product.details.serialNum,
-                        itemNum: product.details.itemNum,
-                        modelNum: product.details.modelNum,
-                        price: product.details.price,
-                        weight: product.customs.weight
+                        item: product.item,
+                        price: product.price,
+                        weight: product.weight
                     }
                     epc.prcl.weight = holding.weight
-                    return holding
                     console.log(holding)
+                    return holding
                 }
 
-                var item = new Item(epc.productHolding)
+                var item = new Item(epc.product)
                 epc.parcelArray.push(item)
             }
-        // Gets parcel response oject w/ id
+            // Gets parcel response oject w/ id
         epc.sendParcel = function() {
-          console.log(epc.prcl)
+                console.log(epc.prcl)
                 easypostFactory.sendParcel(epc.prcl, function(parcel) {
                     epc.parcel = parcel
                     console.log(epc.products)
@@ -86,9 +96,14 @@
                     epc.shpmt.parcel = epc.parcel.id
                 })
             }
-        // Creates shipment with: verified fromAddress, toAess, optional customsInfo (consisting of customItem(s)), and a parcel
+            // Creates shipment with: verified fromAddress, toAess, optional customsInfo (consisting of customItem(s)), and a parcel
         epc.createShipment = function() {
                 epc.shpmt.to_address = epc.tAddress
+
+                if (!epc.tAddress.hasOwnProperty() || !epc.parcel.hasOwnProperty()) {
+                    var $toastContent = $('<span>You are missing info</span>')
+                    Materialize.toast($toastContent, 5000)
+                }
 
                 // omits customs info if the to_address is within the US
                 if (epc.shpmt.to_address.country.toLowerCase() === "us" || epc.shpmt.to_address.country.toLowerCase() === "united states") {
@@ -96,6 +111,8 @@
                 } else if (epc.shpmt.to_address.country.toLowerCase() !== "us" || epc.shpmt.to_address.country.toLowerCase() !== "united states") {
                     epc.shpmt.customsInfo = epc.customsInfo
                 }
+
+
 
                 easypostFactory.sendShipment(epc.shpmt, function(shipment) {
                     epc.shipment = shipment
@@ -114,6 +131,14 @@
                     $("#form").add("disabled")
                 }
             })
+        }
+
+        epc.stringToObj = function(str) {
+          // console.log(str.shift())
+          var ns = str.split(",")
+          ns.map(function(x){
+            console.log(x)
+          })
         }
     }
 

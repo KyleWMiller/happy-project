@@ -5,31 +5,31 @@
             <h5 class="grey-text text-darken-2">To</h5>
             <!-- <a class="waves-effect waves-light btn col l4 offset-l7 buttonBackground verifyGreen right" ng-click="epc.sendTAddress()">Verify</a> -->
             <form>
-                <div class="col l12 s12">
+                <div class="col s12">
                     <input ng-model="epc.tAddress.name" type="text" placeholder="Name">
                 </div>
-                <div class="col l12 s12">
+                <div class="col s12">
                     <input ng-model="epc.tAddress.street1" type="text" placeholder="Street 1">
                 </div>
-                <div class="col l12 s12">
+                <div class="col s12">
                     <input ng-model="epc.tAddress.street2" type="text" placeholder="Street 2">
                 </div>
-                <div class="col l5 s6">
+                <div class="col s6">
                     <input ng-model="epc.tAddress.city" type="text" placeholder="City">
                 </div>
-                <div class="col l3 s6">
+                <div class="col s6">
                     <input ng-model="epc.tAddress.state" type="text" placeholder="State">
                 </div>
-                <div class="col l4 s6">
+                <div class="col s6">
                     <input ng-model="epc.tAddress.zip" type="text" placeholder="Postal Code">
                 </div>
-                <div class="col l6 s6">
+                <div class="col s6">
                     <input ng-model="epc.tAddress.country" type="text" placeholder="Country">
                 </div>
-                <div class="col l6 s12">
+                <div class="col s12">
                     <input ng-model="epc.tAddress.phone" type="text" placeholder="Phone">
                 </div>
-                <div class="col l12 s12">
+                <div class="col s12">
                     <input ng-model="epc.tAddress.email" type="text" placeholder="Email">
                 </div>
                 <div class="right-align">
@@ -43,31 +43,31 @@
             <a class="waves-effect waves-light btn buttonBackground updateBlue col l4 right" ng-click="epc.sendFAddress()" ng-init="epc.sendFAddress()">Update</a>
 
             <form>
-                <div class="col l12 s12">
+                <div class="col s12">
                     <input type="text" ng-model="epc.fAddress.company">
                 </div>
-                <div class="col l12 s12">
+                <div class="col s12">
                     <input type="text" ng-model="epc.fAddress.street1">
                 </div>
-                <div class="col l12 s12">
+                <div class="col s12">
                     <input type="text" placeholder="Street 2" ng-model="epc.fAddress.street2">
                 </div>
-                <div class="col l5 s6">
+                <div class="col s6">
                     <input type="text" ng-model="epc.fAddress.city">
                 </div>
-                <div class="col l3 s6">
+                <div class="col s6">
                     <input type="text" ng-model="epc.fAddress.state">
                 </div>
-                <div class="col l4 s6">
+                <div class="col s6">
                     <input type="text" ng-model="epc.fAddress.zip">
                 </div>
-                <div class="col l6 s6">
+                <div class="col s6">
                     <input type="text" ng-model="epc.fAddress.country">
                 </div>
-                <div class="col l6 s12">
+                <div class="col s12">
                     <input type="text" ng-model="epc.fAddress.phone">
                 </div>
-                <div class="col l12 s12">
+                <div class="col s12">
                     <input type="text" ng-model="epc.fAddress.email">
                 </div>
             </form>
@@ -80,53 +80,64 @@
         <div class="productTile tileBackground z-depth-2">
 
             <h5 class="grey-text text-darken-2">Products</h5>
-            <form>
-              <div class="" ng-repeat="product in epc.products">
 
-                <div class="col l4 center" id="product">
+            <!-- <script type="text/javascript">
+                $(document).ready(function() {
+                    $('select').material_select()
+                })
+            </script> -->
+            <!-- Select for adding box(s) to shipment  -->
+            <div class="col s6">
+                <h6 class="grey-text text-darken-2">Package</h6>
 
-                  {{product.item}}
+                <div class="input-field col s6" ng-repeat="package in epc.parcels">
+                    <input type="text" class="hidden" value="{{package.dimentions.height}}" ng-model="epc.package.height">
+                    {{package.size}}
+                    <input type="text" class="hidden" value="{{package.dimentions.width}}" ng-model="epc.package.width">
+                    <input type="text" class="hidden" value="{{package.dimentions.length}}" ng-model="epc.package.length">
 
-                  <input class="hidden" value="{{product}}"  ng-model="epc.productHolding">
+                    <a class="btn waves-effect waves-light buttonBackground" ng-click="epc.addPackage()">Add Package</a>
 
-                  <a class="btn-floating waves-effect waves-light buttonBackground createGreen" ng-click="epc.addProduct()"><i class="material-icons">add</i></a>
-
+                    <!-- <form>
+                    <select ng-model="epc.package.name">
+                      <option value="" disabled selected>Box</option>
+                      <option ng-repeat="package in epc.parcels">{{package.size}}</option>
+                    </select>
+                    <input type="text" class="hidden" value="{{package.dimentions.height}}" ng-model="epc.package.height">
+                    <input type="text" class="hidden" value="{{package.dimentions.width}}" ng-model="epc.package.width">
+                    <input type="text" class="hidden" value="{{package.dimentions.length}}" ng-model="epc.package.length">
+                  </form> -->
                 </div>
 
-              </div>
-
-            </form>
-
-
-            <div class="col l12 s12 center" ng-repeat="item in epc.parcelArray">
-              <div class="col l2">
-                <p>{{item.item}}</p>
-              </div>
-              <div class="col l6">
-                <div class="col l6">
-                  <p>qty: {{item.quantity}}</p>
-                  <p>serial#: {{item.serialNum}}</p>
-                </div>
-                <div class="col l6">
-                  <p>mfg#: {{item.mfgNum}}</p>
-                  <p>part#: {{item.partNum}}</p>
-                </div>
-              </div>
-              <div class="col l3">
-                <p>Price: $ {{item.price}}</p>
-              </div>
-              <div class="col l1">
-                <a class="btn-floating waves-effect waves-light buttonBackground" ng-click="epc.addProduct()"><i class="material-icons">delete</i></a>
-              </div>
             </div>
-            <a class="waves-effect waves-light btn buttonBackground col l4 offset-l7 createGreen" ng-click="epc.sendParcel()">Create Package</a>
+
+            <!-- Select for adding item(s) to box -->
+            <div class="col s6">
+                <h6 class="grey-text text-darken-2">Item</h6>
+                <div class="input-field col s8">
+                    <select ng-model="epc.product.item">
+                  <option value="" disabled selected>Products</option>
+                  <option ng-repeat="product in epc.products" ng-model="epc.product" value="{{product}}">{{product.item}}</option>
+                </select>
+                </div>
+
+                <div class="col s4">
+                    <a class="btn waves-effect waves-light buttonBackground" ng-click="epc.addProduct">Add Product</a>
+                </div>
+            </div>
+
+            <div class="col s12">
+                {{epc.shipmentArr}}
+            </div>
+
+            <a class="waves-effect waves-light btn buttonBackground col s4 offset-s7 createGreen" ng-click="epc.sendParcel()">Create Package</a>
         </div>
 
         <!-- Customs Form -->
         <div class="customsTile tileBackground z-depth-2">
             <h5 class="grey-text text-darken-2">Customs Signer</h5>
-            <form  id="customs">
-                <div class="col l12">
+            <form id="customs">
+                <div class="col s12">
                     <input type="text" placeholder="Name" ng-model="epc.customsInfo.customs_signer">
                 </div>
             </form>
@@ -134,38 +145,38 @@
 
     </div>
     <div class="row">
-      <div class="createTile center-align">
-        <a class="waves-effect waves-light btn-large buttonBackground createGreen" ng-click="epc.createShipment()">Create Shipment</a>
-    </div>
+        <div class="createTile center-align">
+            <a class="waves-effect waves-light btn-large buttonBackground createGreen" ng-click="epc.createShipment()">Create Shipment</a>
+        </div>
     </div>
 
     <div class="row">
         <div class="rateTile tileBackground z-depth-2">
             <h5 class="grey-text text-darken-2">Rates</h5>
-            <div class="col l3 s3">
+            <div class="col s3">
                 <h6 class="center">Carrier</h6>
             </div>
-            <div class="col l3 s3">
+            <div class="col s3">
                 <h6 class="center">Delivery Date</h6>
             </div>
-            <div class="col l3 s3">
+            <div class="col s3">
                 <h6 class="center">$ Rate</h6>
             </div>
-            <div class="col l3 s3">
+            <div class="col s3">
                 <p class="hidden">Waldo was here</p>
             </div>
             <div ng-repeat=" rate in epc.rts">
-                <div class="col l3 s3">
+                <div class="col s3">
                     <p class="center">{{rate.carrier}}</p>
                     <p class="center">{{rate.service}}</p>
                 </div>
-                <div class="col l3 s3">
+                <div class="col s3">
                     <p class="center">{{rate.delivery_date}}</p>
                 </div>
-                <div class="col l3 s3">
+                <div class="col s3">
                     <p class="center">${{rate.rate}}</p>
                 </div>
-                <div class="col l3 s3 center-align">
+                <div class="col s3 center-align">
                     <a class="waves-effect waves-light btn buttonBackground super" ng-click="epc.purchase(rate.id)">Purchase</a>
                     <input class="hidden" ng-model="rate.id">
                 </div>
@@ -178,25 +189,24 @@
             <!-- <div class="col l12">
               {{epc.label}}
             </div> -->
-            <div class="col l12">
-              <div class="col l6">
-                <a id="label" target="_blank" ng-href="{{epc.label.postage_label.label_url}}" class="waves-effect waves-light btn buttonBackground col l12">Label</a>
-              </div>
-              <div class="col l6">
-                <a id="form" target="_blank" ng-href="{{epc.label.forms[0].form_url}}" class="waves-effect waves-light btn buttonBackground col l12">Commercial Invoice</a>
-              </div>
-              <div class="col l6">
-                <h6>Tracking #: {{epc.label.tracker.tracking_code}}</h6>
-              </div>
-              <div class="col l6">
-                <a id="tLable" target="_blank" ng-href="{{epc.label.tracker.public_url}}" class="waves-effect waves-light btn buttonBackground col l12">Tracking</a>
+            <div class="col s12">
+                <div class="col s6">
+                    <a id="label" target="_blank" ng-href="{{epc.label.postage_label.label_url}}" class="waves-effect waves-light btn buttonBackground col s12">Label</a>
+                </div>
+                <div class="col s6">
+                    <a id="form" target="_blank" ng-href="{{epc.label.forms[0].form_url}}" class="waves-effect waves-light btn buttonBackground col s12">Commercial Invoice</a>
+                </div>
+                <div class="col s6">
+                    <h6>Tracking #: {{epc.label.tracker.tracking_code}}</h6>
+                </div>
+                <div class="col s6">
+                    <a id="tLable" target="_blank" ng-href="{{epc.label.tracker.public_url}}" class="waves-effect waves-light btn buttonBackground col s12">Tracking</a>
 
-              </div>
+                </div>
             </div>
 
         </div>
     </div>
-    <h1>Your code is awesome and you're awesome too!</h1>
 </div>
 
 
@@ -205,15 +215,7 @@
 <!-- <table>
     <tr>
         <td class="input-field col s12">
-            <select ng-model="epc.product.item">
-              option
-               <option value="SDR" >SDR</option>
-               <option value="SDRmountingPlate">SDR Mounting Plate</option>
-               <option value="SDRconnectorKit">SDR Connector Kit</option>
-               <option value="InterfaceCable">Interface Cable</option>
-               <option value="Air8023G">Air802 3G Antenna</option>
-               <option value="Air802WIFI">Air802 WIFI Antenna</option>
-             </select>
+
            </td>
 
         <td>

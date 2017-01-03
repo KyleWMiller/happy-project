@@ -41,7 +41,7 @@ input[type=text] {
   margin-right: 2vw;
   display: inline-block;
 }
-#product {
+.products {
   margin-bottom: 20px;
 }
 .customsTile {
@@ -75,7 +75,7 @@ input[type=text] {
 
 /* Button CSS*/
 .navBackground {
-  background-color: #0A5181;
+  background-color: #0A1720;
 }
 .tileBackground{
   background-color: #152C3F;

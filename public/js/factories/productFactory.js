@@ -8,20 +8,26 @@
         var pf = this
 
         pf.parcels = [{
-            height: 15,
-            width: 10,
-            length: 7
+            size: "15x10x7",
+            dimentions: {
+              height: 15,
+              width: 10,
+              length: 7
+            }
         }, {
-            height: 20,
-            width: 13,
-            length: 14
+            size: "20x13x14",
+            dimentions: {
+              height: 20,
+              width: 13,
+              length: 14
+            }
         }]
 
         pf.products = [{
                 item: "SDR",
                 serialNum: null,
                 mfgNum: "TN1021-100",
-                itemNum: "1233-F- 2191-10",
+                itemNum: "1233-F-2191-10",
                 price: null,
                 description: "Satcom Direct Router",
                 hs_tarrif_number: "851762",
