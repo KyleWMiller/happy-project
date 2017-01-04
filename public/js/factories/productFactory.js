@@ -57,14 +57,14 @@
                 weight: 1
             }, {
                 item: "Interface Cable",
-                itemNum: "SD-IFRTR- 900",
+                itemNum: "SD-IFRTR-900",
                 price: null,
                 description: "Satcom Direct Router Interface Cable",
                 hs_tarrif_number: "851762",
                 origin_country: "US",
                 quantity: 1,
                 value: 75.00,
-                weight: 3 //todo
+                weight: 3
             }, {
                 item: "3G Antenna",
                 itemNum: "100-1021-30",

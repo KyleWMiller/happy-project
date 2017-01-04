@@ -37,7 +37,7 @@
             eel_pfc: "NOEEI 30.37(a)"
         }
         epc.shipmentItem = {}
-        epc.shipmentArr = []
+        epc.shipmentArray = []
 
 
         // Variables that store responses from EasyPost
@@ -51,8 +51,7 @@
         epc.sendFAddress = function() {
             easypostFactory.sendAddress(epc.fAddress, function(address) {
                 epc.fromAddress = address
-                console.log("From address")
-                console.log(epc.fromAddress)
+                console.log("From address",epc.fromAddress)
                 epc.shpmt.from_address = epc.fromAddress.id
             })
         }
@@ -60,19 +59,18 @@
         // Adds items to package
         epc.addProduct = function() {
                 function Item(product) {
-                    console.log("input", product)
                     var holding = {
                         item: product.item,
                         price: product.price,
                         weight: product.weight
                     }
-                    epc.prcl.weight = holding.weight
                     console.log(holding)
                     return holding
                 }
 
                 var item = new Item(epc.item)
-                epc.parcelArray.push(item)
+                epc.shipmentArray.push(item)
+
             }
             // Gets parcel response oject w/ id
         epc.sendParcel = function() {
@@ -96,7 +94,7 @@
                 // omits customs info if the to_address is within the US
                 if (epc.shpmt.to_address.country.toLowerCase() === "us" || epc.shpmt.to_address.country.toLowerCase() === "united states") {
                     epc.shpmt.customsInfo = null
-                } else if (epc.shpmt.to_address.country.toLowerCase() !== "us" || epc.shpmt.to_address.country.toLowerCase() !== "united states") {
+                } else {
                     epc.shpmt.customsInfo = epc.customsInfo
                 }
 
