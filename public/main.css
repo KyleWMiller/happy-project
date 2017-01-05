@@ -100,18 +100,6 @@ input[type=text] {
   background-color: #09789C;
   color: white;
 }
-#package {
-  margin-top: 10px;
-}
-#package:hover {
-  background-color: #09789C;
-}
-#product a{
-  margin-bottom: 10px;
-}
-#product p{
-  margin: 10px 0 0 0;
-}
 
 /* MISC */
 .logo {
@@ -124,4 +112,10 @@ input[type=text] {
 }
 .super {
   vertical-align: super;
+}
+#prePackageInfo {
+  margin-right: 15px;
+  background-color: grey;
+  padding: 5px;
+  border-radius: 2px;
 }

@@ -25,10 +25,10 @@
 
         pf.products = [{
                 item: "SDR",
-                serialNum: null,
+                serialNum: "",
                 mfgNum: "TN1021-100",
                 itemNum: "1233-F-2191-10",
-                price: null,
+                price: 28875.00,
                 description: "Satcom Direct Router",
                 hs_tarrif_number: "851762",
                 origin_country: "US",
@@ -38,7 +38,7 @@
             }, {
                 item: "Mounting Plate",
                 itemNum: "MT1-SDR-900",
-                price: null,
+                price: 1350.00,
                 description: "Satcom Direct Router Mounting Plate",
                 hs_tarrif_number: "851762",
                 origin_country: "US",
@@ -48,7 +48,7 @@
             }, {
                 item: "Connector Kit",
                 itemNum: "100-1021-01",
-                price: null,
+                price: 375.00,
                 description: "Satcom Direct Router Connector Kit",
                 hs_tarrif_number: "851762",
                 origin_country: "US",
@@ -58,7 +58,7 @@
             }, {
                 item: "Interface Cable",
                 itemNum: "SD-IFRTR-900",
-                price: null,
+                price: 1500.00,
                 description: "Satcom Direct Router Interface Cable",
                 hs_tarrif_number: "851762",
                 origin_country: "US",
@@ -69,7 +69,7 @@
                 item: "3G Antenna",
                 itemNum: "100-1021-30",
                 modelNum: "ANRD82421703-TNC",
-                price: null,
+                price: 0,
                 description: "Air802 3G Antenna",
                 hs_tarrif_number: "851762",
                 origin_country: "US",
@@ -80,7 +80,7 @@
                 item: "WIFI Antenna",
                 itemNum: "100-1021-50",
                 modelNum: "ANRD245X05-RTP",
-                price: null,
+                price: 0,
                 description: "Satcom Direct Router Mounting Plate",
                 hs_tarrif_number: "851762",
                 origin_country: "US",
