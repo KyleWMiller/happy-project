@@ -114,8 +114,23 @@ input[type=text] {
   vertical-align: super;
 }
 #prePackageInfo {
-  margin-right: 15px;
+  margin-left: 20px;
   background-color: grey;
-  padding: 5px;
+  padding: 5px 10px 5px 10px;
   border-radius: 2px;
+}
+#plus {
+  margin-left: 30px;
+}
+#plus:hover {
+  background-color: #5B6167;
+}
+#box p{
+  margin-bottom: 30px;
+}
+#shipmentItem {
+  background-color: rgba(35, 35, 40, 0.8);
+}
+#trash {
+  margin-top: 20px;
 }

@@ -6,8 +6,9 @@
 
     function easypostController(easypostFactory, productFactory) {
         var epc = this
-
-        // Variables for local app
+        // ------------------------------------------- //
+        // Variables for local app                     //
+        // ------------------------------------------- //
         epc.tAddress = {}
         epc.fAddress = {
             company: "Satcom Direct",
@@ -42,13 +43,18 @@
             itemArray: []
         }
 
-
-        // Variables that store responses from EasyPost
+        // -------------------------------------------- //
+        // Variables that store responses from EasyPost //
+        // -------------------------------------------- //
         epc.fromAddress = {}
         epc.parcel = {}
         epc.shipment = {}
         epc.rate = {}
         epc.label = {}
+
+        // ------------------------------------------- //
+        // Application funcitons for creating lable and forms //
+        // ------------------------------------------- //
 
         // Gets from address response object w/ id
         epc.sendFAddress = function() {
@@ -58,6 +64,10 @@
                 epc.shpmt.from_address = epc.fromAddress.id
             })
         }
+
+        // ------------------------------------------- //
+        // Product
+        // ------------------------------------------- //
 
         // Adds items to package
         epc.addProduct = function() {
@@ -98,18 +108,28 @@
 
         // Adds box dimentions to shipmentItem
         epc.selectBox = function() {
-            console.log(epc.box)
-            epc.shipmentItem.package = epc.box
+          epc.shipmentItem.package = epc.box
+          $('#box span').attr('id','prePackageInfo')
         }
 
         // Add package to shipmentArray
         epc.addPackage = function() {
-            epc.shipmentArray.push(epc.shipmentItem)
-            epc.shipmentItem = {
-                package: {},
-                itemArray: []
-            }
+          epc.shipmentArray.push(epc.shipmentItem)
+          epc.shipmentItem = {
+            package: {},
+            itemArray: []
+          }
+          $('#box span').remove("#prePackageInfo")
         }
+
+        // Removes products/shipments from ng-repeat arrays
+        epc.removeItem = function(index) {
+            epc.shipmentItem.itemArray.splice(index, 1)
+        }
+        epc.removePackage = function(index) {
+            epc.shipmentArray.slice(index, 1)
+        }
+
 
         // Gets parcel response oject w/ id
         epc.sendParcel = function() {
@@ -121,13 +141,15 @@
                 epc.shpmt.parcel = epc.parcel.id
             })
         }
+
+
         // Creates shipment with: verified fromAddress, toAess, optional customsInfo (consisting of customItem(s)), and a parcel
         epc.createShipment = function() {
             epc.shpmt.to_address = epc.tAddress
 
             if (!epc.tAddress.hasOwnProperty() || !epc.parcel.hasOwnProperty()) {
-                var $toastContent = $('<span>You are missing info</span>')
-                Materialize.toast($toastContent, 5000)
+                var toastContent = $('<span>You are missing info</span>')
+                Materialize.toast(toastContent, 5000)
             }
 
             // omits customs info if the to_address is within the US

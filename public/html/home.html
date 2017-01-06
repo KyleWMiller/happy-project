@@ -82,46 +82,61 @@
             <h4 class="grey-text text-darken-2">Products</h4>
 
             <script type="text/javascript">
-            $(document).ready(function() {
-              $('select').material_select()
-            })
+                $(document).ready(function() {
+                    $('select').material_select()
+                })
             </script>
 
             <div class="col s6">
-              <select class="col s8" ng-options="product as product.item for product in epc.products" ng-model="epc.item">
-                <option value="" selected disabled>Product</option>
+                <select class="col s5 offset-s1" ng-click="epc.selectBox()" ng-options="parcel as parcel.size for parcel in epc.parcels" ng-model="epc.box">
+                <option value="" selected disabled>Box size</option>
               </select>
-              <a class="waves-effect waves-light btn buttonBackground col s2 offset-s1" ng-click="epc.addProduct()">Add</a>
+                <a id="plus" class="btn-floating waves-effect waves-light btn buttonBackground" ng-click="epc.selectBox()"><i class="material-icons">add</i></a>
             </div>
 
             <div class="col s6">
-              <select class="col s5 offset-s2" ng-click="epc.selectBox()" ng-options="parcel as parcel.size for parcel in epc.parcels" ng-model="epc.box">
-                <option value="" selected disabled>Box size</option>
+                <select class="col s8" ng-options="product as product.item for product in epc.products" ng-model="epc.item">
+                <option value="" selected disabled>Product</option>
               </select>
-              <a class="waves-effect waves-light btn buttonBackground col s2 offset-s1" ng-click="epc.selectBox()">Add</a>
+                <a id="plus" class="btn-floating waves-effect waves-light btn buttonBackground" ng-click="epc.addProduct()"><i class="material-icons">add</i></a>
             </div>
 
-            <div class="col s10">
-              <h6 class="grey-text text-darken-2">Package</h6>
-              <p>
-                Box : {{epc.shipmentItem.package.size}}
-              </p>
-              <p>
-                Product(s): <span id="prePackageInfo" ng-repeat="product in epc.shipmentItem.itemArray">{{product.item}}</span>
-              </p>
+            <div class="col s10" id="box">
+                <h6 class="grey-text text-darken-2">Package</h6>
+                <p>
+                    Box : <span>{{epc.shipmentItem.package.size}}</span>
+                </p>
+                <p>
+                    Product(s): <span id="prePackageInfo" ng-repeat="product in epc.shipmentItem.itemArray"><span ng-click="epc.removeItem($index)">{{product.item}}</span>
+                </p>
 
             </div>
-            <a class="waves-effect waves-light btn buttonBackground col s6 center" ng-click="epc.addPackage()">Add to Shipment</a>
-
-            <div class="col s12">
-              <h6 class="grey-text text-darken-2">Shipment</h6>
-              <div ng-repeat="shipment in epc.shipmentArray">
-                {{shipment}}
-              </div>
+            <div class="col s12 center">
+                <a class="waves-effect waves-light btn buttonBackground" ng-click="epc.addPackage()">Add to Shipment</a>
             </div>
 
             <div class="col s12">
-              <a class="waves-effect waves-light btn buttonBackground col s6 center" ng-click="epc.addPackage()">Create Shipment</a>
+                <h6 class="grey-text text-darken-2">Shipment</h6>
+                <div ng-repeat="shipment in epc.shipmentArray">
+                    <div class="col s12" id="shipmentItem">
+                      <a id="#trash" class="btn-floating waves-effect waves-light btn buttonBackground right" ng-click="epc.removePackage($index)"><i class="material-icons">delete</i></a>
+                        <div class="col s4">
+                            {{shipment.package.size}}
+                        </div>
+                        <div class="col s8 right">
+                        </div>
+                        <div class="col s3" ng-repeat="product in shipment.itemArray">
+                            <p>{{product.item}}</p>
+                            <input type="text" ng-model="product.weight">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12">
+                <a class="waves-effect waves-light btn buttonBackground col s6 center" ng-click="epc.addPackage()">Create Shipment</a>
             </div>
 
         </div>
