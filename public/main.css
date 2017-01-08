@@ -7,6 +7,10 @@ body {
 }
 input[type=text] {
   margin: 0 0 5px 0;
+  padding-left: 7px;
+}
+select {
+  padding-left: 7px;
 }
 .row{
   margin-bottom: 2vw;
@@ -119,6 +123,11 @@ input[type=text] {
   padding: 5px 10px 5px 10px;
   border-radius: 2px;
 }
+#prePackageInfo:hover {
+  background-color: #AD0000;
+  cursor: pointer;
+  cursor: hand;
+}
 #plus {
   margin-left: 30px;
 }
@@ -126,11 +135,25 @@ input[type=text] {
   background-color: #5B6167;
 }
 #box p{
-  margin-bottom: 30px;
+  margin: 15px 0px 25px 30px;
+
+}
+#trash:hover {
+  background-color: #AD0000;
+  cursor: pointer;
+  cursor: hand;
 }
 #shipmentItem {
-  background-color: rgba(35, 35, 40, 0.8);
+  background-color: rgba(35, 35, 40, 0.5);
+  padding: 15px;
+  margin-bottom: 2vw;
 }
-#trash {
-  margin-top: 20px;
+#shipmentItem input {
+  height:2rem;
+  margin-top: 0.4rem;
+  width: 50px;
+  display: inline-block;
+}
+#shipmentItem label {
+  display: inline-block;
 }

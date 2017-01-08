@@ -86,7 +86,7 @@
                 origin_country: "US",
                 quantity: null,
                 value: 50.00,
-                weight: 176
+                weight: 0.6
             }
 
         ]

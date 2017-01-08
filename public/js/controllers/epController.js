@@ -53,7 +53,7 @@
         epc.label = {}
 
         // ------------------------------------------- //
-        // Application funcitons for creating lable and forms //
+        //            HappyShip Methods                //
         // ------------------------------------------- //
 
         // Gets from address response object w/ id
@@ -64,10 +64,6 @@
                 epc.shpmt.from_address = epc.fromAddress.id
             })
         }
-
-        // ------------------------------------------- //
-        // Product
-        // ------------------------------------------- //
 
         // Adds items to package
         epc.addProduct = function() {
@@ -108,32 +104,53 @@
 
         // Adds box dimentions to shipmentItem
         epc.selectBox = function() {
-          epc.shipmentItem.package = epc.box
-          $('#box span').attr('id','prePackageInfo')
+            function Box(box) {
+                var holding = {
+                    size: box.size,
+                    dimentions: box.dimentions
+                }
+                return holding
+            }
+
+            var box = new Box(epc.box)
+            epc.shipmentItem.package = box
+            $('#box span').attr('id', 'prePackageInfo')
         }
 
         // Add package to shipmentArray
         epc.addPackage = function() {
-          epc.shipmentArray.push(epc.shipmentItem)
-          epc.shipmentItem = {
-            package: {},
-            itemArray: []
-          }
-          $('#box span').remove("#prePackageInfo")
+            var temp = {
+              weight: 0
+            }
+            function Weight() {
+              epc.shipmentItem.itemArray.map(function(w) {
+                temp.weight += w.weight
+              })
+              return temp
+            }
+            var ozs = new Weight()
+            epc.shipmentItem.package.dimentions.weight = ozs.weight
+            epc.shipmentArray.push(epc.shipmentItem)
+            epc.shipmentItem = {
+                package: {},
+                itemArray: []
+            }
+            $('#box span').removeAttr('id')
         }
 
-        // Removes products/shipments from ng-repeat arrays
+        // Removes products/shipments from respective arrays
         epc.removeItem = function(index) {
             epc.shipmentItem.itemArray.splice(index, 1)
         }
         epc.removePackage = function(index) {
-            epc.shipmentArray.slice(index, 1)
+            epc.shipmentArray.splice(index, 1)
         }
 
 
         // Gets parcel response oject w/ id
         epc.sendParcel = function() {
             console.log(epc.prcl)
+            // Gets parcel response oject w/ id
             easypostFactory.sendParcel(epc.prcl, function(parcel) {
                 epc.parcel = parcel
                 console.log(epc.products)
@@ -143,7 +160,7 @@
         }
 
 
-        // Creates shipment with: verified fromAddress, toAess, optional customsInfo (consisting of customItem(s)), and a parcel
+        // Creates shipment with: verified fromAddress, toAdress, optional customsInfo (consisting of customItem(s)), and a parcel
         epc.createShipment = function() {
             epc.shpmt.to_address = epc.tAddress
 
@@ -164,6 +181,7 @@
             easypostFactory.sendShipment(epc.shpmt, function(shipment) {
                 epc.shipment = shipment
                 console.log('created shipement')
+
                 console.log(epc.shipment)
                 epc.rts = epc.shipment.rates
             })

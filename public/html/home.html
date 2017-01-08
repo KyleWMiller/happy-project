@@ -6,7 +6,7 @@
             <!-- <a class="waves-effect waves-light btn col l4 offset-l7 buttonBackground verifyGreen right" ng-click="epc.sendTAddress()">Verify</a> -->
             <form>
                 <div class="col s12">
-                    <input ng-model="epc.tAddress.name" type="text" placeholder="Name">
+                    <input ng-model="epc.tAddress.name" type="text" placeholder="Company/Name">
                 </div>
                 <div class="col s12">
                     <input ng-model="epc.tAddress.street1" type="text" placeholder="Street 1">
@@ -76,17 +76,17 @@
     </div>
 
     <div class="row">
-        <!-- Product Input -->
         <div class="productsTile tileBackground z-depth-2">
-
             <h4 class="grey-text text-darken-2">Products</h4>
-
             <script type="text/javascript">
                 $(document).ready(function() {
                     $('select').material_select()
                 })
             </script>
 
+            <!-- **************************************************** -->
+            <!-- Selects for adding box size and products to shipment -->
+            <!-- **************************************************** -->
             <div class="col s6">
                 <select class="col s5 offset-s1" ng-click="epc.selectBox()" ng-options="parcel as parcel.size for parcel in epc.parcels" ng-model="epc.box">
                 <option value="" selected disabled>Box size</option>
@@ -101,6 +101,9 @@
                 <a id="plus" class="btn-floating waves-effect waves-light btn buttonBackground" ng-click="epc.addProduct()"><i class="material-icons">add</i></a>
             </div>
 
+            <!-- **************************************************** -->
+            <!-- Display to show staged box and products to be added  -->
+            <!-- **************************************************** -->
             <div class="col s10" id="box">
                 <h6 class="grey-text text-darken-2">Package</h6>
                 <p>
@@ -115,29 +118,41 @@
                 <a class="waves-effect waves-light btn buttonBackground" ng-click="epc.addPackage()">Add to Shipment</a>
             </div>
 
+            <!-- **************************************************** -->
+            <!-- Display for package(s) inside shipmentArray -->
+            <!-- **************************************************** -->
             <div class="col s12">
-                <h6 class="grey-text text-darken-2">Shipment</h6>
+                <h5 class="grey-text text-darken-2">Shipment</h5>
                 <div ng-repeat="shipment in epc.shipmentArray">
-                    <div class="col s12" id="shipmentItem">
-                      <a id="#trash" class="btn-floating waves-effect waves-light btn buttonBackground right" ng-click="epc.removePackage($index)"><i class="material-icons">delete</i></a>
+                    <div class="col s10 offset-s1" id="shipmentItem">
+                      <a id="trash" class="btn-floating waves-effect waves-light btn buttonBackground right" ng-click="epc.removePackage($index)"><i class="material-icons">delete</i></a>
                         <div class="col s4">
-                            {{shipment.package.size}}
+                            <p>
+                              <h6>BOX SIZE: {{shipment.package.size}}</h6>
+                            </p>
                         </div>
-                        <div class="col s8 right">
+                        <div class="col s6">
+                          <div class="col s3 offset-s2">
+                            <p>
+                              <h6>WEIGHT: </h6>
+                            </p>
+                          </div>
+                          <div class="col s6">
+                            <input id="shipmentWeight" class="center-align" type="text" ng-model="shipment.package.dimentions.weight">
+                            <label for="shipmentWeight">oz</label>
+                          </div>
                         </div>
                         <div class="col s3" ng-repeat="product in shipment.itemArray">
                             <p>{{product.item}}</p>
-                            <input type="text" ng-model="product.weight">
-
                         </div>
 
+                        <div class="col s12 center">
+                          <a class="waves-effect waves-light btn buttonBackground col s6" ng-click="epc.addPackage()">Create Shipment</a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col s12">
-                <a class="waves-effect waves-light btn buttonBackground col s6 center" ng-click="epc.addPackage()">Create Shipment</a>
-            </div>
 
         </div>
 
@@ -152,11 +167,11 @@
         </div>
 
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <div class="createTile center-align">
             <a class="waves-effect waves-light btn-large buttonBackground createGreen" ng-click="epc.createShipment()">Create Shipment</a>
         </div>
-    </div>
+    </div> -->
 
     <div class="row">
         <div class="rateTile tileBackground z-depth-2">
