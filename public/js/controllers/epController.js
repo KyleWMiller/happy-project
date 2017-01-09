@@ -114,7 +114,7 @@
 
             var box = new Box(epc.box)
             epc.shipmentItem.package = box
-            $('#box span').attr('id', 'prePackageInfo')
+            $('#b span').attr('id', 'prePackageInfob')
         }
 
         // Add package to shipmentArray
@@ -130,15 +130,22 @@
             }
             var ozs = new Weight()
             epc.shipmentItem.package.dimentions.weight = ozs.weight
+            console.log(epc.shipmentItem)
             epc.shipmentArray.push(epc.shipmentItem)
             epc.shipmentItem = {
                 package: {},
                 itemArray: []
             }
-            $('#box span').removeAttr('id')
+            epc.ozs = {}
+            $('#b span').removeAttr('id')
         }
 
-        // Removes products/shipments from respective arrays
+        // Removes box/products/shipments from respective arrays
+        epc.removeBox = function() {
+            epc.shipmentItem.package = {}
+            $('#prePackageInfob').removeAttr('id')
+
+        }
         epc.removeItem = function(index) {
             epc.shipmentItem.itemArray.splice(index, 1)
         }
@@ -148,12 +155,12 @@
 
 
         // Gets parcel response oject w/ id
-        epc.sendParcel = function() {
+        epc.sendParcel = function(shipment) {
+            epc.prcl = shipment.package.dimentions
             console.log(epc.prcl)
             // Gets parcel response oject w/ id
             easypostFactory.sendParcel(epc.prcl, function(parcel) {
                 epc.parcel = parcel
-                console.log(epc.products)
                 console.log("Parcel")
                 epc.shpmt.parcel = epc.parcel.id
             })
@@ -161,8 +168,9 @@
 
 
         // Creates shipment with: verified fromAddress, toAdress, optional customsInfo (consisting of customItem(s)), and a parcel
-        epc.createShipment = function() {
+        epc.createShipment = function(shipment) {
             epc.shpmt.to_address = epc.tAddress
+
 
             if (!epc.tAddress.hasOwnProperty() || !epc.parcel.hasOwnProperty()) {
                 var toastContent = $('<span>You are missing info</span>')
@@ -173,6 +181,9 @@
             if (epc.shpmt.to_address.country.toLowerCase() === "us" || epc.shpmt.to_address.country.toLowerCase() === "united states") {
                 epc.shpmt.customsInfo = null
             } else {
+                function CustomItems(c) {
+                  
+                }
                 epc.shpmt.customsInfo = epc.customsInfo
             }
 
