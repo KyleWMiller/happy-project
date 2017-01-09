@@ -115,7 +115,7 @@
 
             </div>
             <div class="col s12 center">
-                <a class="waves-effect waves-light btn buttonBackground createGreen" ng-click="epc.addPackage()">Add to Shipment</a>
+                <a class="waves-effect waves-light btn buttonBackground createGreen" ng-click="epc.addPackage(epc.shipmentItem)">Add to Shipment</a>
             </div>
 
             <!-- **************************************************** -->
@@ -142,7 +142,7 @@
                                 <label for="shipmentWeight">oz</label>
                             </div>
                         </div>
-                        <div class="col s3" ng-repeat="product in shipment.itemArray">
+                        <div class="col s3 center-align" ng-repeat="product in shipment.itemArray">
                             <p>{{product.item}}</p>
                         </div>
 

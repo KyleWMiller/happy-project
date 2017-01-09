@@ -118,19 +118,20 @@
         }
 
         // Add package to shipmentArray
-        epc.addPackage = function() {
+        epc.addPackage = function(shipment) {
+            console.log("s",shipment)
             var temp = {
               weight: 0
             }
             function Weight() {
-              epc.shipmentItem.itemArray.map(function(w) {
+              shipment.itemArray.map(function(w) {
                 temp.weight += w.weight
               })
               return temp
             }
             var ozs = new Weight()
             epc.shipmentItem.package.dimentions.weight = ozs.weight
-            console.log(epc.shipmentItem)
+            console.log("S",epc.shipmentItem)
             epc.shipmentArray.push(epc.shipmentItem)
             epc.shipmentItem = {
                 package: {},
@@ -161,7 +162,7 @@
             // Gets parcel response oject w/ id
             easypostFactory.sendParcel(epc.prcl, function(parcel) {
                 epc.parcel = parcel
-                console.log("Parcel")
+                console.log("Parcel",parcel)
                 epc.shpmt.parcel = epc.parcel.id
             })
         }
@@ -181,22 +182,19 @@
             if (epc.shpmt.to_address.country.toLowerCase() === "us" || epc.shpmt.to_address.country.toLowerCase() === "united states") {
                 epc.shpmt.customsInfo = null
             } else {
-                function CustomItems(c) {
-                  
+                function FillCustomItems(productArray) {
+                    var holdingArray = []
+                    productArray.map(function(item) {
+                        holdingArray.push(item.customsInfo)
+                  })
+                  return holdingArray
                 }
+                var mounties = new FillCustomItems(shipment.itemArray)
+                holdingArray = []
+                console.log(mounties)
                 epc.shpmt.customsInfo = epc.customsInfo
             }
 
-
-
-            easypostFactory.sendShipment(epc.shpmt, function(shipment) {
-                epc.shipment = shipment
-                console.log('created shipement')
-
-                console.log(epc.shipment)
-                epc.rts = epc.shipment.rates
-            })
-        }
         // Purchases specific rate using shipment id and returns lable
         epc.purchase = function(rate) {
             easypostFactory.buyRate(rate, epc.shipment.id, function(label) {
