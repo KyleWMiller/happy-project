@@ -5,9 +5,19 @@ body {
 .mainBackground {
   background-color: #29597D;
 }
+h4, h5 {
+  display: inline-block;
+  margin-top: 0px;
+}
+form {
+  margin-right: 15px;
+}
 input[type=text] {
   margin: 0 0 5px 0;
-  padding-left: 7px;
+  padding-left: 15px;
+  border-bottom: none !important;
+  background-color: rgba(47, 79, 79, 0.6);
+
 }
 select {
   padding-left: 7px;
@@ -98,6 +108,7 @@ select {
 .updateBlue{
   color: #00A7D6;
   font-weight: bold;
+  margin-right: 15px;
 }
 .updateBlue:hover {
   background-color: #09789C;
@@ -130,8 +141,9 @@ select {
 #prePackageInfo {
   margin-left: 20px;
   background-color: grey;
-  padding: 5px 10px 5px 10px;
+  padding: 5px 10px;
   border-radius: 2px;
+  width: 100%;
 }
 #prePackageInfo:hover {
   background-color: #AD0000;
@@ -140,8 +152,9 @@ select {
 }
 
 #pSelect input{
-  padding-left: 7px;
+  padding-left: 15px;
   font-size: 1.1rem;
+  background-color: rgba(47, 79, 79, 0.6);
 }
 #plus {
   margin-left: 30px;
@@ -166,9 +179,18 @@ select {
 #shipmentItem input {
   height:2rem;
   margin-top: 0.4rem;
+  padding: 0px;
   width: 50px;
   display: inline-block;
 }
 #shipmentItem label {
   display: inline-block;
+}
+#postPackageItem {
+  background-color: grey;
+  padding: 5px 10px;
+  border-radius: 2px;
+}
+#verified {
+  background-color: #009900;
 }

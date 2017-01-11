@@ -42,6 +42,7 @@
             package: {},
             itemArray: []
         }
+        epc.verify = "Verify"
 
         // -------------------------------------------- //
         // Variables that store responses from EasyPost //
@@ -65,61 +66,72 @@
             })
         }
 
+        // Adds box dimentions to shipmentItem
+        epc.selectBox = function() {
+            if (!epc.box.hasOwnProperty('size')) {
+              var toastContent = $('<span>Please select a "Box Size"</span>')
+              Materialize.toast(toastContent, 2000)
+
+            } else {
+              function Box(box) {
+                var holding = {
+                  size: box.size,
+                  dimentions: box.dimentions
+                }
+                return holding
+              }
+
+              var box = new Box(epc.box)
+              epc.shipmentItem.package = box
+              $('#b span').attr('id', 'prePackageInfob')
+            }
+        }
+
         // Adds items to package
         epc.addProduct = function() {
-            // Seperation step to exit data binding and sort item properties
-            function Item(product) {
+          console.log(epc.item)
+            if (!epc.item.hasOwnProperty('item')) {
+              var toastContent = $('<span>Please select a "Product"</span>')
+              Materialize.toast(toastContent, 2000)
+            } else {
+              // Seperation step to exit data binding and sort item properties
+              function Item(product) {
                 var holding = {
-                    item: product.item,
-                    price: product.price,
-                    weight: product.weight,
-                    customsInfo: {
-                        description: product.description,
-                        hs_tarrif_number: product.hs_tarrif_number,
-                        origin_country: product.origin_country,
-                        quantity: product.quantity,
-                        value: product.value,
-                        weight: product.weight
-                    }
+                  item: product.item,
+                  price: product.price,
+                  weight: product.weight,
+                  customsInfo: {
+                    description: product.description,
+                    hs_tarrif_number: product.hs_tarrif_number,
+                    origin_country: product.origin_country,
+                    quantity: product.quantity,
+                    value: product.value,
+                    weight: product.weight
+                  }
                 }
                 // Adds properties only if they exist
                 if (product.serialNum) {
-                    holding.serialNum = product.serialNum
+                  holding.serialNum = product.serialNum
                 }
                 if (product.mfgNum) {
-                    holding.mfgNum = product.mfgNum
+                  holding.mfgNum = product.mfgNum
                 }
                 if (product.itemNum) {
-                    holding.itemNum = product.itemNum
+                  holding.itemNum = product.itemNum
                 }
                 if (product.modelNum) {
-                    holding.modelNum = product.modelNum
+                  holding.modelNum = product.modelNum
                 }
                 return holding
+              }
+              var item = new Item(epc.item)
+              epc.shipmentItem.itemArray.push(item)
+              epc.customsInfo.customs_items.push(item.customsInfo)
             }
-            var item = new Item(epc.item)
-            epc.shipmentItem.itemArray.push(item)
-            epc.customsInfo.customs_items.push(item.customsInfo)
-        }
-
-        // Adds box dimentions to shipmentItem
-        epc.selectBox = function() {
-            function Box(box) {
-                var holding = {
-                    size: box.size,
-                    dimentions: box.dimentions
-                }
-                return holding
-            }
-
-            var box = new Box(epc.box)
-            epc.shipmentItem.package = box
-            $('#b span').attr('id', 'prePackageInfob')
         }
 
         // Add package to shipmentArray
         epc.addPackage = function(shipment) {
-            console.log("s",shipment)
             var temp = {
               weight: 0
             }
@@ -131,7 +143,6 @@
             }
             var ozs = new Weight()
             epc.shipmentItem.package.dimentions.weight = ozs.weight
-            console.log("S",epc.shipmentItem)
             epc.shipmentArray.push(epc.shipmentItem)
             epc.shipmentItem = {
                 package: {},
@@ -164,6 +175,8 @@
                 epc.parcel = parcel
                 console.log("Parcel",parcel)
                 epc.shpmt.parcel = epc.parcel.id
+                epc.verify = "Verified"
+                $('#verify a').attr('id', 'verified')
             })
         }
 
@@ -172,29 +185,48 @@
         epc.createShipment = function(shipment) {
             epc.shpmt.to_address = epc.tAddress
 
-
-            if (!epc.tAddress.hasOwnProperty() || !epc.parcel.hasOwnProperty()) {
-                var toastContent = $('<span>You are missing info</span>')
-                Materialize.toast(toastContent, 5000)
+            if (!epc.tAddress.hasOwnProperty('country')) {
+                var toastContent = $('<span>Please provide a "To Address"</span>')
+                Materialize.toast(toastContent, 2500)
             }
+            if ( !epc.shpmt.to_address.country.toLowerCase() === "us" || !epc.shpmt.to_address.country.toLowerCase() === "united states" && epc.customsInfo.customs_signer === null) {
+              var toastContent = $('<span>Please provide a "Customs Signer"</span>')
+              Materialize.toast(toastContent, 2500)
 
-            // omits customs info if the to_address is within the US
-            if (epc.shpmt.to_address.country.toLowerCase() === "us" || epc.shpmt.to_address.country.toLowerCase() === "united states") {
-                epc.shpmt.customsInfo = null
             } else {
+              console.log(epc.shpmt.to_address.country.toLowerCase())
+              console.log((!epc.shpmt.to_address.country.toLowerCase() === "us" || !epc.shpmt.to_address.country.toLowerCase() === "united states") && epc.customsInfo.customs_signer === null)
+              console.log((epc.shpmt.to_address.country.toLowerCase() === "us" || epc.shpmt.to_address.country.toLowerCase() === "united states") && epc.customsInfo.customs_signer === null)
+              console.log(epc.shpmt.to_address.country.toLowerCase() === "us" || epc.shpmt.to_address.country.toLowerCase() === "united states")
+              console.log(!epc.shpmt.to_address.country.toLowerCase() === "us" || !epc.shpmt.to_address.country.toLowerCase() === "united states")
+
+              // omits customs info if the to_address is within the US
+              if (epc.shpmt.to_address.country.toLowerCase() === "us" || epc.shpmt.to_address.country.toLowerCase() === "united states") {
+                epc.shpmt.customsInfo = null
+              } else {
                 function FillCustomItems(productArray) {
-                    var holdingArray = []
-                    productArray.map(function(item) {
-                        holdingArray.push(item.customsInfo)
+                  var holdingArray = []
+                  productArray.map(function(item) {
+                    holdingArray.push(item.customsInfo)
+                    console.log(holdingArray)
                   })
                   return holdingArray
                 }
                 var mounties = new FillCustomItems(shipment.itemArray)
-                holdingArray = []
-                console.log(mounties)
+                epc.customsInfo.customs_items = mounties
                 epc.shpmt.customsInfo = epc.customsInfo
-            }
+              }
 
+
+
+              easypostFactory.sendShipment(epc.shpmt, function(shipment) {
+                epc.shipment = shipment
+                console.log('created shipement',epc.shipment)
+                epc.rts = epc.shipment.rates
+              })
+
+            }
+        }
         // Purchases specific rate using shipment id and returns lable
         epc.purchase = function(rate) {
             easypostFactory.buyRate(rate, epc.shipment.id, function(label) {
