@@ -16,7 +16,7 @@
             city: "Melbourne",
             state: "FL",
             zip: "32940-7010",
-            country: "US",
+            country: "USA",
             phone: "+1(321) 777-3000",
             email: "SDR@satcomdirect.com"
         }
@@ -89,7 +89,6 @@
 
         // Adds items to package
         epc.addProduct = function() {
-          console.log(epc.item)
             if (!epc.item.hasOwnProperty('item')) {
               var toastContent = $('<span>Please select a "Product"</span>')
               Materialize.toast(toastContent, 2000)
@@ -184,22 +183,14 @@
         // Creates shipment with: verified fromAddress, toAdress, optional customsInfo (consisting of customItem(s)), and a parcel
         epc.createShipment = function(shipment) {
             epc.shpmt.to_address = epc.tAddress
-
             if (!epc.tAddress.hasOwnProperty('country')) {
                 var toastContent = $('<span>Please provide a "To Address"</span>')
                 Materialize.toast(toastContent, 2500)
             }
-            if ( !epc.shpmt.to_address.country.toLowerCase() === "us" || !epc.shpmt.to_address.country.toLowerCase() === "united states" && epc.customsInfo.customs_signer === null) {
+            if ( epc.shpmt.to_address.country.toLowerCase() !== "usa" && epc.customsInfo.customs_signer === null) {
               var toastContent = $('<span>Please provide a "Customs Signer"</span>')
               Materialize.toast(toastContent, 2500)
-
             } else {
-              console.log(epc.shpmt.to_address.country.toLowerCase())
-              console.log((!epc.shpmt.to_address.country.toLowerCase() === "us" || !epc.shpmt.to_address.country.toLowerCase() === "united states") && epc.customsInfo.customs_signer === null)
-              console.log((epc.shpmt.to_address.country.toLowerCase() === "us" || epc.shpmt.to_address.country.toLowerCase() === "united states") && epc.customsInfo.customs_signer === null)
-              console.log(epc.shpmt.to_address.country.toLowerCase() === "us" || epc.shpmt.to_address.country.toLowerCase() === "united states")
-              console.log(!epc.shpmt.to_address.country.toLowerCase() === "us" || !epc.shpmt.to_address.country.toLowerCase() === "united states")
-
               // omits customs info if the to_address is within the US
               if (epc.shpmt.to_address.country.toLowerCase() === "us" || epc.shpmt.to_address.country.toLowerCase() === "united states") {
                 epc.shpmt.customsInfo = null
@@ -208,7 +199,6 @@
                   var holdingArray = []
                   productArray.map(function(item) {
                     holdingArray.push(item.customsInfo)
-                    console.log(holdingArray)
                   })
                   return holdingArray
                 }

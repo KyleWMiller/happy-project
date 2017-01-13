@@ -1,7 +1,7 @@
 (function() {
 
 
-    angular.module('happyApp', ['epControllers', 'epFactory','prodFactory', 'ui.router'])
+    angular.module('happyApp', ['epControllers', 'epFactory','prodFactory', 'ui.router', 'countrySelect'])
       .config(MainRouter)
 
       function MainRouter ($stateProvider, $urlRouterProvider, $httpProvider){

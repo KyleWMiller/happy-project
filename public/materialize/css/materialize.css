@@ -5679,25 +5679,25 @@ label {
    ========================================================================== */
 /* Style Placeholders */
 ::-webkit-input-placeholder {
-  color: darkgrey;
-  font-weight: bold;
+color: darkgrey;
+font-weight: bold;
 }
 
 :-moz-placeholder {
   /* Firefox 18- */
-  color: darkgrey;
-  font-weight: bold;
+color: darkgrey;
+font-weight: bold;
 }
 
 ::-moz-placeholder {
   /* Firefox 19+ */
-  color: darkgrey;
-  font-weight: bold;
+color: darkgrey;
+font-weight: bold;
 }
 
 :-ms-input-placeholder {
-  color: darkgrey;
-  font-weight: bold;
+color: darkgrey;
+font-weight: bold;
 }
 
 /* Text inputs */
