@@ -223,11 +223,33 @@
                 console.log("label", label)
                 epc.label = label
 
-                if (epc.label.forms[0]) {
-                    $("#form").add("disabled")
+                console.log(epc.label)
+                if (epc.label.forms[0].hasOwnProperty) {
+                    $("#form").removeAttr("disabled")
                 }
             })
         }
+
+        epc.formatDate = function(date) {
+          date.split('')
+          console.log(date)
+          var hold = []
+          for(var i = 0; i < 10; i++) {
+            hold.push(date[i])
+          }
+          console.log(hold)
+          hold.join('')
+          console.log(hold)
+          // hold.split('-')
+          var day = hold.pop(),
+              month = hold.pop(),
+              year = hold.pop()
+          console.log(month, day, year)
+          var date = month+"-"+day+"-"+year
+          console.log(date)
+          return date
+      }
+
     }
 
 }());

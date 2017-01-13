@@ -202,22 +202,22 @@
                     <p class="hidden">Waldo was here</p>
                 </div>
             </div>
-            <div class="col s12" ng-repeat=" rate in epc.rts">
+            <div id="rate" class="col s12" ng-repeat=" rate in epc.rts">
                 <div class="col s3">
                     <p class="center">
-                        <span>{{rate.carrier}}</span>
+                        <span style="display:block;">{{rate.carrier}}</span>
                         <span>{{rate.service}}</span>
                     </p>
                 </div>
                 <div class="col s3">
-                    <p class="center">{{rate.delivery_date}}</p>
+                    <p class="center" ng-init="epc.formatDate(rate.delivery_date)">{{rate.delivery_date}}</p>
                     <p ng-if="rate.delivery_date === null"></p>
                 </div>
                 <div class="col s3">
                     <p class="center">${{rate.rate}}</p>
                 </div>
                 <div class="col s3 center-align">
-                    <a class="waves-effect waves-light btn buttonBackground super" ng-click="epc.purchase(rate.id)">Purchase</a>
+                    <a class="waves-effect waves-light btn buttonBackground updateBlue super" ng-click="epc.purchase(rate.id)">Purchase</a>
                     <input class="hidden" ng-model="rate.id">
                 </div>
 
@@ -233,13 +233,13 @@
                 <h6>Tracking #: {{epc.label.tracker.tracking_code}}</h6>
             </div>
             <div id="label" class="col s12">
-                <a target="_blank" ng-href="{{epc.label.postage_label.label_url}}" class="waves-effect waves-light btn buttonBackground col s12">Label</a>
+                <a target="_blank" ng-href="{{epc.label.postage_label.label_url}}" class="waves-effect waves-light btn buttonBackground col s12 updateBlue">Label</a>
             </div>
             <div id="label" class="col s12">
-                <a target="_blank" ng-href="{{epc.label.forms[0].form_url}}" class="waves-effect waves-light btn buttonBackground col s12">Commercial Invoice</a>
+                <a id="form" target="_blank" ng-href="{{epc.label.forms[0].form_url}}" class="waves-effect waves-light btn buttonBackground col s12 updateBlue" disabled>Commercial Invoice</a>
             </div>
             <div id="label" class="col s12">
-                <a target="_blank" ng-href="{{epc.label.tracker.public_url}}" class="waves-effect waves-light btn buttonBackground col s12">EasyPost Tracking</a>
+                <a target="_blank" ng-href="{{epc.label.tracker.public_url}}" class="waves-effect waves-light btn buttonBackground col s12 updateBlue">EasyPost Tracking</a>
             </div>
         </div>
     </div>
