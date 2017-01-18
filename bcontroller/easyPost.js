@@ -79,5 +79,23 @@ module.exports = {
               }
             })
           })
+    },
+
+    storePO: (req,res) => {
+      console.log('storing po')
+
+      let purchaseOrder = req.body
+
+      let po = new db.PO(purchaseOrder)
+      po.save({
+        purchaseOrder
+      }, (err,po) => {
+        if(err) {
+          res.json(err)
+        } else {
+          res.json(purchaseOrder)
+          console.log('po save successful')
+        }
+      })
     }
 }

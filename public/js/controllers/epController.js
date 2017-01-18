@@ -43,6 +43,10 @@
             itemArray: []
         }
         epc.verify = "Verify"
+        epc.po = {
+          epshipmentInfo: [],
+          itemArray: []
+        }
 
         // -------------------------------------------- //
         // Variables that store responses from EasyPost //
@@ -143,6 +147,13 @@
             var ozs = new Weight()
             epc.shipmentItem.package.dimentions.weight = ozs.weight
             epc.shipmentArray.push(epc.shipmentItem)
+
+            // stages items in po.itemArray
+            epc.shipmentItem.itemArray.map(function(x){
+              epc.po.itemArray.push(x)
+            })
+            console.log("po",epc.po)
+
             epc.shipmentItem = {
                 package: {},
                 itemArray: []
@@ -168,7 +179,6 @@
         // Gets parcel response oject w/ id
         epc.sendParcel = function(shipment) {
             epc.prcl = shipment.package.dimentions
-            console.log(epc.prcl)
             // Gets parcel response oject w/ id
             easypostFactory.sendParcel(epc.prcl, function(parcel) {
                 epc.parcel = parcel
@@ -192,7 +202,7 @@
               Materialize.toast(toastContent, 2500)
             } else {
               // omits customs info if the to_address is within the US
-              if (epc.shpmt.to_address.country.toLowerCase() === "us" || epc.shpmt.to_address.country.toLowerCase() === "united states") {
+              if (epc.shpmt.to_address.country.toLowerCase() === "usa") {
                 epc.shpmt.customsInfo = null
               } else {
                 function FillCustomItems(productArray) {
@@ -223,32 +233,23 @@
                 console.log("label", label)
                 epc.label = label
 
-                console.log(epc.label)
-                if (epc.label.forms[0].hasOwnProperty) {
+                function EndShipment(label) {
+                  var holding = label
+                  return holding
+                }
+                var poShipment = new EndShipment(epc.label)
+                epc.po.epshipmentInfo.push(poShipment)
+                console.log(epc.po)
+                if (epc.label.hasOwnProperty('forms')) {
                     $("#form").removeAttr("disabled")
                 }
             })
         }
 
-        epc.formatDate = function(date) {
-          date.split('')
-          console.log(date)
-          var hold = []
-          for(var i = 0; i < 10; i++) {
-            hold.push(date[i])
-          }
-          console.log(hold)
-          hold.join('')
-          console.log(hold)
-          // hold.split('-')
-          var day = hold.pop(),
-              month = hold.pop(),
-              year = hold.pop()
-          console.log(month, day, year)
-          var date = month+"-"+day+"-"+year
-          console.log(date)
-          return date
-      }
+        epc.savePO = function() {
+          easypostFactory.storePO(epc.po)
+        }
+
 
     }
 

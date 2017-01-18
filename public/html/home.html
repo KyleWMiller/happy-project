@@ -6,7 +6,7 @@
             <!-- <a class="waves-effect waves-light btn col l4 offset-l7 buttonBackground verifyGreen right" ng-click="epc.sendTAddress()">Verify</a> -->
             <form>
                 <div class="col s12">
-                    <input ng-model="epc.tAddress.name" type="text" placeholder="Company/Name">
+                    <input ng-model="epc.tAddress.company" type="text" placeholder="Company">
                 </div>
                 <div class="col s12">
                     <input ng-model="epc.tAddress.street1" type="text" placeholder="Street 1">
@@ -210,7 +210,7 @@
                     </p>
                 </div>
                 <div class="col s3">
-                    <p class="center" ng-init="epc.formatDate(rate.delivery_date)">{{rate.delivery_date}}</p>
+                    <p class="center" >{{rate.delivery_date | date:"EEE, MMM dd"}}</p>
                     <p ng-if="rate.delivery_date === null"></p>
                 </div>
                 <div class="col s3">
@@ -230,7 +230,7 @@
               {{epc.label}}
             </div> -->
             <div id="label" class="col s12">
-                <h6>Tracking #: {{epc.label.tracker.tracking_code}}</h6>
+                <h6>Tracking #:   {{epc.label.tracker.tracking_code}}</h6>
             </div>
             <div id="label" class="col s12">
                 <a target="_blank" ng-href="{{epc.label.postage_label.label_url}}" class="waves-effect waves-light btn buttonBackground col s12 updateBlue">Label</a>
@@ -241,6 +241,10 @@
             <div id="label" class="col s12">
                 <a target="_blank" ng-href="{{epc.label.tracker.public_url}}" class="waves-effect waves-light btn buttonBackground col s12 updateBlue">EasyPost Tracking</a>
             </div>
+            <div id="label" class="col s12">
+              <a class="waves-effect waves-light btn buttonBackground col s12 updateBlue" ng-click"epc.savePO()" >Save PO</a>
+            </div>
+
         </div>
     </div>
 </div>

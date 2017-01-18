@@ -11,6 +11,12 @@
           url: '/',
           templateUrl: '/html/home.html'
         })
+      $stateProvider
+        .state('DocumentsPage', {
+          url: '/',
+          templateUrl: '/html/docs.html'
+        })
+
 
         $urlRouterProvider.otherwise('/')
     }

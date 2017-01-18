@@ -28,4 +28,8 @@ apiRouter.route('/epShipment')
 apiRouter.route('/epBuy/:id')
     .post(ep.buyShipment)
 
+// Store PO
+apiRouter.route('/dbPO')
+    .post(ep.storePO)
+
 module.exports = apiRouter
