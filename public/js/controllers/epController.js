@@ -30,19 +30,19 @@
         epc.customsItem = {}
         epc.customsInfo = {
             customs_certify: true,
-            customs_signer: null,
+            customs_signer: "",
             customs_type: "merchandice",
             non_delivery_option: "return",
             restriction_type: "none",
             customs_items: [],
             eel_pfc: "NOEEI 30.37(a)"
         }
+        epc.thirdParty = {}
         epc.shipmentArray = []
         epc.shipmentItem = {
             package: {},
             itemArray: []
         }
-        epc.verify = "Verify"
         epc.po = {
           epshipmentInfo: [],
           itemArray: []
@@ -77,15 +77,7 @@
               Materialize.toast(toastContent, 2000)
 
             } else {
-              function Box(box) {
-                var holding = {
-                  size: box.size,
-                  dimentions: box.dimentions
-                }
-                return holding
-              }
-
-              var box = new Box(epc.box)
+              var box = angular.copy(epc.box)
               epc.shipmentItem.package = box
               $('#b span').attr('id', 'prePackageInfob')
             }
@@ -135,30 +127,32 @@
 
         // Add package to shipmentArray
         epc.addPackage = function(shipment) {
-            var temp = {
-              weight: 0
-            }
             function Weight() {
+              var weight = 0
               shipment.itemArray.map(function(w) {
-                temp.weight += w.weight
+                weight += w.weight
               })
-              return temp
+              return weight
             }
-            var ozs = new Weight()
-            epc.shipmentItem.package.dimentions.weight = ozs.weight
-            epc.shipmentArray.push(epc.shipmentItem)
+            var ozs = Weight()
+            shipment.package.dimentions.weight = ozs
+
+            shipment.package.number = epc.shipmentArray.length + 1
+            // console.log(epc.shipmentArray.length)
+            // console.log(shipment.package.number)
+
+            ozs = 0
+            var item = angular.copy(shipment)
+            epc.shipmentArray.push(item)
 
             // stages items in po.itemArray
             epc.shipmentItem.itemArray.map(function(x){
               epc.po.itemArray.push(x)
             })
-            console.log("po",epc.po)
-
             epc.shipmentItem = {
                 package: {},
                 itemArray: []
             }
-            epc.ozs = {}
             $('#b span').removeAttr('id')
         }
 
@@ -177,15 +171,18 @@
 
 
         // Gets parcel response oject w/ id
-        epc.sendParcel = function(shipment) {
+        epc.sendParcel = function(shipment, index) {
+            console.log(index)
+            console.log(shipment.package.verify)
             epc.prcl = shipment.package.dimentions
             // Gets parcel response oject w/ id
             easypostFactory.sendParcel(epc.prcl, function(parcel) {
                 epc.parcel = parcel
                 console.log("Parcel",parcel)
                 epc.shpmt.parcel = epc.parcel.id
-                epc.verify = "Verified"
-                $('#verify a').attr('id', 'verified')
+                shipment.package.verify = "Verified"
+                console.log(shipment.package.verify)
+                // $('#verify a').attr('id', 'verified')
             })
         }
 
@@ -244,6 +241,20 @@
                     $("#form").removeAttr("disabled")
                 }
             })
+        }
+
+        epc.formatService = function(carrier, service) {
+          switch(carrier) {
+            case "USPS":
+              for(var i = 1; i < service.length; i++){
+                if(i === i.toUpperCase()) {
+
+                }
+              }
+              break
+            case "FedEx":
+              break
+          }
         }
 
         epc.savePO = function() {

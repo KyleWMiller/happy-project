@@ -63,7 +63,7 @@ select {
   width: 28vw;
   padding: 15px;
   display: inline-block;
-  transform: translate(0px, -8px);
+  /*transform: translate(0px, -8px);*/
 }
 .customsTile input {
   font-size: 1.333rem;
@@ -121,6 +121,9 @@ padding: 10px;
 .logo {
   font-size: 2.3rem;
 }
+.line {
+  display: block;
+}
 #country input{
   padding-left: 15px;
   background-color: rgba(47, 79, 79, 0.6);
@@ -128,7 +131,6 @@ padding: 10px;
 }
 #pSelect input{
   padding-left: 15px;
-  font-size: 1.1rem;
   background-color: rgba(47, 79, 79, 0.6);
 }
 #plus {
@@ -196,6 +198,7 @@ padding: 10px;
 }
 #verified {
   background-color: #009900;
+  color: black;
 }
 .hidden {
   visibility: hidden;

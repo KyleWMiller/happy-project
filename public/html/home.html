@@ -3,7 +3,6 @@
         <!-- To Address Form -->
         <div class="toTile tileBackground z-depth-2" ng-controller="countrySelector as cs">
             <h4 class="grey-text text-darken-2">To</h4>
-            <!-- <a class="waves-effect waves-light btn col l4 offset-l7 buttonBackground verifyGreen right" ng-click="epc.sendTAddress()">Verify</a> -->
             <form>
                 <div class="col s12">
                     <input ng-model="epc.tAddress.company" type="text" placeholder="Company">
@@ -25,7 +24,7 @@
                 </div>
                 <div class="col s6" id="country">
                     <select ng-model="epc.tAddress.country">
-                      <option value="" disabled selected>--Select Country--</option>
+                      <option value="" disabled selected>Select Country</option>
                       <option ng-repeat="country in cs.countryArr" value="{{country}}">{{country}}</option>
                     </select>
                 </div>
@@ -92,15 +91,15 @@
             <!-- **************************************************** -->
             <div class="col s12">
                 <div class="col s5" id="pSelect">
-                    <select class="col s6 offset-s1" ng-click="epc.selectBox()" ng-options="parcel as parcel.size for parcel in epc.parcels" ng-model="epc.box">
-                        <option value="" selected disabled>--Select Box--</option>
+                    <select class="col s8" ng-click="epc.selectBox()" ng-options="parcel as parcel.size for parcel in epc.parcels" ng-model="epc.box">
+                        <option value="" selected disabled>Select Box</option>
                     </select>
                     <a id="plus" class="btn-floating waves-effect waves-light btn buttonBackground" ng-click="epc.selectBox()"><i class="material-icons">add</i></a>
                 </div>
 
                 <div class="col s6" id="pSelect">
-                    <select class="col s6" ng-options="product as product.item for product in epc.products" ng-model="epc.item">
-                        <option value="" selected disabled>--Select Product--</option>
+                    <select class="col s8" ng-options="product as product.item for product in epc.products" ng-model="epc.item">
+                        <option value="" selected disabled>Select Product</option>
                     </select>
                     <a id="plus" class="btn-floating waves-effect waves-light btn buttonBackground" ng-click="epc.addProduct()"><i class="material-icons">add</i></a>
                 </div>
@@ -128,23 +127,23 @@
             <!-- **************************************************** -->
             <div class="col s12">
                 <h5 class="grey-text text-darken-2">Shipment</h5>
-                <div ng-repeat="shipment in epc.shipmentArray">
+                <div ng-repeat="shipment in epc.shipmentArray track by $index">
                     <div class="col s10 offset-s1" id="shipmentItem">
-                        <a id="trash" class="btn-floating waves-effect waves-light btn buttonBackground right" ng-click="epc.removePackage($index)"><i class="material-icons">delete</i></a>
-                        <div class="col s4">
-                            <p>
-                                <h6>BOX SIZE: {{shipment.package.size}}</h6>
-                            </p>
-                        </div>
-                        <div class="col s6">
-                            <div class="col s3 offset-s2">
-                                <p>
-                                    <h6>WEIGHT: </h6>
-                                </p>
-                            </div>
-                            <div class="col s6">
-                                <input id="shipmentWeight" class="center-align" type="text" ng-model="shipment.package.dimentions.weight">
-                                <label for="shipmentWeight">oz</label>
+                        <div class="col s12">
+                            <a id="trash" class="btn-floating waves-effect waves-light btn buttonBackground right" ng-click="epc.removePackage($index)"><i class="material-icons">delete</i></a>
+                            <div class="col s10">
+                                <div class="col s5">
+                                    <p>Box: {{shipment.package.size}}</p>
+                                </div>
+                                <div class="col s7">
+                                    <div class="col s3">
+                                        <p>Weight: </p>
+                                    </div>
+                                    <div class="col s6 offset-s1">
+                                        <input id="shipmentWeight" class="center-align" type="text" ng-model="shipment.package.dimentions.weight">
+                                        <label for="shipmentWeight">oz</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col s3 center-align" ng-repeat="product in shipment.itemArray">
@@ -153,7 +152,7 @@
 
                         <div class="col s12">
                             <div class="col s3" id="verify">
-                                <a class="waves-effect waves-light btn buttonBackground col s12 center" ng-click="epc.sendParcel(shipment)">{{epc.verify}}</a>
+                                <a class="waves-effect waves-light btn buttonBackground col s12 center" ng-class="{Verified:'verified'}[shipment.package.verify]" ng-click="epc.sendParcel(shipment, $index)">{{shipment.package.verify}}</a>
 
                             </div>
                             <div class="col s7 offset-s2">
@@ -176,7 +175,28 @@
                     <input type="text" placeholder="Name" ng-model="epc.customsInfo.customs_signer">
                 </div>
             </form>
+
+            <h5 class="grey-text text-darken-2">3rd Party Billing</h5>
+            <form>
+                <div class="col s4">
+                    <input type="text" placeholder="Carrier" ng-model="epc.thirdParty.carrier">
+                </div>
+                <div class="col s8">
+                    <input type="text" placeholder="Account Number" ng-model="epc.thirdParty.bill_third_party_account">
+                </div>
+                <div class="col s6" id="country" ng-controller="countrySelector as cs">
+                    <select ng-model="epc.thirdParty.bill_third_party_country">
+                  <option value="" disabled selected>Select Country</option>
+                  <option ng-repeat="country in cs.countryArr" value="{{country}}">{{country}}</option>
+                </select>
+                </div>
+                <div class="col s6">
+                    <input type="text" placeholder="Postal Code" ng-model="epc.thirdParty.bill_third_party_postal_code">
+                </div>
+            </form>
         </div>
+
+
 
     </div>
     <!-- <div class="row">
@@ -193,7 +213,7 @@
                     <h6 class="center">Carrier</h6>
                 </div>
                 <div class="col s3">
-                    <h6 class="center">Est. Delivery Date</h6>
+                    <h6 class="center">Est. Delivery</h6>
                 </div>
                 <div class="col s3">
                     <h6 class="center">$ Rate</h6>
@@ -210,7 +230,7 @@
                     </p>
                 </div>
                 <div class="col s3">
-                    <p class="center" >{{rate.delivery_date | date:"EEE, MMM dd"}}</p>
+                    <p class="center">{{rate.delivery_date | date:"EEE, MMM dd"}}</p>
                     <p ng-if="rate.delivery_date === null"></p>
                 </div>
                 <div class="col s3">
@@ -242,7 +262,7 @@
                 <a target="_blank" ng-href="{{epc.label.tracker.public_url}}" class="waves-effect waves-light btn buttonBackground col s12 updateBlue">EasyPost Tracking</a>
             </div>
             <div id="label" class="col s12">
-              <a class="waves-effect waves-light btn buttonBackground col s12 updateBlue" ng-click"epc.savePO()" >Save PO</a>
+                <a class="waves-effect waves-light btn buttonBackground col s12 updateBlue" ng-click "epc.savePO()">Save PO</a>
             </div>
 
         </div>
