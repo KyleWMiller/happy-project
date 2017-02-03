@@ -137,13 +137,17 @@
             var ozs = Weight()
             shipment.package.dimentions.weight = ozs
 
-            shipment.package.number = epc.shipmentArray.length + 1
+            // shipment.package.number = epc.shipmentArray.length + 1
             // console.log(epc.shipmentArray.length)
             // console.log(shipment.package.number)
 
             ozs = 0
             var item = angular.copy(shipment)
             epc.shipmentArray.push(item)
+
+            for(var i = 0; i < epc.shipmentArray.length; i++){
+              epc.shipmentArray[i].package.number = i + 1
+            }
 
             // stages items in po.itemArray
             epc.shipmentItem.itemArray.map(function(x){
@@ -167,13 +171,15 @@
         }
         epc.removePackage = function(index) {
             epc.shipmentArray.splice(index, 1)
+            for(var i = 0; i < epc.shipmentArray.length; i++){
+              epc.shipmentArray[i].package.number = i + 1
+            }
+
         }
 
 
         // Gets parcel response oject w/ id
         epc.sendParcel = function(shipment, index) {
-            console.log(index)
-            console.log(shipment.package.verify)
             epc.prcl = shipment.package.dimentions
             // Gets parcel response oject w/ id
             easypostFactory.sendParcel(epc.prcl, function(parcel) {
@@ -181,8 +187,6 @@
                 console.log("Parcel",parcel)
                 epc.shpmt.parcel = epc.parcel.id
                 shipment.package.verify = "Verified"
-                console.log(shipment.package.verify)
-                // $('#verify a').attr('id', 'verified')
             })
         }
 

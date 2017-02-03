@@ -8,7 +8,7 @@
         var pf = this
 
         pf.parcels = [{
-            size: "15x10x7",
+            size: "15\"x10\"x7\"",
             number: 0,
             verify: "Verify",
             dimentions: {
@@ -17,7 +17,7 @@
               length: 7
             }
         }, {
-            size: "20x13x14",
+            size: "20\"x13\"x14\"",
             number: 0,
             verify: "Verify",
             dimentions: {

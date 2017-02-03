@@ -54,6 +54,7 @@ select {
   padding: 15px;
   margin-right: 2vw;
   display: inline-block;
+  transform: translate(0px, -76px);
 }
 .itemTile {
   background-color: #222428;
@@ -63,7 +64,6 @@ select {
   width: 28vw;
   padding: 15px;
   display: inline-block;
-  /*transform: translate(0px, -8px);*/
 }
 .customsTile input {
   font-size: 1.333rem;
@@ -196,7 +196,7 @@ padding: 10px;
   padding: 5px 10px;
   border-radius: 2px;
 }
-#verified {
+.verified {
   background-color: #009900;
   color: black;
 }

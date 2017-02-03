@@ -132,17 +132,20 @@
                         <div class="col s12">
                             <a id="trash" class="btn-floating waves-effect waves-light btn buttonBackground right" ng-click="epc.removePackage($index)"><i class="material-icons">delete</i></a>
                             <div class="col s10">
-                                <div class="col s5">
-                                    <p>Box: {{shipment.package.size}}</p>
+                                <div class="col s6">
+                                    <p>{{shipment.package.number}} of {{epc.shipmentArray.length}}</p>
                                 </div>
-                                <div class="col s7">
-                                    <div class="col s3">
-                                        <p>Weight: </p>
-                                    </div>
-                                    <div class="col s6 offset-s1">
-                                        <input id="shipmentWeight" class="center-align" type="text" ng-model="shipment.package.dimentions.weight">
-                                        <label for="shipmentWeight">oz</label>
-                                    </div>
+                            </div>
+                            <div class="col s5">
+                                <p>Box: {{shipment.package.size}}</p>
+                            </div>
+                            <div class="col s7">
+                                <div class="col s3">
+                                    <p>Weight: </p>
+                                </div>
+                                <div class="col s6">
+                                    <input id="shipmentWeight" class="center-align" type="text" ng-model="shipment.package.dimentions.weight">
+                                    <label for="shipmentWeight">oz</label>
                                 </div>
                             </div>
                         </div>
@@ -152,7 +155,7 @@
 
                         <div class="col s12">
                             <div class="col s3" id="verify">
-                                <a class="waves-effect waves-light btn buttonBackground col s12 center" ng-class="{Verified:'verified'}[shipment.package.verify]" ng-click="epc.sendParcel(shipment, $index)">{{shipment.package.verify}}</a>
+                                <a class="waves-effect waves-light btn buttonBackground col s12 center" ng-class="{verified:'Verified'}[shipment.package.verify]" ng-click="epc.sendParcel(shipment, $index)">{{shipment.package.verify}}</a>
 
                             </div>
                             <div class="col s7 offset-s2">
