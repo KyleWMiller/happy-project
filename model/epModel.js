@@ -7,7 +7,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     po = new Schema({
         itemArray: Array,
-        shipmentsInfo: Array
+        shipmentInfo: Array
     })
 
 module.exports = {

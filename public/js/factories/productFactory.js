@@ -10,7 +10,10 @@
         pf.parcels = [{
             size: "15\"x10\"x7\"",
             number: 0,
-            verify: "Verify",
+            verification: {
+              verify:"Verify",
+              create:"Create"
+            },
             dimentions: {
               height: 15,
               width: 10,
@@ -19,7 +22,10 @@
         }, {
             size: "20\"x13\"x14\"",
             number: 0,
-            verify: "Verify",
+            verification: {
+              verify:"Verify",
+              create:"Create"
+            },
             dimentions: {
               height: 20,
               width: 13,

@@ -1,3 +1,20 @@
-<div class="paperBorder white-text">
+<div ng-controller="pdfController as pdf" class="paperBorder white-text col s12">
+    <div class="col s6">
+      <a class="waves-effect waves-light btn buttonBackground" ng-click="pdf.certificate()">CFC</a>
+    </div>
+    <div class="col s6">
+      <a class="waves-effect waves-light btn buttonBackground" ng-click="pdf.packList()">Packing List</a>
+    </div>
+    <div class="col s12">
+        <a class="waves-effect waves-light btn buttonBackground" ng-click="pdf.getPOs()">Get them pos</a>
+        <div class="row">
+          <div class="col s6" ng-repeat="po in pdf.pos">
+            <!-- {{po.itemArray}} -->
+            <div class="col s3" ng-repeat="item in po.itemArray">
+              {{item.item}}
+            </div>
+        </div>
 
+        </div>
+    </div>
 </div>

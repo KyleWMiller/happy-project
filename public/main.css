@@ -89,6 +89,9 @@ padding: 10px;
   padding: 15px;
   display: inline-block;
 }
+.nextTile {
+  width: 80vw;
+}
 
 /* Button CSS*/
 .navBackground {
@@ -108,13 +111,11 @@ padding: 10px;
   color: white;
 }
 .updateBlue{
-  color: #00A7D6;
   font-weight: bold;
   margin-right: 15px;
 }
 .updateBlue:hover {
   background-color: #09789C;
-  color: white;
 }
 
 /* MISC */
@@ -208,9 +209,23 @@ padding: 10px;
 .super {
   margin-top: 17px;
 }
-#rate {
-  border: 1px solid white;
+.rateDD {
+  width: 100%;
+  margin: 10px 0px;
+}
+.rateUL {
+  max-height: 500px;
+}
+.rateUL li{
+  padding: 10px 0px;
+}
+#labels {
+  margin: 10px 0px;
 }
 #label {
   margin-top: 15px;
+}
+#next {
+  padding-top: 10px;
+  border-radius: 3px;
 }

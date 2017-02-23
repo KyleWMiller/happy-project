@@ -2,27 +2,17 @@
 // Schemas for EasyPost
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
 
-// models not in use 
+// models not in use
 
 // formats the information recieved from db collection
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    addressResId = new Schema({
-        id: String,
-        name: String,
-        company: String
-    }),
-    parcelRes = new Schema({
-        id: String,
-        created_at: String,
-        length: String,
-        width: String,
-        height: String,
-        weight: String
+    po = new Schema({
+      shipmentInfo: Array,
+      itemArray: Array
     })
 
 
 module.exports = {
-    Add = mongoose.model('Adds', addressResId),
-    Parcel = mongoose.model('Parcels', parcelRes)
+    PO = mongoose.model('POs', po)
 }

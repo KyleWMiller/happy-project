@@ -44,8 +44,8 @@
             itemArray: []
         }
         epc.po = {
-          epshipmentInfo: [],
-          itemArray: []
+            shipmentInfo: [],
+            itemArray: []
         }
 
         // -------------------------------------------- //
@@ -55,7 +55,7 @@
         epc.parcel = {}
         epc.shipment = {}
         epc.rate = {}
-        epc.label = {}
+        epc.labels = []
 
         // ------------------------------------------- //
         //            HappyShip Methods                //
@@ -73,66 +73,66 @@
         // Adds box dimentions to shipmentItem
         epc.selectBox = function() {
             if (!epc.box.hasOwnProperty('size')) {
-              var toastContent = $('<span>Please select a "Box Size"</span>')
-              Materialize.toast(toastContent, 2000)
+                var toastContent = $('<span>Please select a "Box Size"</span>')
+                Materialize.toast(toastContent, 2000)
 
             } else {
-              var box = angular.copy(epc.box)
-              epc.shipmentItem.package = box
-              $('#b span').attr('id', 'prePackageInfob')
+                var box = angular.copy(epc.box)
+                epc.shipmentItem.package = box
+                $('#b span').attr('id', 'prePackageInfob')
             }
         }
 
         // Adds items to package
         epc.addProduct = function() {
             if (!epc.item.hasOwnProperty('item')) {
-              var toastContent = $('<span>Please select a "Product"</span>')
-              Materialize.toast(toastContent, 2000)
+                var toastContent = $('<span>Please select a "Product"</span>')
+                Materialize.toast(toastContent, 2000)
             } else {
-              // Seperation step to exit data binding and sort item properties
-              function Item(product) {
-                var holding = {
-                  item: product.item,
-                  price: product.price,
-                  weight: product.weight,
-                  customsInfo: {
-                    description: product.description,
-                    hs_tarrif_number: product.hs_tarrif_number,
-                    origin_country: product.origin_country,
-                    quantity: product.quantity,
-                    value: product.value,
-                    weight: product.weight
-                  }
+                // Seperation step to exit data binding and sort item properties
+                function Item(product) {
+                    var holding = {
+                        item: product.item,
+                        price: product.price,
+                        weight: product.weight,
+                        customsInfo: {
+                            description: product.description,
+                            hs_tarrif_number: product.hs_tarrif_number,
+                            origin_country: product.origin_country,
+                            quantity: product.quantity,
+                            value: product.value,
+                            weight: product.weight
+                        }
+                    }
+                    // Adds properties only if they exist
+                    if (product.serialNum) {
+                        holding.serialNum = product.serialNum
+                    }
+                    if (product.mfgNum) {
+                        holding.mfgNum = product.mfgNum
+                    }
+                    if (product.itemNum) {
+                        holding.itemNum = product.itemNum
+                    }
+                    if (product.modelNum) {
+                        holding.modelNum = product.modelNum
+                    }
+                    return holding
                 }
-                // Adds properties only if they exist
-                if (product.serialNum) {
-                  holding.serialNum = product.serialNum
-                }
-                if (product.mfgNum) {
-                  holding.mfgNum = product.mfgNum
-                }
-                if (product.itemNum) {
-                  holding.itemNum = product.itemNum
-                }
-                if (product.modelNum) {
-                  holding.modelNum = product.modelNum
-                }
-                return holding
-              }
-              var item = new Item(epc.item)
-              epc.shipmentItem.itemArray.push(item)
-              epc.customsInfo.customs_items.push(item.customsInfo)
+                var item = new Item(epc.item)
+                epc.shipmentItem.itemArray.push(item)
+                epc.customsInfo.customs_items.push(item.customsInfo)
             }
         }
 
         // Add package to shipmentArray
         epc.addPackage = function(shipment) {
             function Weight() {
-              var weight = 0
-              shipment.itemArray.map(function(w) {
-                weight += w.weight
-              })
-              return weight
+                var weight = 0
+                shipment.itemArray.map(function(w) {
+                    weight += w.weight
+                })
+                return weight
             }
             var ozs = Weight()
             shipment.package.dimentions.weight = ozs
@@ -145,13 +145,13 @@
             var item = angular.copy(shipment)
             epc.shipmentArray.push(item)
 
-            for(var i = 0; i < epc.shipmentArray.length; i++){
-              epc.shipmentArray[i].package.number = i + 1
+            for (var i = 0; i < epc.shipmentArray.length; i++) {
+                epc.shipmentArray[i].package.number = i + 1
             }
 
             // stages items in po.itemArray
-            epc.shipmentItem.itemArray.map(function(x){
-              epc.po.itemArray.push(x)
+            epc.shipmentItem.itemArray.map(function(x) {
+                epc.po.itemArray.push(x)
             })
             epc.shipmentItem = {
                 package: {},
@@ -169,10 +169,20 @@
         epc.removeItem = function(index) {
             epc.shipmentItem.itemArray.splice(index, 1)
         }
-        epc.removePackage = function(index) {
+        epc.removePackage = function(index, items) {
+            // removes package items from po obj
+
+            for (var i = items.length - 1; i >= 0; i--) {
+                epc.po.itemArray.map(function(x) {
+                    if (x.item === items[i].item) {
+                        epc.po.itemArray.splice(epc.po.itemArray.indexOf(x), 1)
+                    }
+                })
+            }
+            // removes package from shipment array
             epc.shipmentArray.splice(index, 1)
-            for(var i = 0; i < epc.shipmentArray.length; i++){
-              epc.shipmentArray[i].package.number = i + 1
+            for (var i = 0; i < epc.shipmentArray.length; i++) {
+                epc.shipmentArray[i].package.number = i + 1
             }
 
         }
@@ -184,9 +194,9 @@
             // Gets parcel response oject w/ id
             easypostFactory.sendParcel(epc.prcl, function(parcel) {
                 epc.parcel = parcel
-                console.log("Parcel",parcel)
+                console.log("Parcel", parcel)
                 epc.shpmt.parcel = epc.parcel.id
-                shipment.package.verify = "Verified"
+                shipment.package.verification.verify = "Verified"
             })
         }
 
@@ -194,37 +204,43 @@
         // Creates shipment with: verified fromAddress, toAdress, optional customsInfo (consisting of customItem(s)), and a parcel
         epc.createShipment = function(shipment) {
             epc.shpmt.to_address = epc.tAddress
+
+            // Error handeling for To Address
             if (!epc.tAddress.hasOwnProperty('country')) {
                 var toastContent = $('<span>Please provide a "To Address"</span>')
                 Materialize.toast(toastContent, 2500)
             }
-            if ( epc.shpmt.to_address.country.toLowerCase() !== "usa" && epc.customsInfo.customs_signer === null) {
-              var toastContent = $('<span>Please provide a "Customs Signer"</span>')
-              Materialize.toast(toastContent, 2500)
+
+            // Error handeling for Customs Signer
+            if (epc.shpmt.to_address.country.toLowerCase() !== "usa" && epc.customsInfo.customs_signer === null) {
+                var toastContent = $('<span>Please provide a "Customs Signer"</span>')
+                Materialize.toast(toastContent, 2500)
             } else {
-              // omits customs info if the to_address is within the US
-              if (epc.shpmt.to_address.country.toLowerCase() === "usa") {
-                epc.shpmt.customsInfo = null
-              } else {
-                function FillCustomItems(productArray) {
-                  var holdingArray = []
-                  productArray.map(function(item) {
-                    holdingArray.push(item.customsInfo)
-                  })
-                  return holdingArray
+                // omits customs info if the to_address is within the US
+                if (epc.shpmt.to_address.country.toLowerCase() === "usa") {
+                    epc.shpmt.customsInfo = null
+                } else {
+                    // Adds items custom info to the customs object
+                    function FillCustomItems(productArray) {
+                        var holdingArray = []
+                        productArray.map(function(item) {
+                            holdingArray.push(item.customsInfo)
+                        })
+                        return holdingArray
+                    }
+                    var mounties = new FillCustomItems(shipment.itemArray)
+                    epc.customsInfo.customs_items = mounties
+                    epc.shpmt.customsInfo = epc.customsInfo
                 }
-                var mounties = new FillCustomItems(shipment.itemArray)
-                epc.customsInfo.customs_items = mounties
-                epc.shpmt.customsInfo = epc.customsInfo
-              }
 
+                easypostFactory.sendShipment(epc.shpmt, function(shipment) {
+                    epc.shipment = shipment
+                    console.log('created shipement', epc.shipment)
+                    epc.rts.push(epc.shipment.rates)
 
-
-              easypostFactory.sendShipment(epc.shpmt, function(shipment) {
-                epc.shipment = shipment
-                console.log('created shipement',epc.shipment)
-                epc.rts = epc.shipment.rates
-              })
+                    console.log(epc.rts)
+                })
+                shipment.package.verification.create = "Created"
 
             }
         }
@@ -232,37 +248,41 @@
         epc.purchase = function(rate) {
             easypostFactory.buyRate(rate, epc.shipment.id, function(label) {
                 console.log("label", label)
-                epc.label = label
+                epc.labels.push(label)
 
-                function EndShipment(label) {
-                  var holding = label
-                  return holding
-                }
-                var poShipment = new EndShipment(epc.label)
-                epc.po.epshipmentInfo.push(poShipment)
-                console.log(epc.po)
-                if (epc.label.hasOwnProperty('forms')) {
-                    $("#form").removeAttr("disabled")
+                var poShipment = angular.copy(epc.labels[epc.labels.indexOf(label)])
+                epc.po.shipmentInfo.push(poShipment)
+                if (poShipment.forms.length == 0) {
+                    $("#form").attr("disabled", "disabled")
                 }
             })
         }
 
         epc.formatService = function(carrier, service) {
-          switch(carrier) {
-            case "USPS":
-              for(var i = 1; i < service.length; i++){
-                if(i === i.toUpperCase()) {
+            switch (carrier) {
+                case "USPS":
+                    var holding = service.split(/(?=[A-Z])/).join(" ")
+                    return holding
+                    break
+                case "FedEx":
+                    function capFirstChar(string) {
+                        return string.charAt(0).toUpperCase() + string.slice(1);
+                    }
 
-                }
-              }
-              break
-            case "FedEx":
-              break
-          }
+                    var holding = service.toLowerCase()
+                          .split('_')
+                          .map(function(x) {
+                              return capFirstChar(x)
+                          })
+                          .join(" ")
+                    return holding
+                    break
+            }
         }
 
         epc.savePO = function() {
-          easypostFactory.storePO(epc.po)
+            console.log("saving po in db")
+            easypostFactory.storePO(epc.po)
         }
 
 

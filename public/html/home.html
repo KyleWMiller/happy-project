@@ -43,7 +43,6 @@
         <div class="fromTile tileBackground z-depth-2">
             <h4 class="grey-text text-darken-2">From</h4>
             <a class="waves-effect waves-light btn buttonBackground updateBlue col l4 right" ng-click="epc.sendFAddress()" ng-init="epc.sendFAddress()">Update</a>
-
             <form>
                 <div class="col s12">
                     <input type="text" ng-model="epc.fAddress.company">
@@ -130,7 +129,7 @@
                 <div ng-repeat="shipment in epc.shipmentArray track by $index">
                     <div class="col s10 offset-s1" id="shipmentItem">
                         <div class="col s12">
-                            <a id="trash" class="btn-floating waves-effect waves-light btn buttonBackground right" ng-click="epc.removePackage($index)"><i class="material-icons">delete</i></a>
+                            <a id="trash" class="btn-floating waves-effect waves-light btn buttonBackground right" ng-click="epc.removePackage($index, shipment.itemArray)"><i class="material-icons">delete</i></a>
                             <div class="col s10">
                                 <div class="col s6">
                                     <p>{{shipment.package.number}} of {{epc.shipmentArray.length}}</p>
@@ -155,11 +154,11 @@
 
                         <div class="col s12">
                             <div class="col s3" id="verify">
-                                <a class="waves-effect waves-light btn buttonBackground col s12 center" ng-class="{verified:'Verified'}[shipment.package.verify]" ng-click="epc.sendParcel(shipment, $index)">{{shipment.package.verify}}</a>
+                                <a class="waves-effect waves-light btn buttonBackground createGreen col s12 center" ng-class="{verified:'Verified'}[shipment.package.verify]" ng-click="epc.sendParcel(shipment, $index)">{{shipment.package.verification.verify}}</a>
 
                             </div>
                             <div class="col s7 offset-s2">
-                                <a class="waves-effect waves-light btn buttonBackground createGreen col s12 center" ng-click="epc.createShipment(shipment)">Create Shipment</a>
+                                <a class="waves-effect waves-light btn buttonBackground createGreen col s12 center" ng-click="epc.createShipment(shipment)">{{shipment.package.verification.create}} Shipment</a>
                             </div>
                         </div>
 
@@ -225,49 +224,77 @@
                     <p class="hidden">Waldo was here</p>
                 </div>
             </div>
-            <div id="rate" class="col s12" ng-repeat=" rate in epc.rts">
-                <div class="col s3">
-                    <p class="center">
-                        <span style="display:block;">{{rate.carrier}}</span>
-                        <span>{{rate.service}}</span>
-                    </p>
+            <div class="col s12" ng-repeat="rates in epc.rts track by $index">
+                <div class="">
+                    <script type="text/javascript">
+                        $('.dropdown-button').dropdown({
+                            inDuration: 300,
+                            outDuration: 225,
+                            constrainWidth: false, // Does not change width of dropdown to that of the activator
+                            hover: false, // Activate on hover
+                            gutter: 0, // Spacing from edge
+                            belowOrigin: true, // Displays dropdown below the button
+                            alignment: 'left', // Displays dropdown with edge aligned to the left of button
+                            stopPropagation: false // Stops event propagation
+                        })
+                    </script>
+                    <!-- Dropdown Trigger -->
+                    <a class="dropdown-button btn buttonBackground rateDD left" data-activates="dropdown1">Rates for Package {{$index + 1}}</a>
+                    <!-- Dropdown Structure -->
+                    <ul id="dropdown1" class="dropdown-content col s12 rateUL">
+                        <li class="col s12" ng-repeat="rate in rates">
+                            <div class="col s3">
+                                <p class="center">
+                                    <span style="display:block;">{{rate.carrier}}</span>
+                                    <span>{{epc.formatService(rate.carrier, rate.service)}}</span>
+                                </p>
+                            </div>
+                            <div class="col s3">
+                                <p class="center">{{rate.delivery_date | date:"EEE, MMM dd"}}</p>
+                                <p ng-if="rate.delivery_date === null"></p>
+                            </div>
+                            <div class="col s3">
+                                <p class="center">${{rate.rate}}</p>
+                            </div>
+                            <div class="col s3 center-align">
+                                <a class="waves-effect waves-light btn buttonBackground updateBlue super" ng-click="epc.purchase(rate.id)">Purchase</a>
+                                <input class="hidden" ng-model="rate.id">
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col s3">
-                    <p class="center">{{rate.delivery_date | date:"EEE, MMM dd"}}</p>
-                    <p ng-if="rate.delivery_date === null"></p>
-                </div>
-                <div class="col s3">
-                    <p class="center">${{rate.rate}}</p>
-                </div>
-                <div class="col s3 center-align">
-                    <a class="waves-effect waves-light btn buttonBackground updateBlue super" ng-click="epc.purchase(rate.id)">Purchase</a>
-                    <input class="hidden" ng-model="rate.id">
-                </div>
-
             </div>
         </div>
 
         <div class="labelTile tileBackground z-depth-2">
-            <h5 class="grey-text text-darken-2">Label</h5>
-            <!-- <div class="col l12">
-              {{epc.label}}
-            </div> -->
-            <div id="label" class="col s12">
-                <h6>Tracking #:   {{epc.label.tracker.tracking_code}}</h6>
-            </div>
-            <div id="label" class="col s12">
-                <a target="_blank" ng-href="{{epc.label.postage_label.label_url}}" class="waves-effect waves-light btn buttonBackground col s12 updateBlue">Label</a>
-            </div>
-            <div id="label" class="col s12">
-                <a id="form" target="_blank" ng-href="{{epc.label.forms[0].form_url}}" class="waves-effect waves-light btn buttonBackground col s12 updateBlue" disabled>Commercial Invoice</a>
-            </div>
-            <div id="label" class="col s12">
-                <a target="_blank" ng-href="{{epc.label.tracker.public_url}}" class="waves-effect waves-light btn buttonBackground col s12 updateBlue">EasyPost Tracking</a>
-            </div>
-            <div id="label" class="col s12">
-                <a class="waves-effect waves-light btn buttonBackground col s12 updateBlue" ng-click "epc.savePO()">Save PO</a>
+            <h5 class="grey-text text-darken-2">Labels</h5>
+            <div id="labels" class="col l12" ng-repeat="label in epc.labels track by $index">
+                <div class="col s12 center">
+                  <h5>Package {{$index + 1}}</h5>
+                </div>
+                <div id="label" class="col s12">
+                    <h6>Tracking #:   {{label.tracker.tracking_code}}</h6>
+                </div>
+                <div id="label" class="col s12">
+                    <a target="_blank" ng-href="{{label.postage_label.label_url}}" class="waves-effect waves-light btn buttonBackground col s12 updateBlue">Label</a>
+                </div>
+                <div id="label" class="col s12">
+                    <a id="form" target="_blank" ng-href="{{label.forms[0].form_url}}" class="waves-effect waves-light btn buttonBackground col s12 updateBlue">Commercial Invoice</a>
+                </div>
+                <div id="label" class="col s12">
+                    <a target="_blank" ng-href="{{label.tracker.public_url}}" class="waves-effect waves-light btn buttonBackground col s12 updateBlue">EasyPost Tracking</a>
+                </div>
+                <div id="label" class="col s12">
+                    <a class="waves-effect waves-light btn buttonBackground col s12 updateBlue" ng-click="epc.savePO(epc.po)">Save PO</a>
+                </div>
             </div>
 
         </div>
+    </div>
+
+    <div class="row">
+      <div class="nextTile">
+        <a id="next" class="waves-effect waves-light btn btn-large buttonBackground updateBlue col s12" ng-click="epc.savePO(epc.po)" ui-sref="DocumentsPage"><h5>Print Documents</h5></a>
+      </div>
     </div>
 </div>

@@ -4,10 +4,8 @@
     angular.module('epFactory', [])
         .factory('easypostFactory', ['$http', easypostFactory])
 
-    easypostFactory.$inject = ['$http']
-
     function easypostFactory($http) {
-        var ef = {},
+        var ef = this,
             addressUrl  = 'api/v1/epAddress',
             parcelUrl   = 'api/v1/epParcel',
             shipmentUrl = 'api/v1/epShipment',

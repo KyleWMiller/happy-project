@@ -1,7 +1,7 @@
 (function() {
 
 
-    angular.module('happyApp', ['epControllers', 'epFactory','prodFactory', 'ui.router', 'countrySelect'])
+    angular.module('happyApp', ['epControllers', 'epFactory','prodFactory', 'ui.router', 'countrySelect', 'jsPDF', 'docFactory', 'historyFactory'])
       .config(MainRouter)
 
       function MainRouter ($stateProvider, $urlRouterProvider, $httpProvider){
@@ -13,8 +13,13 @@
         })
       $stateProvider
         .state('DocumentsPage', {
-          url: '/',
+          url: '/Docs',
           templateUrl: '/html/docs.html'
+        })
+      $stateProvider
+        .state('HistoryPage', {
+          url: '/Hist',
+          templateUrl:'/html/po.html'
         })
 
 

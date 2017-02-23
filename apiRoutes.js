@@ -32,4 +32,8 @@ apiRouter.route('/epBuy/:id')
 apiRouter.route('/dbPO')
     .post(ep.storePO)
 
+// Retrieve POs
+apiRouter.route('/POs')
+    .get(dbq.getPOs)
+
 module.exports = apiRouter
