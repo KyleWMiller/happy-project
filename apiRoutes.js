@@ -36,4 +36,8 @@ apiRouter.route('/dbPO')
 apiRouter.route('/POs')
     .get(dbq.getPOs)
 
+// Return Individual PO
+apiRouter.route('/PO/:poNum')
+  .get(dbq.getOnePO)
+
 module.exports = apiRouter

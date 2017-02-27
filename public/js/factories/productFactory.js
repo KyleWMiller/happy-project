@@ -35,10 +35,10 @@
 
         pf.products = [{
                 item: "SDR",
-                serialNum: "",
-                mfgNum: "TN1021-100",
+                serialNum: "834",
                 itemNum: "1233-F-2191-10",
                 price: 28875.00,
+                remarks: "Satcom Direct part number 1233-F-2191-10 is equivalent to manufacturer's part number TN1021-100",
                 description: "Satcom Direct Router",
                 hs_tarrif_number: "851762",
                 origin_country: "US",

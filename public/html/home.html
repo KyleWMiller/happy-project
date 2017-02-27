@@ -1,11 +1,17 @@
 <div class="paperBorder white-text" ng-controller="easypostController as epc">
     <div class="row">
+      <div class="poTile tileBackground">
+          <label for="po"><h4 class="grey-text text-darken-2">PO# </h4></label>
+          <input id="po" ng-model="epc.po.poNum" type="text">
+      </div>
+    </div>
+    <div class="row">
         <!-- To Address Form -->
         <div class="toTile tileBackground z-depth-2" ng-controller="countrySelector as cs">
             <h4 class="grey-text text-darken-2">To</h4>
             <form>
                 <div class="col s12">
-                    <input ng-model="epc.tAddress.company" type="text" placeholder="Company">
+                    <input ng-model="epc.tAddress.company" type="text" placeholder="Company/Name">
                 </div>
                 <div class="col s12">
                     <input ng-model="epc.tAddress.street1" type="text" placeholder="Street 1">
@@ -279,7 +285,8 @@
                     <a target="_blank" ng-href="{{label.postage_label.label_url}}" class="waves-effect waves-light btn buttonBackground col s12 updateBlue">Label</a>
                 </div>
                 <div id="label" class="col s12">
-                    <a id="form" target="_blank" ng-href="{{label.forms[0].form_url}}" class="waves-effect waves-light btn buttonBackground col s12 updateBlue">Commercial Invoice</a>
+                    <a id="form" target="_blank" ng-if="label.forms[0]" ng-href="{{label.forms[0].form_url}}" class="waves-effect waves-light btn buttonBackground col s12 updateBlue">Commercial Invoice</a>
+                    <a id="form" target="_blank" ng-if="!label.forms[0]" class="waves-effect waves-light btn buttonBackground col s12 updateBlue" disabled>Commercial Invoice</a>
                 </div>
                 <div id="label" class="col s12">
                     <a target="_blank" ng-href="{{label.tracker.public_url}}" class="waves-effect waves-light btn buttonBackground col s12 updateBlue">EasyPost Tracking</a>
@@ -294,7 +301,7 @@
 
     <div class="row">
       <div class="nextTile">
-        <a id="next" class="waves-effect waves-light btn btn-large buttonBackground updateBlue col s12" ng-click="epc.savePO(epc.po)" ui-sref="DocumentsPage"><h5>Print Documents</h5></a>
+        <a id="next" class="waves-effect waves-light btn btn-large buttonBackground updateBlue col s12" ng-click="epc.savePO(epc.po)"><h5>Print Documents</h5></a>
       </div>
     </div>
 </div>

@@ -44,6 +44,7 @@
             itemArray: []
         }
         epc.po = {
+            poNum: 23180,
             shipmentInfo: [],
             itemArray: []
         }
@@ -171,7 +172,6 @@
         }
         epc.removePackage = function(index, items) {
             // removes package items from po obj
-
             for (var i = items.length - 1; i >= 0; i--) {
                 epc.po.itemArray.map(function(x) {
                     if (x.item === items[i].item) {
@@ -233,15 +233,23 @@
                     epc.shpmt.customsInfo = epc.customsInfo
                 }
 
-                easypostFactory.sendShipment(epc.shpmt, function(shipment) {
+                // Add Third Party carrier accounts
+                if(epc.thirdParty.carrier) {
+                  if(!epc.thirdParty.bill_third_party_account || !epc.thirdParty.bill_third_party_country || !epc.thirdParty.bill_third_party_postal_code) {
+                    var toastContent = $('<span>Please complete 3rd party billing info</span>')
+                    Materialize.toast(toastContent, 2500)
+                  }
+                  epc.shpmt.options = epc.thirdParty
+                } else {
+                  easypostFactory.sendShipment(epc.shpmt, function(shipment) {
                     epc.shipment = shipment
                     console.log('created shipement', epc.shipment)
                     epc.rts.push(epc.shipment.rates)
 
                     console.log(epc.rts)
-                })
-                shipment.package.verification.create = "Created"
-
+                  })
+                  shipment.package.verification.create = "Created"
+                }
             }
         }
         // Purchases specific rate using shipment id and returns lable
@@ -250,11 +258,21 @@
                 console.log("label", label)
                 epc.labels.push(label)
 
-                var poShipment = angular.copy(epc.labels[epc.labels.indexOf(label)])
-                epc.po.shipmentInfo.push(poShipment)
-                if (poShipment.forms.length == 0) {
-                    $("#form").attr("disabled", "disabled")
+                var poLable = {
+                  buyerAddress: label.buyer_address,
+                  created_at: label.created_at,
+                  customs_info: label.customs_info,
+                  fees: label.fees,
+                  forms: label.forms,
+                  id: label.id,
+                  options: label.options,
+                  parcel: label.parcel,
+                  postage_label: label.postage_label,
+                  selected_rate: label.selected_rate,
+                  tracker: label.tracker,
+                  tracking_code: label.tracking_code
                 }
+                epc.po.shipmentInfo.push(poLable)
             })
         }
 
@@ -268,7 +286,6 @@
                     function capFirstChar(string) {
                         return string.charAt(0).toUpperCase() + string.slice(1);
                     }
-
                     var holding = service.toLowerCase()
                           .split('_')
                           .map(function(x) {
@@ -281,10 +298,13 @@
         }
 
         epc.savePO = function() {
-            console.log("saving po in db")
             easypostFactory.storePO(epc.po)
         }
 
+        epc.continueToPrint = function() {
+          epc.savePO()
+
+        }
 
     }
 

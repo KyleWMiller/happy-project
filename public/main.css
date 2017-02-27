@@ -32,6 +32,14 @@ select {
   margin-left: 10vw;
   margin-top: 3vw;
 }
+.poTile {
+  padding: 15px;
+  display: inline-block;
+  white-space: nowrap;
+}
+.poTile input {
+  width: auto;
+}
 .toTile {
   width: 39vw;
   padding: 15px;
@@ -54,7 +62,7 @@ select {
   padding: 15px;
   margin-right: 2vw;
   display: inline-block;
-  transform: translate(0px, -76px);
+  float:left;
 }
 .itemTile {
   background-color: #222428;
@@ -121,9 +129,6 @@ padding: 10px;
 /* MISC */
 .logo {
   font-size: 2.3rem;
-}
-.line {
-  display: block;
 }
 #country input{
   padding-left: 15px;

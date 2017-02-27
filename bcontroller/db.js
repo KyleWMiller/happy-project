@@ -10,11 +10,23 @@ module.exports = {
         console.log('getting POs')
         dbq.PO.find({}, (err, pos) => {
               if (err) {
-                  res.json(err)
+                  res.status(400).json(err)
               } else {
-                  res.json(pos)
+                  res.status(200).json(pos)
               }
           })
+    },
+    getOnePO: (req, res) => {
+      console.log("getting PO")
+      console.log(req.params)
+      let poNum = req.params.poNum
+      dbq.PO.find({"poNum": poNum}, (err, po) => {
+            if (err) {
+              res.status(400).json(err)
+            } else {
+              res.status(200).json(po)
+            }
+      })
     }
 
 }
