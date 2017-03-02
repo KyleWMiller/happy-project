@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('epControllers', [])
-        .controller('easypostController', ['easypostFactory', 'productFactory', easypostController])
+        .controller('easypostController', ['easypostFactory', 'productFactory', 'hsController', easypostController])
 
-    function easypostController(easypostFactory, productFactory) {
+    function easypostController(easypostFactory, productFactory, hsController) {
         var epc = this
         // ------------------------------------------- //
         // Variables for local app                     //
@@ -302,7 +302,13 @@
         }
 
         epc.continueToPrint = function() {
-          epc.savePO()
+          if(epc.po.shipmentInfo.length >= 1) {
+            epc.savePO()
+            $state.go('DocumentsPage')
+          } else {
+            var toastContent = $('<span>Please complete a shipment</span>')
+            Materialize.toast(toastContent, 2500)
+          }
 
         }
 

@@ -1,18 +1,83 @@
 <div ng-controller="pdfController as pdf" class="paperBorder white-text col s12">
   <div class="col s12" ng-init="pdf.getPOs()">
-
     <div class="row">
 
-      <div class="col s6" ng-repeat="po in pdf.pos">
-        <div class="" ng-repeat="item in po.itemArray">
+      <div class="col s4" ng-repeat="po in pdf.pos">
+        <h4 class="grey-text text-darken-2">PO#: <span class="white-text">{{po.poNum}}</span></h4>
+        <div class="" ng-repeat="item in po.itemArray" >
 
-          <div sytle="display:block;">
-            <a class="waves-effect waves-light btn buttonBackground" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
+          <!-- SDR Info Form -->
+          <div id="item" ng-if="item.item === 'SDR'" class="tileBackground">
+            <div class="row docRow">
+              <!-- Serial# -->
+              <div class="col s6">
+                <label for="serialNum"><h6 class="grey-text text-darken-2">Serial#: </h6></label>
+                <input id="serialNum" type="text" ng-model="item.serialNum">
+              </div>
+              <!-- Price -->
+              <div class="col s6">
+                <label for="price"><h6 class="grey-text text-darken-2">Price: </h6></label>
+                <input id="price" type="text" ng-model="item.price">
+              </div>
+            </div>
+            <div class="row docRow">
+              <a class="waves-effect waves-light btn buttonBackground right" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
+            </div>
+          </div>
+
+          <!-- Mounting Plate Info Form -->
+          <div id="item" ng-if="item.item === 'Mounting Plate'" class="tileBackground">
+            <div class="col s6">
+              <!-- Price -->
+              <label for="price"> <h6 class="grey-text text-darken-2">Price: </h6></label>
+              <input id="price" type="text" ng-model="item.price">
+            </div>
+            <a class="waves-effect waves-light btn buttonBackground right" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
+          </div>
+
+          <!-- Connector Kit Info Form -->
+          <div id="item" ng-if="item.item === 'Connector Kit'" class="tileBackground">
+            <div class="col s6">
+              <!-- Price -->
+              <label for="price"><h6 class="grey-text text-darken-2">Price: </h6></label>
+              <input id="price" type="text" ng-model="item.price">
+            </div>
+            <a class="waves-effect waves-light btn buttonBackground right" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
+          </div>
+
+          <!-- Interface Cable Info Form -->
+          <div id="item" ng-if="item.item === 'Interface Cable'" class="tileBackground">
+            <div class="col s6">
+              <!-- Price -->
+              <label for="price"><h6 class="grey-text text-darken-2">Price: </h6></label>
+              <input id="price" type="text" ng-model="item.price">
+            </div>
+            <a class="waves-effect waves-light btn buttonBackground right" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
+          </div>
+
+          <!-- 3G Antenna Info Form -->
+          <div id="item" ng-if="item.item === '3G Antenna'" class="tileBackground">
+            <div class="col s6">
+              <!-- Price -->
+              <label for="price"><h6 class="grey-text text-darken-2">Price: </h6></label>
+              <input id="price" type="text" ng-model="item.price">
+            </div>
+            <a class="waves-effect waves-light btn buttonBackground right" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
+          </div>
+
+          <!-- WIFI Antenna Info Form -->
+          <div id="item" ng-if="item.item === 'WIFI Antenna'" class="tileBackground">
+            <div class="col s6">
+              <!-- Price -->
+              <label for="price"><h6 class="grey-text text-darken-2">Price: </h6></label>
+              <input id="price" type="text" ng-model="item.price">
+            </div>
+            <a class="waves-effect waves-light btn buttonBackground right" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
           </div>
         </div>
 
         <div class="col s6">
-          <a class="waves-effect waves-light btn buttonBackground" ng-click="pdf.packList(po.itemArray)">Packing List</a>
+          <a class="waves-effect waves-light btn buttonBackground " ng-click="pdf.packList(po.itemArray)">Packing List</a>
         </div>
       </div>
     </div>

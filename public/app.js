@@ -3,6 +3,7 @@
 
     angular.module('happyApp', ['epControllers', 'epFactory','prodFactory', 'ui.router', 'countrySelect', 'jsPDF', 'docFactory', 'historyFactory'])
       .config(MainRouter)
+      .controller('hsController', hsController)
 
       function MainRouter ($stateProvider, $urlRouterProvider, $httpProvider){
 
@@ -13,7 +14,7 @@
         })
       $stateProvider
         .state('DocumentsPage', {
-          url: '/Docs',
+          url: '/Docs/*',
           templateUrl: '/html/docs.html'
         })
       $stateProvider
@@ -24,6 +25,12 @@
 
 
         $urlRouterProvider.otherwise('/')
+    }
+
+    function hsController() {
+      var hsc = this
+
+      hsc.currentState = 0
     }
 
 

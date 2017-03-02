@@ -234,3 +234,14 @@ padding: 10px;
   padding-top: 10px;
   border-radius: 3px;
 }
+#item {
+  padding: 15px;
+  display: inline-block;
+  white-space: nowrap;
+}
+#item input {
+  width: auto;
+}
+.docRow {
+  margin-bottom: 0px;
+}

@@ -23,13 +23,13 @@ apiRoutes = require('./apiRoutes.js'),
     mongoose = require('mongoose'),
     // Mongoose is used for backend validation of information going to MongoDB
     databaseURL = "mongodb://localhost:27017/hsdb,"
-mongoose.Promise = global.Promise
-mongoose.connect(databaseURL, function(err) {
-    if (err) {
+    mongoose.Promise = global.Promise
+    mongoose.connect(databaseURL, function(err) {
+      if (err) {
         console.log(err)
-    }
-    console.log('connected to db')
-})
+      }
+      console.log('connected to db')
+    })
 
 app.use(logger('dev'))
 app.use(bodyParser.json())

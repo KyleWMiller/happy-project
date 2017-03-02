@@ -6,11 +6,12 @@
 
     function poFactory($http) {
       var pof = this,
-          poUrl = 'api/v1/POs'
+          posUrl = 'api/v1/POs',
+          poUrl = 'api/v1/PO'
 
       pof.getPOs = function() {
         console.log("getting pos")
-        return $http.get(poUrl)
+        return $http.get(posUrl)
       }
 
       pof.getOnePO = function(poNum) {

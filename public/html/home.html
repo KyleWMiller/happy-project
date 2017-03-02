@@ -291,9 +291,6 @@
                 <div id="label" class="col s12">
                     <a target="_blank" ng-href="{{label.tracker.public_url}}" class="waves-effect waves-light btn buttonBackground col s12 updateBlue">EasyPost Tracking</a>
                 </div>
-                <div id="label" class="col s12">
-                    <a class="waves-effect waves-light btn buttonBackground col s12 updateBlue" ng-click="epc.savePO(epc.po)">Save PO</a>
-                </div>
             </div>
 
         </div>
@@ -301,7 +298,7 @@
 
     <div class="row">
       <div class="nextTile">
-        <a id="next" class="waves-effect waves-light btn btn-large buttonBackground updateBlue col s12" ng-click="epc.savePO(epc.po)"><h5>Print Documents</h5></a>
+        <a id="next" class="waves-effect waves-light btn btn-large buttonBackground updateBlue col s12" ng-click="epc.savePO()" ui-sref="DocumentsPage"><h5>Print Documents</h5></a>
       </div>
     </div>
 </div>
