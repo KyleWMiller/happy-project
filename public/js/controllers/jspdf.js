@@ -2,24 +2,37 @@
   'use strict';
 
   angular.module('jsPDF', [])
-    .controller('pdfController', ['poFactory', 'pdfFactory', pdfController])
+    .controller('pdfController', ['poFactory', 'pdfFactory', 'hsService', pdfController])
 
 
-  function pdfController(poFactory, pdfFactory) {
+  function pdfController(poFactory, pdfFactory, hsService) {
     var pdf = this
 
     pdf.pos = []
+    pdf.po = {}
     pdf.sdImg = pdfFactory.sdLogoImg
+    pdf.startState = hsService.startState
+    // pdf.poNum = $stateParams.poNum
 
-
+    // ========================================================================== //
     pdf.getPOs = function() {
       poFactory.getPOs()
         .then(function(response) {
           pdf.pos = response.data
-          console.log("pos", pdf.pos)
+          console.log("pos", pdf.po)
         })
     }
-
+    // ========================================================================== //
+    pdf.getOnePO = function() {
+      // console.log(pdf.poNum)
+      console.log("startState",pdf.startState)
+      poFactory.getOnePO(pdf.startState)
+          .then(function(response) {
+            pdf.po = response.data
+            console.log(pdf.po)
+          })
+    }
+    // ========================================================================== //
     pdf.formateDate = function(date) {
       var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"],
         day = date.getDate(),
@@ -29,7 +42,7 @@
       return months[monthIndex] + " " + day + " " + year
 
     }
-
+    // ========================================================================== //
     pdf.certificate = function(item) {
 
       var imgData = pdf.sdImg,
@@ -130,7 +143,7 @@
       cfc.save(po + description + '.pdf')
 
     }
-
+    // ========================================================================== //
     pdf.packList = function(itemArray) {
       var imgData = pdf.sdImg,
         packingNum = "CI\#00787",

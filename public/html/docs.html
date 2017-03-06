@@ -1,10 +1,10 @@
 <div ng-controller="pdfController as pdf" class="paperBorder white-text col s12">
-  <div class="col s12" ng-init="pdf.getPOs()">
+  <div class="col s12" ng-init="pdf.getOnePO()">
     <div class="row">
 
-      <div class="col s4" ng-repeat="po in pdf.pos">
-        <h4 class="grey-text text-darken-2">PO#: <span class="white-text">{{po.poNum}}</span></h4>
-        <div class="" ng-repeat="item in po.itemArray" >
+      <div class="col s12">
+        <h4 class="grey-text text-darken-2">PO#: <span class="white-text">{{pdf.po.poNum}}</span></h4>
+        <div ng-repeat="item in pdf.po.itemArray" >
 
           <!-- SDR Info Form -->
           <div id="item" ng-if="item.item === 'SDR'" class="tileBackground">

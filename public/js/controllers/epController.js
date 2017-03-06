@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('epControllers', [])
-        .controller('easypostController', ['easypostFactory', 'productFactory', 'hsController', easypostController])
+        .controller('easypostController', ['easypostFactory', 'productFactory', 'hsService', easypostController])
 
-    function easypostController(easypostFactory, productFactory, hsController) {
+    function easypostController(easypostFactory, productFactory, hsService) {
         var epc = this
         // ------------------------------------------- //
         // Variables for local app                     //
@@ -44,7 +44,7 @@
             itemArray: []
         }
         epc.po = {
-            poNum: 23180,
+            poNum: 8375309,
             shipmentInfo: [],
             itemArray: []
         }
@@ -70,7 +70,7 @@
                 epc.shpmt.from_address = epc.fromAddress.id
             })
         }
-
+        // ========================================================================== //
         // Adds box dimentions to shipmentItem
         epc.selectBox = function() {
             if (!epc.box.hasOwnProperty('size')) {
@@ -83,7 +83,7 @@
                 $('#b span').attr('id', 'prePackageInfob')
             }
         }
-
+        // ========================================================================== //
         // Adds items to package
         epc.addProduct = function() {
             if (!epc.item.hasOwnProperty('item')) {
@@ -125,7 +125,7 @@
                 epc.customsInfo.customs_items.push(item.customsInfo)
             }
         }
-
+        // ========================================================================== //
         // Add package to shipmentArray
         epc.addPackage = function(shipment) {
             function Weight() {
@@ -160,16 +160,18 @@
             }
             $('#b span').removeAttr('id')
         }
-
+        // ========================================================================== //
         // Removes box/products/shipments from respective arrays
         epc.removeBox = function() {
             epc.shipmentItem.package = {}
             $('#prePackageInfob').removeAttr('id')
 
         }
+        // ========================================================================== //
         epc.removeItem = function(index) {
             epc.shipmentItem.itemArray.splice(index, 1)
         }
+        // ========================================================================== //
         epc.removePackage = function(index, items) {
             // removes package items from po obj
             for (var i = items.length - 1; i >= 0; i--) {
@@ -186,8 +188,7 @@
             }
 
         }
-
-
+        // ========================================================================== //
         // Gets parcel response oject w/ id
         epc.sendParcel = function(shipment, index) {
             epc.prcl = shipment.package.dimentions
@@ -199,8 +200,7 @@
                 shipment.package.verification.verify = "Verified"
             })
         }
-
-
+        // ========================================================================== //
         // Creates shipment with: verified fromAddress, toAdress, optional customsInfo (consisting of customItem(s)), and a parcel
         epc.createShipment = function(shipment) {
             epc.shpmt.to_address = epc.tAddress
@@ -252,6 +252,7 @@
                 }
             }
         }
+        // ========================================================================== //
         // Purchases specific rate using shipment id and returns lable
         epc.purchase = function(rate) {
             easypostFactory.buyRate(rate, epc.shipment.id, function(label) {
@@ -274,8 +275,9 @@
                 }
                 epc.po.shipmentInfo.push(poLable)
             })
+            hsService.startState = epc.po.poNum
         }
-
+        // ========================================================================== //
         epc.formatService = function(carrier, service) {
             switch (carrier) {
                 case "USPS":
@@ -296,22 +298,10 @@
                     break
             }
         }
-
+        // ========================================================================== //
         epc.savePO = function() {
             easypostFactory.storePO(epc.po)
         }
-
-        epc.continueToPrint = function() {
-          if(epc.po.shipmentInfo.length >= 1) {
-            epc.savePO()
-            $state.go('DocumentsPage')
-          } else {
-            var toastContent = $('<span>Please complete a shipment</span>')
-            Materialize.toast(toastContent, 2500)
-          }
-
-        }
-
     }
 
 }());

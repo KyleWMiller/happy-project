@@ -1,37 +1,36 @@
 (function() {
+  'use strict';
 
+  angular.module('happyApp', ['ui.router', 'happyShipService', 'epControllers', 'epFactory', 'prodFactory', 'countrySelect', 'jsPDF', 'docFactory', 'historyFactory'])
+    .config(MainRouter)
 
-    angular.module('happyApp', ['epControllers', 'epFactory','prodFactory', 'ui.router', 'countrySelect', 'jsPDF', 'docFactory', 'historyFactory'])
-      .config(MainRouter)
-      .controller('hsController', hsController)
+  function MainRouter($stateProvider, $urlRouterProvider) {
 
-      function MainRouter ($stateProvider, $urlRouterProvider, $httpProvider){
+    $stateProvider
+      .state('HomePage', {
+        url: '/',
+        templateUrl: '/html/home.html'
+      })
+    $stateProvider
+      .state('DocumentsPage', {
+        url: '/Docs/:poNum',
+        params: {
+          poNum: null
+        },
+        templateUrl: '/html/docs.html',
+        resolve: {
+          poNum: function(poFactory, $transtion$) {
+            console.log($transtion$.params().poNum)
+            return poFactory.getOnePO($transtion$.params().poNum)
+          }
+        }
+      })
+    $stateProvider
+      .state('HistoryPage', {
+        url: '/Hist',
+        templateUrl: '/html/po.html'
+      })
 
-      $stateProvider
-        .state('HomePage', {
-          url: '/',
-          templateUrl: '/html/home.html'
-        })
-      $stateProvider
-        .state('DocumentsPage', {
-          url: '/Docs/*',
-          templateUrl: '/html/docs.html'
-        })
-      $stateProvider
-        .state('HistoryPage', {
-          url: '/Hist',
-          templateUrl:'/html/po.html'
-        })
-
-
-        $urlRouterProvider.otherwise('/')
-    }
-
-    function hsController() {
-      var hsc = this
-
-      hsc.currentState = 0
-    }
-
-
+    $urlRouterProvider.otherwise('/')
+  }
 }());
