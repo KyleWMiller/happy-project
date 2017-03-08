@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('happyApp', ['ui.router', 'happyShipService', 'epControllers', 'epFactory', 'prodFactory', 'countrySelect', 'jsPDF', 'docFactory', 'historyFactory'])
+  angular.module('happyApp', ['ui.router', 'epControllers', 'epFactory', 'prodFactory', 'countrySelect', 'jsPDF', 'docFactory', 'historyFactory'])
     .config(MainRouter)
 
   function MainRouter($stateProvider, $urlRouterProvider) {
@@ -14,16 +14,7 @@
     $stateProvider
       .state('DocumentsPage', {
         url: '/Docs/:poNum',
-        params: {
-          poNum: null
-        },
-        templateUrl: '/html/docs.html',
-        resolve: {
-          poNum: function(poFactory, $transtion$) {
-            console.log($transtion$.params().poNum)
-            return poFactory.getOnePO($transtion$.params().poNum)
-          }
-        }
+        templateUrl: '/html/docs.html'
       })
     $stateProvider
       .state('HistoryPage', {

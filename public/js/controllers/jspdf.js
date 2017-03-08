@@ -2,33 +2,29 @@
   'use strict';
 
   angular.module('jsPDF', [])
-    .controller('pdfController', ['poFactory', 'pdfFactory', 'hsService', pdfController])
+    .controller('pdfController', ['poFactory', 'pdfFactory', '$http', '$stateParams', pdfController])
 
 
-  function pdfController(poFactory, pdfFactory, hsService) {
+  function pdfController(poFactory, pdfFactory, $http, $stateParams) {
     var pdf = this
 
     pdf.pos = []
     pdf.po = {}
     pdf.sdImg = pdfFactory.sdLogoImg
-    pdf.startState = hsService.startState
-    // pdf.poNum = $stateParams.poNum
+    pdf.poNum = $stateParams.poNum
 
     // ========================================================================== //
     pdf.getPOs = function() {
       poFactory.getPOs()
         .then(function(response) {
           pdf.pos = response.data
-          console.log("pos", pdf.po)
         })
     }
     // ========================================================================== //
     pdf.getOnePO = function() {
-      // console.log(pdf.poNum)
-      console.log("startState",pdf.startState)
-      poFactory.getOnePO(pdf.startState)
+      poFactory.getOnePO(pdf.poNum)
           .then(function(response) {
-            pdf.po = response.data
+            pdf.po = response.data[0]
             console.log(pdf.po)
           })
     }

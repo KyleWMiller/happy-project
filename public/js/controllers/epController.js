@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('epControllers', [])
-        .controller('easypostController', ['easypostFactory', 'productFactory', 'hsService', easypostController])
+        .controller('easypostController', ['easypostFactory', 'productFactory', easypostController])
 
-    function easypostController(easypostFactory, productFactory, hsService) {
+    function easypostController(easypostFactory, productFactory, $stateParams) {
         var epc = this
         // ------------------------------------------- //
         // Variables for local app                     //
@@ -275,7 +275,6 @@
                 }
                 epc.po.shipmentInfo.push(poLable)
             })
-            hsService.startState = epc.po.poNum
         }
         // ========================================================================== //
         epc.formatService = function(carrier, service) {
