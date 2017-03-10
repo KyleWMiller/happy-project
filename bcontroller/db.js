@@ -18,7 +18,6 @@ module.exports = {
     },
     getOnePO: (req, res) => {
       console.log("getting PO")
-      console.log(req.params)
       let poNum = req.params.poNum
       dbq.PO.find({"poNum": poNum}, (err, po) => {
             if (err) {

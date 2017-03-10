@@ -9,6 +9,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     po = new Schema({
       poNum: Number,
+      contactAddress: Object,
       shipmentInfo: Array,
       itemArray: Array
     })

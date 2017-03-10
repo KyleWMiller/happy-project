@@ -1,82 +1,131 @@
 <div ng-controller="pdfController as pdf" class="paperBorder white-text col s12">
+  <script type="text/javascript">
+      $(document).ready(function() {
+          $('select').material_select()
+      })
+  </script>
   <div class="col s12" ng-init="pdf.getOnePO(pdf.poNum)">
+    <h4 class="grey-text text-darken-2">PO#: <span class="white-text">{{pdf.po.poNum}}</span></h4>
+
     <div class="row">
-      <div class="col s12">
-        <h4 class="grey-text text-darken-2">PO#: <span class="white-text">{{pdf.po.poNum}}</span></h4>
+      <div class="tileBackground contactTile" ng-controller="countrySelector as cs">
+        <h5 class="grey-text text-darken-2">Contact Info</h5>
+        <form>
+          <div class="col s12">
+            <input type="text" ng-model="pdf.po.contactAddress.attn" placeholder="Attn:">
+          </div>
+          <div class="col s12">
+            <input type="text" ng-model="pdf.po.contactAddress.company">
+          </div>
+          <div class="col s12">
+            <input type="text" ng-model="pdf.po.contactAddress.street1">
+          </div>
+          <div class="col s12">
+            <input type="text" placeholder="Street 2" ng-model="pdf.po.contactAddress.street2">
+          </div>
+          <div class="col s6">
+            <input type="text" ng-model="pdf.po.contactAddress.city">
+          </div>
+          <div class="col s6">
+            <input type="text" ng-model="pdf.po.contactAddress.state">
+          </div>
+          <div class="col s6">
+            <input type="text" ng-model="pdf.po.contactAddress.zip">
+          </div>
+          <div class="col s6" id="country">
+              <select ng-model="pdf.po.contactAddress.country">
+                <option value="" disabled selected>Select Country</option>
+                <option ng-repeat="country in cs.countryArr" value="{{country}}">{{country}}</option>
+              </select>
+          </div>
+          <div class="col s12">
+            <input type="text" ng-model="pdf.po.contactAddress.phone">
+          </div>
+          <div class="col s12">
+            <input type="text" ng-model="pdf.po.contactAddress.email">
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="pdfItemTile">
         <div ng-repeat="item in pdf.po.itemArray" >
 
           <!-- SDR Info Form -->
-          <div id="item" ng-if="item.item === 'SDR'" class="tileBackground">
+          <div id="item" ng-if="item.item === 'SDR'" class="tileBackground col s4 col s4">
             <div class="row docRow">
+              <!-- Price -->
+              <div class="col s6">
+                <label for="price"><h6 class="grey-text text-darken-2">Price: </h6></label>
+                <input id="price" type="text" ng-model="item.price">
+              </div>
               <!-- Serial# -->
               <div class="col s6">
                 <label for="serialNum"><h6 class="grey-text text-darken-2">Serial#: </h6></label>
                 <input id="serialNum" type="text" ng-model="item.serialNum">
               </div>
-              <!-- Price -->
-              <div class="col s6">
-                <label for="price"><h6 class="grey-text text-darken-2">Price: </h6></label>
-                <input id="price" type="text" ng-model="item.price" value="item.price | currency">
-              </div>
             </div>
             <div class="row docRow">
-              <a class="waves-effect waves-light btn buttonBackground right" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
+              <a class="waves-effect waves-light btn buttonBackground col s11" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
             </div>
           </div>
 
           <!-- Mounting Plate Info Form -->
-          <div id="item" ng-if="item.item === 'Mounting Plate'" class="tileBackground">
+          <div id="item" ng-if="item.item === 'Mounting Plate'" class="tileBackground col s4">
             <div class="col s6">
               <!-- Price -->
               <label for="price"> <h6 class="grey-text text-darken-2">Price: </h6></label>
               <input id="price" type="text" ng-model="item.price" value="item.price | currency">
             </div>
-            <a class="waves-effect waves-light btn buttonBackground right" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
+            <a class="waves-effect waves-light btn buttonBackground col s11" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
           </div>
 
           <!-- Connector Kit Info Form -->
-          <div id="item" ng-if="item.item === 'Connector Kit'" class="tileBackground">
+          <div id="item" ng-if="item.item === 'Connector Kit'" class="tileBackground col s4">
             <div class="col s6">
               <!-- Price -->
               <label for="price"><h6 class="grey-text text-darken-2">Price: </h6></label>
               <input id="price" type="text" ng-model="item.price">
             </div>
-            <a class="waves-effect waves-light btn buttonBackground right" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
+            <a class="waves-effect waves-light btn buttonBackground col s11" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
           </div>
 
           <!-- Interface Cable Info Form -->
-          <div id="item" ng-if="item.item === 'Interface Cable'" class="tileBackground">
+          <div id="item" ng-if="item.item === 'Interface Cable'" class="tileBackground col s4">
             <div class="col s6">
               <!-- Price -->
               <label for="price"><h6 class="grey-text text-darken-2">Price: </h6></label>
               <input id="price" type="text" ng-model="item.price">
             </div>
-            <a class="waves-effect waves-light btn buttonBackground right" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
+            <a class="waves-effect waves-light btn buttonBackground col s11" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
           </div>
 
           <!-- 3G Antenna Info Form -->
-          <div id="item" ng-if="item.item === '3G Antenna'" class="tileBackground">
+          <div id="item" ng-if="item.item === '3G Antenna'" class="tileBackground col s4">
             <div class="col s6">
               <!-- Price -->
               <label for="price"><h6 class="grey-text text-darken-2">Price: </h6></label>
               <input id="price" type="text" ng-model="item.price">
             </div>
-            <a class="waves-effect waves-light btn buttonBackground right" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
+            <a class="waves-effect waves-light btn buttonBackground col s11" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
           </div>
 
           <!-- WIFI Antenna Info Form -->
-          <div id="item" ng-if="item.item === 'WIFI Antenna'" class="tileBackground">
+          <div id="item" ng-if="item.item === 'WIFI Antenna'" class="tileBackground col s4">
             <div class="col s6">
               <!-- Price -->
               <label for="price"><h6 class="grey-text text-darken-2">Price: </h6></label>
               <input id="price" type="text" ng-model="item.price">
             </div>
-            <a class="waves-effect waves-light btn buttonBackground right" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
+            <a class="waves-effect waves-light btn buttonBackground col s11" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
           </div>
         </div>
 
-        <div class="col s6">
-          <a class="waves-effect waves-light btn buttonBackground " ng-click="pdf.packList(pdf.po.itemArray)">Packing List</a>
+        <div class="row">
+          <div class="col s6">
+            <a class="waves-effect waves-light btn buttonBackground " ng-click="pdf.packList(pdf.po.itemArray)">Packing List</a>
+          </div>
         </div>
       </div>
     </div>

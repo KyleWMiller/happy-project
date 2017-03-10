@@ -40,15 +40,17 @@
     }
     // ========================================================================== //
     pdf.certificate = function(item) {
+      console.log(item)
 
       var imgData = pdf.sdImg,
         consignee = {
-          name: "Spirit Aeronautics",
-          street: "4808 E. Fifth Ave",
-          area: "Columbus, OH 43219",
-          country: "United States"
+          name: pdf.po.contactAddress.company,
+          street: pdf.po.contactAddress.street1,
+          street2: pdf.po.contactAddress.street2,
+          area: pdf.po.contactAddress.city + "," + pdf.po.contactAddress.state + " " + pdf.po.contactAddress.zip,
+          country: pdf.po.contactAddress.country
         },
-        po = 23180,
+        po = pdf.po.poNum,
         itemNum = item.itemNum,
         qty = "1",
         description = item.item,
@@ -195,7 +197,7 @@
               itemNum = "MT1-SDR-900",
               line1 = pl.text(17, y, "CNX to SDR Mounting Plate"),
               line2 = pl.text(111, y, qty + ""),
-              line3 = pl.text(131, y, "$" + price),
+              line3 = pl.text(131, y, $filter('currency')(price, '$', 2)()),
               line4 = pl.text(161, y, "$" + total),
               line5 = pl.text(17, y + 5, itemNum)
 

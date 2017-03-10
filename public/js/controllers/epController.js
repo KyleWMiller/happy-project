@@ -45,6 +45,7 @@
         }
         epc.po = {
             poNum: 8375309,
+            contactAddress: epc.tAddress,
             shipmentInfo: [],
             itemArray: []
         }
@@ -117,6 +118,10 @@
                     }
                     if (product.modelNum) {
                         holding.modelNum = product.modelNum
+                    }
+                    if (product.remarks) {
+                        console.log(product.remarks)
+                        holding.remarks = product.remarks
                     }
                     return holding
                 }

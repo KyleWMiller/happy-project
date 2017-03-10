@@ -100,6 +100,18 @@ padding: 10px;
 .nextTile {
   width: 80vw;
 }
+.pdfItemTile {
+  width: 80vw;
+  padding: 15px 0px;
+}
+.pdfItemTile input {
+  width: 7vw;
+}
+.contactTile {
+  width: 35vw;
+  padding: 15px;
+  display: inline-block;
+}
 
 /* Button CSS*/
 .navBackground {
@@ -129,6 +141,9 @@ padding: 10px;
 /* MISC */
 .logo {
   font-size: 2.3rem;
+}
+.logoimg {
+  padding: 2px;
 }
 #country input{
   padding-left: 15px;
@@ -235,12 +250,8 @@ padding: 10px;
   border-radius: 3px;
 }
 #item {
-  padding: 15px;
-  display: inline-block;
+  /*display: inline-block;*/
   white-space: nowrap;
-}
-#item input {
-  width: auto;
 }
 .docRow {
   margin-bottom: 0px;
