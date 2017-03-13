@@ -2,16 +2,17 @@
   'use strict';
 
   angular.module('jsPDF', [])
-    .controller('pdfController', ['poFactory', 'pdfFactory', '$http', '$stateParams', pdfController])
+    .controller('pdfController', ['poFactory', 'pdfFactory', '$http', '$stateParams', '$filter', pdfController])
 
 
-  function pdfController(poFactory, pdfFactory, $http, $stateParams) {
+  function pdfController(poFactory, pdfFactory, $http, $stateParams, $filter) {
     var pdf = this
 
     pdf.pos = []
     pdf.po = {}
     pdf.sdImg = pdfFactory.sdLogoImg
     pdf.poNum = $stateParams.poNum
+    pdf.qar = "Ryan Lightsey"
 
     // ========================================================================== //
     pdf.getPOs = function() {
@@ -56,7 +57,7 @@
         description = item.item,
         serial = "",
         remarks = "",
-        qar = "Ryan Lightsey"
+        qar = pdf.qar
         if(item.serialNum) {
           serial = item.serialNum
         } else {
@@ -145,19 +146,17 @@
     pdf.packList = function(itemArray) {
       var imgData = pdf.sdImg,
         packingNum = "CI\#00787",
-        po = 23180,
-        customer = "Spirit Aeronautics",
-        contact = "Recieving Department",
-        phone = "614.237.4271",
-        add1 = "4808 E. Fifth Ave",
-        add2 = "Columbus, OH 43219",
-        country = "USA",
-        item = "100-1021-30",
-        qty = 1,
-        description = "SDR",
-        serial = 834,
-        remarks = "Satcom Direct Part number 100-1021- 30 is equivalent to Air802 model ANRD82421703-TNC",
-        qar = "Ryan Lightsey"
+        po = pdf.po.poNum,
+        consignee = {
+          name: pdf.po.contactAddress.company,
+          contact: pdf.po.contactAddress.attn,
+          street: pdf.po.contactAddress.street1,
+          street2: pdf.po.contactAddress.street2,
+          area: pdf.po.contactAddress.city + "," + pdf.po.contactAddress.state + " " + pdf.po.contactAddress.zip,
+          phone: pdf.po.contactAddress.phone,
+          country: pdf.po.contactAddress.country
+        },
+        qar = pdf.qar
 
 
         pdf.printItems = function(itemArray) {
@@ -178,8 +177,8 @@
               sn = 834,
               line1 = pl.text(17, y, "Satcom Direct Router"),
               line2 = pl.text(111, y, qty + ""),
-              line3 = pl.text(131, y, "$" + price),
-              line4 = pl.text(161, y, "$" + total),
+              line3 = pl.text(131, y, $filter('currency')(price)),
+              line4 = pl.text(161, y, $filter('currency')(price)),
               line5 = pl.text(17, y + 5, "P/N: " + pn),
               line6 = pl.text(17, y + 10, "MPN: " + mpn),
               line7 = pl.text(17, y + 15, "S/N: " + sn),
@@ -197,8 +196,8 @@
               itemNum = "MT1-SDR-900",
               line1 = pl.text(17, y, "CNX to SDR Mounting Plate"),
               line2 = pl.text(111, y, qty + ""),
-              line3 = pl.text(131, y, $filter('currency')(price, '$', 2)()),
-              line4 = pl.text(161, y, "$" + total),
+              line3 = pl.text(131, y, $filter('currency')(price)),
+              line4 = pl.text(161, y, $filter('currency')(price)),
               line5 = pl.text(17, y + 5, itemNum)
 
               pi.endY = 5
@@ -213,8 +212,8 @@
               total = price * qty,
               line1 = pl.text(17, y, "SDR Connector Kit " + itemNum),
               line2 = pl.text(111, y, qty + ""),
-              line3 = pl.text(131, y, "$" + price),
-              line4 = pl.text(161, y, "$" + total)
+              line3 = pl.text(131, y, $filter('currency')(price)),
+              line4 = pl.text(161, y, $filter('currency')(price))
 
               return line1 && line2 && line3 && line4
               break
@@ -226,8 +225,8 @@
               total = price * qty,
               line1 = pl.text(17, y, "Interface Cable " + itemNum),
               line2 = pl.text(111, y, qty + ""),
-              line3 = pl.text(131, y, "$" + price),
-              line4 = pl.text(161, y, "$" + total)
+              line3 = pl.text(131, y, $filter('currency')(price)),
+              line4 = pl.text(161, y, $filter('currency')(price))
 
               return line1 && line2 && line3 && line4
               break
@@ -239,8 +238,8 @@
               total = price * qty,
               line1 = pl.text(17, y, "3G Antenna " + itemNum),
               line2 = pl.text(111, y, qty + ""),
-              line3 = pl.text(131, y, "$" + price),
-              line4 = pl.text(161, y, "$" + total)
+              line3 = pl.text(131, y, $filter('currency')(price)),
+              line4 = pl.text(161, y, $filter('currency')(price))
 
               return line1 && line2 && line3 && line4
               break
@@ -252,8 +251,8 @@
               total = price * qty,
               line1 = pl.text(17, y, "WIFI Antenna " + itemNum),
               line2 = pl.text(111, y, "" + qty),
-              line3 = pl.text(131, y, "$" + price),
-              line4 = pl.text(161, y, "$" + total)
+              line3 = pl.text(131, y, $filter('currency')(price)),
+              line4 = pl.text(161, y, $filter('currency')(price))
 
               return line1 && line2 && line3 && line4
               break
@@ -286,14 +285,14 @@
 
       pl.text(15, 85, "Reference PO # " + po)
       pl.setFontType("normal")
-      pl.text(15, 92, "Customer: " + customer)
+      pl.text(15, 92, "Customer: " + consignee.name)
       pl.line(15, 93, 34, 93)
-      pl.text(15, 98, "Contact: " + contact)
+      pl.text(15, 98, "Contact: " + consignee.contact)
       pl.line(15, 99, 30, 99)
-      pl.text(15, 103, "Phone: " + phone)
-      pl.text(15, 108, add1)
-      pl.text(15, 113, add2)
-      pl.text(15, 118, country)
+      pl.text(15, 103, "Phone: " + consignee.phone)
+      pl.text(15, 108, consignee.street)
+      pl.text(15, 113, consignee.area)
+      pl.text(15, 118, consignee.country)
 
       pl.setFontType("bold")
       pl.text(15, 130, "Description")

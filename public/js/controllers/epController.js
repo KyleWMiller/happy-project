@@ -93,6 +93,7 @@
             } else {
                 // Seperation step to exit data binding and sort item properties
                 function Item(product) {
+                  console.log(product)
                     var holding = {
                         item: product.item,
                         price: product.price,
