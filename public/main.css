@@ -102,13 +102,27 @@ padding: 10px;
 }
 .pdfItemTile {
   width: 80vw;
-  padding: 15px 0px;
+  padding: 15px;
+  display:inline-block;
 }
 .pdfItemTile input {
   width: 7vw;
+
 }
 .contactTile {
   width: 35vw;
+  padding: 15px;
+  margin-right: 2vw;
+  float: left;
+  display: inline-block;
+}
+.pdfInfoTile {
+  width: 35vw;
+  padding: 15px;
+  display: inline-block;
+}
+.plTile {
+  width: 80vw;
   padding: 15px;
   display: inline-block;
 }
@@ -251,8 +265,8 @@ padding: 10px;
   border-radius: 3px;
 }
 #item {
-  /*display: inline-block;*/
-  white-space: nowrap;
+  display: inline-block;
+  /*white-space: nowrap;*/
 }
 .docRow {
   margin-bottom: 0px;

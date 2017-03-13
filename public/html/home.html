@@ -263,7 +263,7 @@
                                 <p class="center">${{rate.rate}}</p>
                             </div>
                             <div class="col s3 center-align">
-                                <a class="waves-effect waves-light btn buttonBackground updateBlue super" ng-click="epc.purchase(rate.id)">Purchase</a>
+                                <a class="waves-effect waves-light btn buttonBackground updateBlue super" ng-click="epc.purchase(rate.id, rate.shipment_id)">Purchase</a>
                                 <input class="hidden" ng-model="rate.id">
                             </div>
                         </li>

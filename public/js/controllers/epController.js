@@ -250,7 +250,9 @@
                   easypostFactory.sendShipment(epc.shpmt, function(shipment) {
                     epc.shipment = shipment
                     console.log('created shipement', epc.shipment)
-                    epc.rts.push(epc.shipment.rates)
+                    if(epc.shipment.rates.length > 0) {
+                      epc.rts.push(epc.shipment.rates)
+                    }
 
                     console.log(epc.rts)
                   })
@@ -260,8 +262,8 @@
         }
         // ========================================================================== //
         // Purchases specific rate using shipment id and returns lable
-        epc.purchase = function(rate) {
-            easypostFactory.buyRate(rate, epc.shipment.id, function(label) {
+        epc.purchase = function(rate, shipment) {
+            easypostFactory.buyRate(rate, shipment, function(label) {
                 console.log("label", label)
                 epc.labels.push(label)
 

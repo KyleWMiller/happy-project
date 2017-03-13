@@ -13,6 +13,7 @@
     pdf.sdImg = pdfFactory.sdLogoImg
     pdf.poNum = $stateParams.poNum
     pdf.qar = "Ryan Lightsey"
+    pdf.packingNum = "CI\#00787"
 
     // ========================================================================== //
     pdf.getPOs = function() {
@@ -26,6 +27,7 @@
       poFactory.getOnePO(pdf.poNum)
           .then(function(response) {
             pdf.po = response.data[0]
+            pdf.po.contactAddress.attn = "Recieving Department"
             console.log(pdf.po)
           })
     }
@@ -46,6 +48,7 @@
       var imgData = pdf.sdImg,
         consignee = {
           name: pdf.po.contactAddress.company,
+          contact: pdf.po.contactAddress.attn,
           street: pdf.po.contactAddress.street1,
           street2: pdf.po.contactAddress.street2,
           area: pdf.po.contactAddress.city + "," + pdf.po.contactAddress.state + " " + pdf.po.contactAddress.zip,
@@ -145,7 +148,7 @@
     // ========================================================================== //
     pdf.packList = function(itemArray) {
       var imgData = pdf.sdImg,
-        packingNum = "CI\#00787",
+        packingNum = pdf.packingNum,
         po = pdf.po.poNum,
         consignee = {
           name: pdf.po.contactAddress.company,
