@@ -18,6 +18,13 @@
     "node-easypost": "^2.1.1",
     "path": "^0.12.7"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KyleWMiller/happy-project.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KyleWMiller/happy-project/issues"
+  },
+  "homepage": "https://github.com/KyleWMiller/happy-project#readme"
 }
