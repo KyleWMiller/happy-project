@@ -22,9 +22,10 @@ apiRoutes = require('./apiRoutes.js'),
 
     mongoose = require('mongoose'),
     // Mongoose is used for backend validation of information going to MongoDB
+    // Local DB link
     // databaseURL = "mongodb://localhost:27017/hsdb,"
-    // Mlab Db link
-    databaseURL = "mongodb://Jerry:comedianporche@ds135790.mlab.com:35790/hsdb"
+    // Mlab DB link
+    databaseURL = "mongodb://Jerry:comedianporche@ds139470.mlab.com:39470/heroku_fqsdtdjx"
     mongoose.Promise = global.Promise
     mongoose.connect(databaseURL, function(err) {
       if (err) {
