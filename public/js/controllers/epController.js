@@ -251,6 +251,9 @@
                     epc.shipment = shipment
                     console.log('created shipement', epc.shipment)
                     if(epc.shipment.rates.length > 0) {
+                      // var rateArray = {
+                      //   rates: angular.copy(epc.shipment.rates)
+                      // }
                       epc.rts.push(epc.shipment.rates)
                     }
 

@@ -244,6 +244,9 @@ padding: 10px;
 .super {
   margin-top: 17px;
 }
+.rateBorder {
+  border: 2px solid white;
+}
 .rateDD {
   width: 100%;
   margin: 10px 0px;
