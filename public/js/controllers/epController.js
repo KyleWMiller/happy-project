@@ -30,7 +30,7 @@
         epc.customsItem = {}
         epc.customsInfo = {
             customs_certify: true,
-            customs_signer: "",
+            customs_signer: null,
             customs_type: "merchandice",
             non_delivery_option: "return",
             restriction_type: "none",

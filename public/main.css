@@ -187,16 +187,18 @@ padding: 10px;
   cursor: hand;
 }
 #prePackageInfo {
-  margin-left: 20px;
+  margin: 0px 10px 5px 0px;
   background-color: grey;
   padding: 5px 10px;
   border-radius: 2px;
-  width: 100%;
 }
 #prePackageInfo:hover {
   background-color: #AD0000;
   cursor: pointer;
   cursor: hand;
+}
+.staging {
+  margin: 10px 0px;
 }
 #box {
   background-color: #45606F;
@@ -206,6 +208,9 @@ padding: 10px;
 }
 #box p{
   margin: 15px 0px 25px 30px;
+}
+.pLabel {
+  padding-left: 0px !important;
 }
 #trash:hover {
   background-color: #AD0000;

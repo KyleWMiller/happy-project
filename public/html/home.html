@@ -115,12 +115,15 @@
             <!-- **************************************************** -->
             <div class="col s12" id="box">
                 <h6>Package</h6>
-                <p id="b">
+                <div id="b" class="col s12 staging">
                     Box : <span ng-click="epc.removeBox()">{{epc.shipmentItem.package.size}}</span>
-                </p>
-                <p>
-                    Product(s) : <span id="prePackageInfo" ng-repeat="product in epc.shipmentItem.itemArray"><span ng-click="epc.removeItem($index)">{{product.item}}</span>
-                </p>
+                </div>
+                <div class="col s12 staging">
+                    <span class="col s2 pLabel">Product(s) : </span>
+                    <div class="col s10">
+                      <span id="prePackageInfo" class="col s3 center" ng-repeat="product in epc.shipmentItem.itemArray"><span ng-click="epc.removeItem($index)">{{product.item}}</span>
+                    </div>
+                </div>
 
             </div>
             <div class="col s12 center">
@@ -211,20 +214,6 @@
     <div class="row">
         <div class="rateTile tileBackground z-depth-2">
             <h5 class="grey-text text-darken-2">Rates</h5>
-            <!-- <div class="col s12">
-                <div class="col s3">
-                    <h6 class="center">Carrier</h6>
-                </div>
-                <div class="col s3">
-                    <h6 class="center">Est. Delivery</h6>
-                </div>
-                <div class="col s3">
-                    <h6 class="center">$ Rate</h6>
-                </div>
-                <div class="col s3">
-                    <p class="hidden">Waldo was here</p>
-                </div>
-            </div> -->
             <div class="col s12" ng-repeat="rates in epc.rts track by $index">
               <h6 class="grey-text text-darken-2">Rates for Package {{$index + 1}}</h6>
                 <div class="ratesBorder">
@@ -248,42 +237,6 @@
                         </td>
                       </tr>
                     </table>
-                    <!-- <script type="text/javascript">
-                        $('.dropdown-button').dropdown({
-                            inDuration: 300,
-                            outDuration: 225,
-                            constrainWidth: false, // Does not change width of dropdown to that of the activator
-                            hover: false, // Activate on hover
-                            gutter: 0, // Spacing from edge
-                            belowOrigin: true, // Displays dropdown below the button
-                            alignment: 'left', // Displays dropdown with edge aligned to the left of button
-                            stopPropagation: false // Stops event propagation
-                        })
-                    </script> -->
-                    <!-- Dropdown Trigger -->
-                    <!-- <a class="dropdown-button btn buttonBackground updateBlue rateDD left" data-activates="dropdown1">Rates for Package {{$index + 1}}</a> -->
-                    <!-- Dropdown Structure -->
-                    <!-- <ul id="dropdown1" class="dropdown-content col s12 rateUL">
-                        <li class="col s12" ng-repeat="rate in epc.rts[$index].rates">
-                            <div class="col s3">
-                                <p class="center">
-                                    <span style="display:block;">{{rate.carrier}}</span>
-                                    <span>{{epc.formatService(rate.carrier, rate.service)}}</span>
-                                </p>
-                            </div>
-                            <div class="col s3">
-                                <p class="center">{{rate.delivery_date | date:"EEE, MMM dd"}}</p>
-                                <p ng-if="rate.delivery_date === null"></p>
-                            </div>
-                            <div class="col s3">
-                                <p class="center">${{rate.rate}}</p>
-                            </div>
-                            <div class="col s3 center-align">
-                                <a class="waves-effect waves-light btn buttonBackground updateBlue super" ng-click="epc.purchase(rate.id, rate.shipment_id)">Purchase</a>
-                                <input class="hidden" ng-model="rate.id">
-                            </div>
-                        </li>
-                    </ul> -->
                 </div>
             </div>
         </div>

@@ -94,7 +94,7 @@
                 description: "Satcom Direct Router Mounting Plate",
                 hs_tarrif_number: "851762",
                 origin_country: "US",
-                quantity: null,
+                quantity: 1,
                 value: 50.00,
                 weight: 0.6
             }
