@@ -155,7 +155,7 @@
           contact: pdf.po.contactAddress.attn,
           street: pdf.po.contactAddress.street1,
           street2: pdf.po.contactAddress.street2,
-          area: pdf.po.contactAddress.city + "," + pdf.po.contactAddress.state + " " + pdf.po.contactAddress.zip,
+          area: pdf.po.contactAddress.city + ", " + pdf.po.contactAddress.state + " " + pdf.po.contactAddress.zip,
           phone: pdf.po.contactAddress.phone,
           country: pdf.po.contactAddress.country
         },
