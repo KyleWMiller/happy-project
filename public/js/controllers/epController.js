@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('epControllers', [])
-        .controller('easypostController', ['easypostFactory', 'productFactory', easypostController])
+        .controller('easypostController', ['easypostFactory', 'productFactory', '$state', '$stateParams', easypostController])
 
-    function easypostController(easypostFactory, productFactory, $stateParams) {
+    function easypostController(easypostFactory, productFactory, $state , $stateParams) {
         var epc = this
         // ------------------------------------------- //
         // Variables for local app                     //
@@ -251,9 +251,10 @@
                     epc.shipment = shipment
                     console.log('created shipement', epc.shipment)
                     if(epc.shipment.rates.length > 0) {
-                      // var rateArray = {
-                      //   rates: angular.copy(epc.shipment.rates)
-                      // }
+                      epc.shipment.rates.map(function(x){
+                        x.purchased = "Purchase"
+                      })
+                      console.log(epc.shipment.rates)
                       epc.rts.push(epc.shipment.rates)
                     }
 
@@ -265,11 +266,11 @@
         }
         // ========================================================================== //
         // Purchases specific rate using shipment id and returns lable
-        epc.purchase = function(rate, shipment) {
-            easypostFactory.buyRate(rate, shipment, function(label) {
-                console.log("label", label)
-                epc.labels.push(label)
-
+        epc.purchase = function(rateID, shipmentID, rate) {
+            console.log(rate)
+            easypostFactory.buyRate(rateID, shipmentID, function(label) {
+              epc.labels.push(label)
+              console.log("label", label)
                 var poLable = {
                   buyerAddress: label.buyer_address,
                   created_at: label.created_at,
@@ -286,6 +287,7 @@
                 }
                 epc.po.shipmentInfo.push(poLable)
             })
+            rate.purchased = 'Purchased'
         }
         // ========================================================================== //
         epc.formatService = function(carrier, service) {
@@ -309,8 +311,9 @@
             }
         }
         // ========================================================================== //
-        epc.savePO = function() {
+        epc.savePO = function($state, $stateParams) {
             easypostFactory.storePO(epc.po)
+            $state.go('DocumentsPage', {poNum: epc.po.poNum})
         }
     }
 

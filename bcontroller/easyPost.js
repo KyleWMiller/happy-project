@@ -50,10 +50,15 @@ module.exports = {
             to_address: req.body.to_address,
             from_address: {id: req.body.from_address},
             parcel: {id: req.body.parcel},
-            customs_info: req.body.customsInfo
-            // options: req.body.options
+        }
+        if(req.body.customsInfo) {
+          shipmentDetails.customs_info = req.body.customsInfo
+        }
+        if(req.body.options) {
+          shipmentDetails.options = req.body.options
         }
         easypost.Shipment.create(shipmentDetails, (err, shipment) => {
+          console.log(shipmentDetails)
             if(err) {
               console.log(err)
               res.status(400).json(err)

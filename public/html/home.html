@@ -162,11 +162,11 @@
                         </div>
 
                         <div class="col s12">
-                            <div class="col s3" id="verify">
-                                <a class="waves-effect waves-light btn buttonBackground createGreen col s12 center" ng-class="{verified:'Verified'}[shipment.package.verify]" ng-click="epc.sendParcel(shipment, $index)">{{shipment.package.verification.verify}}</a>
+                            <div class="col s4" id="verify">
+                                <a class="waves-effect waves-light btn buttonBackground createGreen col s12 center" ng-class="{'verified': shipment.package.verification.verify === 'Verified'}" ng-click="epc.sendParcel(shipment, $index)">{{shipment.package.verification.verify}}</a>
 
                             </div>
-                            <div class="col s7 offset-s2">
+                            <div class="col s7 offset-s1">
                                 <a class="waves-effect waves-light btn buttonBackground createGreen col s12 center" ng-click="epc.createShipment(shipment)">{{shipment.package.verification.create}} Shipment</a>
                             </div>
                         </div>
@@ -232,7 +232,7 @@
                         <td class="col s3"><p>{{rate.delivery_date | date:"EEE, MMM dd"}}</p></td>
                         <td class="col s3"><p>${{rate.rate}}</p></td>
                         <td class="col s3">
-                          <a class="waves-effect waves-light btn buttonBackground updateBlue super col s12" ng-click="epc.purchase(rate.id, rate.shipment_id)">Purchase</a>
+                          <a class="waves-effect waves-light btn buttonBackground updateBlue super col s12" ng-click="epc.purchase(rate.id, rate.shipment_id, rate)" ng-class="{'purchased': rate.purchased === 'Purchased'}">{{rate.purchased}}</a>
                           <input class="hidden" ng-model="rate.id">
                         </td>
                       </tr>
@@ -267,7 +267,7 @@
 
     <div class="row">
       <div class="nextTile">
-        <a id="next" class="waves-effect waves-light btn btn-large buttonBackground updateBlue col s12" ng-click="epc.savePO()" ui-sref="DocumentsPage({poNum: epc.po.poNum})"><h5>Print Documents</h5></a>
+        <a id="next" class="waves-effect waves-light btn btn-large buttonBackground updateBlue col s12" ng-click="epc.savePO()" ><h5>Print Documents</h5></a>
       </div>
     </div>
 </div>

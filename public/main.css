@@ -239,28 +239,17 @@ padding: 10px;
 }
 .verified {
   background-color: #009900;
-  color: black;
 }
 .hidden {
   visibility: hidden;
   height: 0px !important;
   margin: 0px !important;
 }
+.purchased {
+  background-color: #0FD90E;
+}
 .super {
   margin-top: 17px;
-}
-.rateBorder {
-  border: 2px solid white;
-}
-.rateDD {
-  width: 100%;
-  margin: 10px 0px;
-}
-.rateUL {
-  max-height: 500px;
-}
-.rateUL li{
-  padding: 10px 0px;
 }
 #labels {
   margin: 10px 0px;
@@ -274,7 +263,6 @@ padding: 10px;
 }
 #item {
   display: inline-block;
-  /*white-space: nowrap;*/
 }
 .docRow {
   margin-bottom: 0px;
