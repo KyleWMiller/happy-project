@@ -6,7 +6,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     po = new Schema({
-        poNum: Number,
+        poNum: String,
         contactAddress: Object,
         itemArray: Array,
         shipmentInfo: Array

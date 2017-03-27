@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('epControllers', [])
-        .controller('easypostController', ['easypostFactory', 'productFactory', '$state', '$stateParams', easypostController])
+        .controller('easypostController', ['easypostFactory', 'productFactory', '$state', easypostController])
 
-    function easypostController(easypostFactory, productFactory, $state , $stateParams) {
+    function easypostController(easypostFactory, productFactory, $state) {
         var epc = this
         // ------------------------------------------- //
         // Variables for local app                     //
@@ -43,8 +43,9 @@
             package: {},
             itemArray: []
         }
+        epc.firstTime = true
         epc.po = {
-            poNum: 8375309,
+            poNum: "8375309",
             contactAddress: epc.tAddress,
             shipmentInfo: [],
             itemArray: []
@@ -67,7 +68,6 @@
         epc.sendFAddress = function() {
             easypostFactory.sendAddress(epc.fAddress, function(address) {
                 epc.fromAddress = address
-                console.log("From address", epc.fromAddress)
                 epc.shpmt.from_address = epc.fromAddress.id
             })
         }
@@ -93,7 +93,6 @@
             } else {
                 // Seperation step to exit data binding and sort item properties
                 function Item(product) {
-                  console.log(product)
                     var holding = {
                         item: product.item,
                         price: product.price,
@@ -121,7 +120,6 @@
                         holding.modelNum = product.modelNum
                     }
                     if (product.remarks) {
-                        console.log(product.remarks)
                         holding.remarks = product.remarks
                     }
                     return holding
@@ -143,12 +141,8 @@
             }
             var ozs = Weight()
             shipment.package.dimentions.weight = ozs
-
-            // shipment.package.number = epc.shipmentArray.length + 1
-            // console.log(epc.shipmentArray.length)
-            // console.log(shipment.package.number)
-
             ozs = 0
+            shipment.firstTime = true
             var item = angular.copy(shipment)
             epc.shipmentArray.push(item)
 
@@ -201,7 +195,6 @@
             // Gets parcel response oject w/ id
             easypostFactory.sendParcel(epc.prcl, function(parcel) {
                 epc.parcel = parcel
-                console.log("Parcel", parcel)
                 epc.shpmt.parcel = epc.parcel.id
                 shipment.package.verification.verify = "Verified"
             })
@@ -209,39 +202,40 @@
         // ========================================================================== //
         // Creates shipment with: verified fromAddress, toAdress, optional customsInfo (consisting of customItem(s)), and a parcel
         epc.createShipment = function(shipment) {
-            epc.shpmt.to_address = epc.tAddress
+            if(shipment.firstTime === true) {
+              epc.shpmt.to_address = epc.tAddress
 
-            // Error handeling for To Address
-            if (!epc.tAddress.hasOwnProperty('country')) {
+              // Error handeling for To Address
+              if (!epc.tAddress.hasOwnProperty('country')) {
                 var toastContent = $('<span>Please provide a "To Address"</span>')
                 Materialize.toast(toastContent, 2500)
-            }
+              }
 
-            // Error handeling for Customs Signer
-            if (epc.shpmt.to_address.country.toLowerCase() !== "usa" && epc.customsInfo.customs_signer === null) {
+              // Error handeling for Customs Signer
+              if (epc.shpmt.to_address.country.toLowerCase() !== "usa" && epc.customsInfo.customs_signer === null) {
                 var toastContent = $('<span>Please provide a "Customs Signer"</span>')
                 Materialize.toast(toastContent, 2500)
-            } else {
+              } else {
                 // omits customs info if the to_address is within the US
                 if (epc.shpmt.to_address.country.toLowerCase() === "usa") {
-                    epc.shpmt.customsInfo = null
+                  epc.shpmt.customsInfo = null
                 } else {
-                    // Adds items custom info to the customs object
-                    function FillCustomItems(productArray) {
-                        var holdingArray = []
-                        productArray.map(function(item) {
-                            holdingArray.push(item.customsInfo)
-                        })
-                        return holdingArray
-                    }
-                    var mounties = new FillCustomItems(shipment.itemArray)
-                    epc.customsInfo.customs_items = mounties
-                    epc.shpmt.customsInfo = epc.customsInfo
+                  // Adds items custom info to the customs object
+                  function FillCustomItems(productArray) {
+                    var holdingArray = []
+                    productArray.map(function(item) {
+                      holdingArray.push(item.customsInfo)
+                    })
+                    return holdingArray
+                  }
+                  var mounties = new FillCustomItems(shipment.itemArray)
+                  epc.customsInfo.customs_items = mounties
+                  epc.shpmt.customsInfo = epc.customsInfo
                 }
 
                 // Add Third Party carrier accounts
-                if(epc.thirdParty.carrier) {
-                  if(!epc.thirdParty.bill_third_party_account || !epc.thirdParty.bill_third_party_country || !epc.thirdParty.bill_third_party_postal_code) {
+                if (epc.thirdParty.carrier) {
+                  if (!epc.thirdParty.bill_third_party_account || !epc.thirdParty.bill_third_party_country || !epc.thirdParty.bill_third_party_postal_code) {
                     var toastContent = $('<span>Please complete 3rd party billing info</span>')
                     Materialize.toast(toastContent, 2500)
                   }
@@ -249,41 +243,38 @@
                 } else {
                   easypostFactory.sendShipment(epc.shpmt, function(shipment) {
                     epc.shipment = shipment
-                    console.log('created shipement', epc.shipment)
-                    if(epc.shipment.rates.length > 0) {
-                      epc.shipment.rates.map(function(x){
+                    if (epc.shipment.rates.length > 0) {
+                      epc.shipment.rates.map(function(x) {
                         x.purchased = "Purchase"
                       })
-                      console.log(epc.shipment.rates)
                       epc.rts.push(epc.shipment.rates)
                     }
-
-                    console.log(epc.rts)
                   })
                   shipment.package.verification.create = "Created"
+                  shipment.firstTime = false
                 }
+              }
             }
+
         }
         // ========================================================================== //
         // Purchases specific rate using shipment id and returns lable
         epc.purchase = function(rateID, shipmentID, rate) {
-            console.log(rate)
-            easypostFactory.buyRate(rateID, shipmentID, function(label) {
-              epc.labels.push(label)
-              console.log("label", label)
+          easypostFactory.buyRate(rateID, shipmentID, function(label) {
+                epc.labels.push(label)
                 var poLable = {
-                  buyerAddress: label.buyer_address,
-                  created_at: label.created_at,
-                  customs_info: label.customs_info,
-                  fees: label.fees,
-                  forms: label.forms,
-                  id: label.id,
-                  options: label.options,
-                  parcel: label.parcel,
-                  postage_label: label.postage_label,
-                  selected_rate: label.selected_rate,
-                  tracker: label.tracker,
-                  tracking_code: label.tracking_code
+                    buyerAddress: label.buyer_address,
+                    created_at: label.created_at,
+                    customs_info: label.customs_info,
+                    fees: label.fees,
+                    forms: label.forms,
+                    id: label.id,
+                    options: label.options,
+                    parcel: label.parcel,
+                    postage_label: label.postage_label,
+                    selected_rate: label.selected_rate,
+                    tracker: label.tracker,
+                    tracking_code: label.tracking_code
                 }
                 epc.po.shipmentInfo.push(poLable)
             })
@@ -301,19 +292,26 @@
                         return string.charAt(0).toUpperCase() + string.slice(1);
                     }
                     var holding = service.toLowerCase()
-                          .split('_')
-                          .map(function(x) {
-                              return capFirstChar(x)
-                          })
-                          .join(" ")
+                        .split('_')
+                        .map(function(x) {
+                            return capFirstChar(x)
+                        })
+                        .join(" ")
                     return holding
                     break
             }
         }
         // ========================================================================== //
-        epc.savePO = function($state, $stateParams) {
-            easypostFactory.storePO(epc.po)
-            $state.go('DocumentsPage', {poNum: epc.po.poNum})
+        epc.savePO = function() {
+            if (epc.labels.length === epc.rts.length) {
+                easypostFactory.storePO(epc.po)
+                $state.go('DocumentsPage', {
+                    poNum: epc.po.poNum
+                })
+            } else {
+                var toastContent = $('<span>Please purchase rates for all packages</span>')
+                Materialize.toast(toastContent, 2500)
+            }
         }
     }
 

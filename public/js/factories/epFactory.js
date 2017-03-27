@@ -47,7 +47,8 @@
         }
 
         ef.storePO = function(purchaseOrder) {
-            return $http.post(poUrl, purchaseOrder)                
+          console.log("storing po")
+            return $http.post(poUrl, purchaseOrder)
         }
 
         return ef

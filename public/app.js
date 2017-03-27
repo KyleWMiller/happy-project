@@ -4,6 +4,7 @@
   angular.module('happyApp', ['ui.router', 'epControllers', 'epFactory', 'prodFactory', 'countrySelect', 'jsPDF', 'docFactory', 'historyFactory'])
     .config(MainRouter)
     .directive('realTimeCurrency', realTimeCurrency)
+    .directive('disableClick', disableClick)
 
   function MainRouter($stateProvider, $urlRouterProvider) {
 
@@ -93,4 +94,13 @@
     }
   }
 
+  function disableClick() {
+    return {
+      restrict: 'A',
+      priority: 1000,    // setting higher priority to let this directive execute before ngClick
+      compile: function(element, attr) {
+        attr.ngClick = null;
+      }
+    }
+  }
 }());

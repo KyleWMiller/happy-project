@@ -238,7 +238,7 @@ padding: 10px;
   border-radius: 2px;
 }
 .verified {
-  background-color: #009900;
+  background-color: #09789C;
 }
 .hidden {
   visibility: hidden;
@@ -246,7 +246,7 @@ padding: 10px;
   margin: 0px !important;
 }
 .purchased {
-  background-color: #0FD90E;
+  background-color: #009900;
 }
 .super {
   margin-top: 17px;

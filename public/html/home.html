@@ -116,10 +116,10 @@
             <div class="col s12" id="box">
                 <h6>Package</h6>
                 <div id="b" class="col s12 staging">
-                    Box : <span ng-click="epc.removeBox()">{{epc.shipmentItem.package.size}}</span>
+                    Box: <span ng-click="epc.removeBox()">{{epc.shipmentItem.package.size}}</span>
                 </div>
                 <div class="col s12 staging">
-                    <span class="col s2 pLabel">Product(s) : </span>
+                    <span class="col s2 pLabel">Product(s): </span>
                     <div class="col s10">
                       <span id="prePackageInfo" class="col s3 center" ng-repeat="product in epc.shipmentItem.itemArray"><span ng-click="epc.removeItem($index)">{{product.item}}</span>
                     </div>
@@ -167,7 +167,7 @@
 
                             </div>
                             <div class="col s7 offset-s1">
-                                <a class="waves-effect waves-light btn buttonBackground createGreen col s12 center" ng-click="epc.createShipment(shipment)">{{shipment.package.verification.create}} Shipment</a>
+                                <a id="cs" class="waves-effect waves-light btn buttonBackground createGreen col s12 center" ng-click="epc.createShipment(shipment)" ng-class="{'verified': shipment.package.verification.create === 'Created'}">{{shipment.package.verification.create}} Shipment</a>
                             </div>
                         </div>
 
@@ -267,7 +267,7 @@
 
     <div class="row">
       <div class="nextTile">
-        <a id="next" class="waves-effect waves-light btn btn-large buttonBackground updateBlue col s12" ng-click="epc.savePO()" ><h5>Print Documents</h5></a>
+        <a id="next" class="waves-effect waves-light btn btn-large buttonBackground updateBlue col s12" ng-click="epc.savePO($state)" ><h5>Print Documents</h5></a>
       </div>
     </div>
 </div>
