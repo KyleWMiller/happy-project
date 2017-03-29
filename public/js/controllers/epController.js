@@ -55,7 +55,7 @@
         // Variables that store responses from EasyPost //
         // -------------------------------------------- //
         epc.fromAddress = {}
-        epc.parcel = {}
+        epc.parcel = []
         epc.shipment = {}
         epc.rate = {}
         epc.labels = []
@@ -190,20 +190,21 @@
         }
         // ========================================================================== //
         // Gets parcel response oject w/ id
-        epc.sendParcel = function(shipment, index) {
+        epc.sendParcel = function(shipment) {
             epc.prcl = shipment.package.dimentions
             // Gets parcel response oject w/ id
             easypostFactory.sendParcel(epc.prcl, function(parcel) {
-                epc.parcel = parcel
-                epc.shpmt.parcel = epc.parcel.id
+                epc.parcel.push(parcel)
                 shipment.package.verification.verify = "Verified"
             })
         }
         // ========================================================================== //
         // Creates shipment with: verified fromAddress, toAdress, optional customsInfo (consisting of customItem(s)), and a parcel
-        epc.createShipment = function(shipment) {
+        epc.createShipment = function(shipment, index) {
             if(shipment.firstTime === true) {
               epc.shpmt.to_address = epc.tAddress
+              epc.shpmt.parcel = epc.parcel[$index].id
+
 
               // Error handeling for To Address
               if (!epc.tAddress.hasOwnProperty('country')) {
