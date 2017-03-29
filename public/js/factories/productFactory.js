@@ -91,7 +91,7 @@
                 itemNum: "100-1021-50",
                 modelNum: "ANRD245X05-RTP",
                 price: 0,
-                description: "Satcom Direct Router Mounting Plate",
+                description: "Air802 WIFI Antenna",
                 hs_tarrif_number: "851762",
                 origin_country: "US",
                 quantity: 1,

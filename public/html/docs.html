@@ -1,153 +1,102 @@
 <div ng-controller="pdfController as pdf" class="paperBorder white-text col s12">
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('select').material_select()
-    })
-  </script>
-  <div class="col s12" ng-init="pdf.getOnePO(pdf.poNum)">
-    <h4 class="grey-text text-darken-2">PO#: <span class="white-text">{{pdf.po.poNum}}</span></h4>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('select').material_select()
+        })
+    </script>
+    <div class="col s12" ng-init="pdf.getOnePO(pdf.poNum)">
+        <div class="row">
+          <div class="poTile tileBackground">
+            <h4 class="grey-text text-darken-2">PO#: <span class="white-text">{{pdf.po.poNum}}</span></h4>
+          </div>
+        </div>
 
-    <div class="row">
-      <div class="tileBackground contactTile" ng-controller="countrySelector as cs">
-        <h5 class="grey-text text-darken-2">Contact Info</h5>
-        <form>
-          <div class="col s12">
-            <input type="text" ng-model="pdf.po.contactAddress.attn" placeholder="Attn:">
-          </div>
-          <div class="col s12">
-            <input type="text" ng-model="pdf.po.contactAddress.company" placeholder="Company">
-          </div>
-          <div class="col s12">
-            <input type="text" ng-model="pdf.po.contactAddress.street1" placeholder="Street 1">
-          </div>
-          <div class="col s12">
-            <input type="text" placeholder="Street 2" ng-model="pdf.po.contactAddress.street2">
-          </div>
-          <div class="col s6">
-            <input type="text" ng-model="pdf.po.contactAddress.city" placeholder="City">
-          </div>
-          <div class="col s6">
-            <input type="text" ng-model="pdf.po.contactAddress.state" placeholder="St">
-          </div>
-          <div class="col s6">
-            <input type="text" ng-model="pdf.po.contactAddress.zip" placeholder="Zip">
-          </div>
-          <div class="col s6" id="country">
-            <select ng-model="pdf.po.contactAddress.country">
+        <div class="row">
+            <div class="tileBackground contactTile" ng-controller="countrySelector as cs">
+                <h5 class="grey-text text-darken-2">Contact Info</h5>
+                <form>
+                    <div class="col s12">
+                        <input type="text" ng-model="pdf.po.contactAddress.attn" placeholder="Attn:">
+                    </div>
+                    <div class="col s12">
+                        <input type="text" ng-model="pdf.po.contactAddress.company" placeholder="Company">
+                    </div>
+                    <div class="col s12">
+                        <input type="text" ng-model="pdf.po.contactAddress.street1" placeholder="Street 1">
+                    </div>
+                    <div class="col s12">
+                        <input type="text" placeholder="Street 2" ng-model="pdf.po.contactAddress.street2">
+                    </div>
+                    <div class="col s6">
+                        <input type="text" ng-model="pdf.po.contactAddress.city" placeholder="City">
+                    </div>
+                    <div class="col s6">
+                        <input type="text" ng-model="pdf.po.contactAddress.state" placeholder="St">
+                    </div>
+                    <div class="col s6">
+                        <input type="text" ng-model="pdf.po.contactAddress.zip" placeholder="Zip">
+                    </div>
+                    <div class="col s6" id="country">
+                        <select ng-model="pdf.po.contactAddress.country">
                 <option value="" disabled selected>Select Country</option>
                 <option ng-repeat="country in cs.countryArr" value="{{country}}">{{country}}</option>
               </select>
-          </div>
-          <div class="col s12">
-            <input type="text" ng-model="pdf.po.contactAddress.phone" placeholder="Phone">
-          </div>
-          <div class="col s12">
-            <input type="text" ng-model="pdf.po.contactAddress.email" placeholder="Email">
-          </div>
-        </form>
-      </div>
+                    </div>
+                    <div class="col s12">
+                        <input type="text" ng-model="pdf.po.contactAddress.phone" placeholder="Phone">
+                    </div>
+                    <div class="col s12">
+                        <input type="text" ng-model="pdf.po.contactAddress.email" placeholder="Email">
+                    </div>
+                </form>
+            </div>
 
-      <div class="tileBackground pdfInfoTile">
-        <h5 class="grey-text text-darken-2">Quality Assurance Representative</h5>
-        <div class="col s11">
-          <input type="text" ng-model="pdf.qar">
+            <div class="tileBackground pdfInfoTile">
+                <h5 class="grey-text text-darken-2">Quality Assurance Representative</h5>
+                <div class="col s11">
+                    <input type="text" ng-model="pdf.qar">
+                </div>
+            </div>
         </div>
-      </div>
+
+        <div class="row">
+            <div class="pdfItemTile tileBackground">
+                <h5 class="grey-text text-darken-2">Certificates of Conformence</h5>
+                <div ng-repeat="item in pdf.po.itemArray">
+                    <!-- Item Info Form -->
+                    <div id="item" class="col s4">
+                        <h6 class="center">{{item.item}}</h6>
+                        <div class="row docRow">
+                            <!-- Price -->
+                            <div class="col s6">
+                                <label for="price"><h6 class="grey-text text-darken-2">Price: </h6></label>
+                                <input id="price" type="text" ng-model="item.price" real-time-currency>
+                            </div>
+                            <!-- Add Serial# field for SDR -->
+                            <div class="col s6" ng-if="item.item === 'SDR'">
+                                <label for="serialNum"><h6 class="grey-text text-darken-2">Serial#: </h6></label>
+                                <input id="serialNum" type="text" ng-model="item.serialNum">
+                            </div>
+                        </div>
+                        <div class="row docRow">
+                            <a class="waves-effect waves-light btn buttonBackground updateBlue col s11" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="tileBackground plTile">
+                <div class="col s12">
+                    <h5 class="grey-text text-darken-2">Packing List</h5>
+                </div>
+                <div class="col s3">
+                    <input type="text" ng-model="pdf.packingNum">
+                </div>
+                <a class="waves-effect waves-light btn buttonBackground col s6 push-s3 updateBlue" ng-click="pdf.packList()">Print Packing List</a>
+            </div>
+        </div>
+
     </div>
-
-    <div class="row">
-      <div class="pdfItemTile tileBackground">
-        <h5 class="grey-text text-darken-2">Certificates of Conformence</h5>
-        <div ng-repeat="item in pdf.po.itemArray">
-          <!-- SDR Info Form -->
-          <div id="item" ng-if="item.item === 'SDR'" class="col s4">
-            <h6 class="center">{{item.item}}</h6>
-            <div class="row docRow">
-              <!-- Price -->
-              <div class="col s6">
-                <label for="price"><h6 class="grey-text text-darken-2">Price: </h6></label>
-                <input id="price" type="text" ng-model="item.price" real-time-currency>
-              </div>
-              <!-- Serial# -->
-              <div class="col s6">
-                <label for="serialNum"><h6 class="grey-text text-darken-2">Serial#: </h6></label>
-                <input id="serialNum" type="text" ng-model="item.serialNum">
-              </div>
-            </div>
-            <div class="row docRow">
-              <a class="waves-effect waves-light btn buttonBackground updateBlue col s11" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
-            </div>
-          </div>
-
-          <!-- Mounting Plate Info Form -->
-          <div id="item" ng-if="item.item === 'Mounting Plate'" class="col s4">
-            <h6 class="center">{{item.item}}</h6>
-            <div class="col s6">
-              <!-- Price -->
-              <label for="price"> <h6 class="grey-text text-darken-2">Price: </h6></label>
-              <input id="price" type="text" ng-model="item.price" real-time-currency>
-            </div>
-            <a class="waves-effect waves-light btn buttonBackground updateBlue col s11" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
-          </div>
-          <!-- Connector Kit Info Form -->
-          <div id="item" ng-if="item.item === 'Connector Kit'" class="col s4">
-            <h6 class="center">{{item.item}}</h6>
-            <div class="col s6">
-              <!-- Price -->
-              <label for="price"><h6 class="grey-text text-darken-2">Price: </h6></label>
-              <input id="price" type="text" ng-model="item.price" real-time-currency>
-            </div>
-            <a class="waves-effect waves-light btn buttonBackground updateBlue col s11" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
-          </div>
-
-          <!-- Interface Cable Info Form -->
-          <div id="item" ng-if="item.item === 'Interface Cable'" class="col s4">
-            <h6 class="center">{{item.item}}</h6>
-            <div class="col s6">
-              <!-- Price -->
-              <label for="price"><h6 class="grey-text text-darken-2">Price: </h6></label>
-              <input id="price" type="text" ng-model="item.price" real-time-currency>
-            </div>
-            <a class="waves-effect waves-light btn buttonBackground updateBlue col s11" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
-          </div>
-
-          <!-- 3G Antenna Info Form -->
-          <div id="item" ng-if="item.item === '3G Antenna'" class="col s4">
-            <h6 class="center">{{item.item}}</h6>
-            <div class="col s6">
-              <!-- Price -->
-              <label for="price"><h6 class="grey-text text-darken-2">Price: </h6></label>
-              <input id="price" type="text" ng-model="item.price" real-time-currency>
-            </div>
-            <a class="waves-effect waves-light btn buttonBackground updateBlue col s11" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
-          </div>
-
-          <!-- WIFI Antenna Info Form -->
-          <div id="item" ng-if="item.item === 'WIFI Antenna'" class="col s4">
-            <h6 class="center">{{item.item}}</h6>
-            <div class="col s6">
-              <!-- Price -->
-              <label for="price"><h6 class="grey-text text-darken-2">Price: </h6></label>
-              <input id="price" type="text" ng-model="item.price" real-time-currency>
-            </div>
-            <a class="waves-effect waves-light btn buttonBackground updateBlue col s11" style="margin:10px;" ng-click="pdf.certificate(item)">{{item.item}} CFC</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="tileBackground plTile">
-        <div class="col s12">
-          <h5 class="grey-text text-darken-2">Packing List</h5>
-        </div>
-        <div class="col s3">
-          <input type="text" ng-model="pdf.packingNum">
-        </div>
-        <a class="waves-effect waves-light btn buttonBackground col s6 offset-l2 updateBlue" ng-click="pdf.packList(pdf.po.itemArray)">Print Packing List</a>
-      </div>
-    </div>
-
-  </div>
 </div>
