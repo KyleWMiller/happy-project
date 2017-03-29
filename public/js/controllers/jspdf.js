@@ -234,7 +234,7 @@
                         case "3G Antenna":
                             var y = yStart,
                                 itemNum = "100-1021-30",
-                                qty = item.cutomsInfo.quantity,
+                                qty = item.customsInfo.quantity,
                                 price = item.price,
                                 total = price * qty,
                                 line1 = pl.text(17, y, "3G Antenna " + itemNum),
