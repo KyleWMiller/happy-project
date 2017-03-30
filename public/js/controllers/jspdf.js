@@ -159,6 +159,9 @@
                 },
                 qar = pdf.qar
 
+            // Update PO info in DB
+            poFactory.updatePO(pdf.po)
+
 
             pdf.printItems = function(itemArray) {
                 var pi = this
@@ -319,7 +322,6 @@
 
             // pl.autoPrint()
             pl.save('PL' + po + '.pdf')
-
 
         }
     }
