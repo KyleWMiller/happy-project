@@ -90,6 +90,17 @@
                     $('select').material_select()
                 })
             </script>
+            <!-- **************************************************** -->
+            <!--              Buttons for premade boxes               -->
+            <!-- **************************************************** -->
+            <div class="col s12 premade">
+              <div class="col s5">
+                <a class="waves-effect waves-light btn buttonBackground createGreen" ng-click="epc.premadeBox1()">Premade Box 1</a>
+              </div>
+              <div class="col s5 offset-s2">
+                <a class="waves-effect waves-light btn buttonBackground createGreen" ng-click="epc.premadeBox2()">Premade Box 2</a>
+              </div>
+            </div>
 
             <!-- **************************************************** -->
             <!-- Selects for adding box size and products to shipment -->
@@ -167,7 +178,7 @@
 
                             </div>
                             <div class="col s7 offset-s1">
-                                <a id="cs" class="waves-effect waves-light btn buttonBackground createGreen col s12 center" ng-click="epc.createShipment(shipment)" ng-class="{'verified': shipment.package.verification.create === 'Created'}">{{shipment.package.verification.create}} Shipment</a>
+                                <a id="cs" class="waves-effect waves-light btn buttonBackground createGreen col s12 center" ng-click="epc.createShipment(shipment, $index)" ng-class="{'verified': shipment.package.verification.create === 'Created'}">{{shipment.package.verification.create}} Shipment</a>
                             </div>
                         </div>
 

@@ -194,7 +194,7 @@
                                 qty = item.customsInfo.quantity,
                                 price = item.price,
                                 total = price * qty,
-                                itemNum = "MT1-SDR-900",
+                                itemNum = "Item#: MT1-SDR-900",
                                 line1 = pl.text(17, y, "CNX to SDR Mounting Plate"),
                                 line2 = pl.text(111, y, qty + ""),
                                 line3 = pl.text(131, y, $filter('currency')(price)),
@@ -211,7 +211,7 @@
                                 qty = item.customsInfo.quantity,
                                 price = item.price,
                                 total = price * qty,
-                                line1 = pl.text(17, y, "SDR Connector Kit " + itemNum),
+                                line1 = pl.text(17, y, "SDR Connector Kit Item#: " + itemNum),
                                 line2 = pl.text(111, y, qty + ""),
                                 line3 = pl.text(131, y, $filter('currency')(price)),
                                 line4 = pl.text(161, y, $filter('currency')(price))
@@ -224,7 +224,7 @@
                                 qty = item.customsInfo.quantity,
                                 price = item.price,
                                 total = price * qty,
-                                line1 = pl.text(17, y, "Interface Cable " + itemNum),
+                                line1 = pl.text(17, y, "Interface Cable Item#: " + itemNum),
                                 line2 = pl.text(111, y, qty + ""),
                                 line3 = pl.text(131, y, $filter('currency')(price)),
                                 line4 = pl.text(161, y, $filter('currency')(price))
@@ -237,7 +237,7 @@
                                 qty = item.customsInfo.quantity,
                                 price = item.price,
                                 total = price * qty,
-                                line1 = pl.text(17, y, "3G Antenna " + itemNum),
+                                line1 = pl.text(17, y, "3G Antenna Item#: " + itemNum),
                                 line2 = pl.text(111, y, qty + ""),
                                 line3 = pl.text(131, y, $filter('currency')(price)),
                                 line4 = pl.text(161, y, $filter('currency')(price))
@@ -250,7 +250,7 @@
                                 qty = item.customsInfo.quantity,
                                 price = item.price,
                                 total = price * qty,
-                                line1 = pl.text(17, y, "WIFI Antenna " + itemNum),
+                                line1 = pl.text(17, y, "WIFI Antenna Item#: " + itemNum),
                                 line2 = pl.text(111, y, "" + qty),
                                 line3 = pl.text(131, y, $filter('currency')(price)),
                                 line4 = pl.text(161, y, $filter('currency')(price))
@@ -261,7 +261,7 @@
                 }
                 itemArray.forEach(function(x) {
                     pdf.itemSelect(x, pi.startY, pi.endY)
-                    // console.log(pi.endY)
+                    console.log(pi.endY)
                     pi.startY = pi.startY + pi.endY + 10
                     pi.endY = 0
                 })
@@ -311,10 +311,10 @@
 
             pl.setFontSize(11)
             pl.setFontType("bold")
-            pl.text(15, 230, qar)
-            pl.text(15, 234, "Satcom Direct Inc.")
-            pl.text(15, 238, "321-777-3000")
-            pl.text(15, 242, "SDR@satcomdirect.com")
+            pl.text(15, 270, qar)
+            pl.text(15, 274, "Satcom Direct Inc.")
+            pl.text(15, 278, "321-777-3000")
+            pl.text(15, 282, "SDR@satcomdirect.com")
 
 
             // pl.autoPrint()

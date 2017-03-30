@@ -30,7 +30,6 @@
         ef.sendShipment = function(shipment, callback) {
             return $http.post(shipmentUrl, shipment)
                 .then(function(res) {
-                  console.log()
                     callback(res.data)
                 })
         }
@@ -43,13 +42,11 @@
 
             return $http.post(updatedBuyUrl, rate)
                 .then(function(res) {
-                    console.log("buying rate " + rate)
                     callback(res.data)
                 })
         }
 
         ef.storePO = function(purchaseOrder) {
-          console.log("storing po")
             return $http.post(poUrl, purchaseOrder)
         }
 

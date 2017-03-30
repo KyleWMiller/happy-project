@@ -175,6 +175,9 @@ padding: 10px;
 #plus:hover {
   background-color: #5B6167;
 }
+.premade {
+  margin-bottom: 20px;
+}
 #prePackageInfob {
   margin-left: 20px;
   background-color: grey;

@@ -161,6 +161,22 @@
             $('#b span').removeAttr('id')
         }
         // ========================================================================== //
+        // Creates premade shipments for quick creation
+        epc.premadeBox1 = function() {
+          epc.shipmentItem.package = epc.parcels[0]
+          $('#b span').attr('id', 'prePackageInfob')
+          epc.shipmentItem.itemArray.push(epc.products[0])
+          epc.shipmentItem.itemArray.push(epc.products[2])
+          epc.shipmentItem.itemArray.push(epc.products[3])
+        }
+        epc.premadeBox2 = function() {
+          epc.shipmentItem.package = epc.parcels[1]
+          $('#b span').attr('id', 'prePackageInfob')
+          epc.shipmentItem.itemArray.push(epc.products[1])
+          epc.shipmentItem.itemArray.push(epc.products[4])
+          epc.shipmentItem.itemArray.push(epc.products[5])
+        }
+        // ========================================================================== //
         // Removes box/products/shipments from respective arrays
         epc.removeBox = function() {
             epc.shipmentItem.package = {}
