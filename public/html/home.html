@@ -91,7 +91,7 @@
                 })
             </script>
             <!-- **************************************************** -->
-            <!--              Buttons for premade boxes               -->
+            <!--             Buttons for premade boxes               -->
             <!-- **************************************************** -->
             <div class="col s12 premade">
               <div class="col s5">
@@ -132,7 +132,9 @@
                 <div class="col s12 staging">
                     <span class="col s2 pLabel">Product(s): </span>
                     <div class="col s10">
-                      <span id="prePackageInfo" class="col s3 center" ng-repeat="product in epc.shipmentItem.itemArray"><span ng-click="epc.removeItem($index)">{{product.item}}</span>
+                      <div id="prePackageInfo" class="col s3 center" ng-repeat="product in epc.shipmentItem.itemArray" ng-click="epc.removeItem($index)">
+                        <span>{{product.item}}</span>
+                      </div>
                     </div>
                 </div>
 
