@@ -177,8 +177,9 @@
                 pi.itemSelect = function(item, yStart, endY) {
                     switch (item.item) {
                         case "SDR":
+                        console.log(item)
                             var y = yStart,
-                                qty = item.customsInfo.quantity,
+                                qty = item.quantity,
                                 price = item.price,
                                 total = price * qty,
                                 pn = "12233-F-2191-10",
@@ -199,7 +200,7 @@
                             break
                         case "Mounting Plate":
                             var y = yStart,
-                                qty = item.customsInfo.quantity,
+                                qty = item.quantity,
                                 price = item.price,
                                 total = price * qty,
                                 itemNum = "Item#: MT1-SDR-900",
@@ -216,7 +217,7 @@
                         case "Connector Kit":
                             var y = yStart,
                                 itemNum = "100-1021-01",
-                                qty = item.customsInfo.quantity,
+                                qty = item.quantity,
                                 price = item.price,
                                 total = price * qty,
                                 line1 = pl.text(17, y, "SDR Connector Kit Item#: " + itemNum),
@@ -229,7 +230,7 @@
                         case "Interface Cable":
                             var y = yStart,
                                 itemNum = "SD-IFRTF-900",
-                                qty = item.customsInfo.quantity,
+                                qty = item.quantity,
                                 price = item.price,
                                 total = price * qty,
                                 line1 = pl.text(17, y, "Interface Cable Item#: " + itemNum),
@@ -242,7 +243,7 @@
                         case "3G Antenna":
                             var y = yStart,
                                 itemNum = "100-1021-30",
-                                qty = item.customsInfo.quantity,
+                                qty = item.quantity,
                                 price = item.price,
                                 total = price * qty,
                                 line1 = pl.text(17, y, "3G Antenna Item#: " + itemNum),
@@ -255,7 +256,7 @@
                         case "WIFI Antenna":
                             var y = yStart,
                                 itemNum = "100-10210-01",
-                                qty = item.customsInfo.quantity,
+                                qty = item.quantity,
                                 price = item.price,
                                 total = price * qty,
                                 line1 = pl.text(17, y, "WIFI Antenna Item#: " + itemNum),

@@ -292,7 +292,7 @@
                     tracker: label.tracker,
                     tracking_code: label.tracking_code
                 }
-                epc.po.shipmentInfo.push(poLable)
+                epc.labels.push(poLable)
             })
             rate.purchased = 'Purchased'
         }
