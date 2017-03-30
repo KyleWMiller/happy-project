@@ -210,7 +210,7 @@
             epc.prcl = shipment.package.dimentions
             // Gets parcel response oject w/ id
             easypostFactory.sendParcel(epc.prcl, function(parcel) {
-                epc.parcel.push(parcel)
+                shipment.parcel = parcel
                 shipment.package.verification.verify = "Verified"
             })
         }
@@ -219,7 +219,8 @@
         epc.createShipment = function(shipment, index) {
             if(shipment.firstTime === true) {
               epc.shpmt.to_address = epc.tAddress
-              epc.shpmt.parcel = epc.parcel[$index].id
+              epc.shpmt.parcel = shipment.parcel.id
+              console.log(shipment)
 
 
               // Error handeling for To Address
