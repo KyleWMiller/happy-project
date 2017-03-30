@@ -2,10 +2,10 @@
     'use strict';
 
     angular.module('jsPDF', [])
-        .controller('pdfController', ['poFactory', 'pdfFactory', '$http', '$stateParams', '$filter', pdfController])
+        .controller('pdfController', ['poFactory', 'pdfFactory', '$http', '$stateParams', '$filter', '$state', pdfController])
 
 
-    function pdfController(poFactory, pdfFactory, $http, $stateParams, $filter, $scope) {
+    function pdfController(poFactory, pdfFactory, $http, $stateParams, $filter, $state) {
         var pdf = this
 
         pdf.pos = []
@@ -29,6 +29,11 @@
                     pdf.po = response.data[0]
                     pdf.po.contactAddress.attn = "Recieving Department"
                 })
+        }
+        // ========================================================================== //
+        pdf.changePOs = function() {
+          console.log('go')
+          $state.go('DocumentsPage', {poNum:pdf.po.poNum})
         }
         // ========================================================================== //
         pdf.formateDate = function(date) {

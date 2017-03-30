@@ -220,8 +220,6 @@
             if(shipment.firstTime === true) {
               epc.shpmt.to_address = epc.tAddress
               epc.shpmt.parcel = shipment.parcel.id
-              console.log(shipment)
-
 
               // Error handeling for To Address
               if (!epc.tAddress.hasOwnProperty('country')) {

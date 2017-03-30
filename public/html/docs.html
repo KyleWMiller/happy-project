@@ -8,7 +8,7 @@
         <div class="row">
           <div class="poTile tileBackground poNum">
             <h4 class="grey-text text-darken-2">PO#: </h4>
-            <input type="text" ng-model="pdf.po.poNum" ng-keyup="$event.keyCode == 13 ? SOMETHING : null">
+            <input type="text" ng-model="pdf.po.poNum" ng-keyup="$event.keyCode == 13 ? pdf.changePOs($state) : null" ng-click="pdf.changePOs($state)">
           </div>
         </div>
 
