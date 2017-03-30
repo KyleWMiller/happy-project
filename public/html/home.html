@@ -93,11 +93,11 @@
             <!-- **************************************************** -->
             <!--             Buttons for premade boxes               -->
             <!-- **************************************************** -->
-            <div class="col s12 premade">
+            <div class="col s12 premade center">
               <div class="col s5">
                 <a class="waves-effect waves-light btn buttonBackground createGreen" ng-click="epc.premadeBox1()">Premade Box 1</a>
               </div>
-              <div class="col s5 offset-s2">
+              <div class="col s5 offset-s1">
                 <a class="waves-effect waves-light btn buttonBackground createGreen" ng-click="epc.premadeBox2()">Premade Box 2</a>
               </div>
             </div>
@@ -132,8 +132,8 @@
                 <div class="col s12 staging">
                     <span class="col s2 pLabel">Product(s): </span>
                     <div class="col s10">
-                      <div id="prePackageInfo" class="col s3 center" ng-repeat="product in epc.shipmentItem.itemArray" ng-click="epc.removeItem($index)">
-                        <span>{{product.item}}</span>
+                      <div id="prePackageInfo" class="col s3 center valign-wrapper" ng-repeat="product in epc.shipmentItem.itemArray" ng-click="epc.removeItem($index)">
+                        <span class="valign center-block">{{product.item}}</span>
                       </div>
                     </div>
                 </div>
@@ -170,8 +170,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col s3 center-align" ng-repeat="product in shipment.itemArray">
-                            <p id="postPackageItem">{{product.item}}</p>
+                        <div class="col s12 staging">
+                          <div id="postPackageItem" class="col s3 center valign-wrapper" ng-repeat="product in shipment.itemArray">
+                            <span class="valign">{{product.item}}</span>
+                          </div>
                         </div>
 
                         <div class="col s12">

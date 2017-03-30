@@ -183,6 +183,7 @@ padding: 10px;
   background-color: grey;
   padding: 5px 10px 5px 10px;
   border-radius: 2px;
+  height: 3.66rem;
 }
 #prePackageInfob:hover {
   background-color: #AD0000;
@@ -194,6 +195,7 @@ padding: 10px;
   background-color: grey;
   padding: 5px 10px;
   border-radius: 2px;
+  height: 3.66rem;
 }
 #prePackageInfo:hover {
   background-color: #AD0000;
@@ -238,7 +240,9 @@ padding: 10px;
 #postPackageItem {
   background-color: grey;
   padding: 5px 10px;
+  margin: 0px 10px 5px 0px;
   border-radius: 2px;
+  height: 3.66rem;
 }
 .verified {
   background-color: #09789C;
@@ -266,6 +270,9 @@ padding: 10px;
 }
 #item {
   display: inline-block;
+}
+.poNum input[type="text"]{
+  font-size: 24px;
 }
 .docRow {
   margin-bottom: 0px;

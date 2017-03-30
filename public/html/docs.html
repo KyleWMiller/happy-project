@@ -6,8 +6,9 @@
     </script>
     <div class="col s12" ng-init="pdf.getOnePO(pdf.poNum)">
         <div class="row">
-          <div class="poTile tileBackground">
-            <h4 class="grey-text text-darken-2">PO#: <span class="white-text">{{pdf.po.poNum}}</span></h4>
+          <div class="poTile tileBackground poNum">
+            <h4 class="grey-text text-darken-2">PO#: </h4>
+            <input type="text" ng-model="pdf.po.poNum" ng-keyup="$event.keyCode == 13 ? SOMETHING : null">
           </div>
         </div>
 
