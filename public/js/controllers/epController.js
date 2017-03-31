@@ -64,6 +64,7 @@
         //            HappyShip Methods                //
         // ------------------------------------------- //
 
+        // ========================================================================== //
         // Gets from address response object w/ id
         epc.sendFAddress = function() {
             easypostFactory.sendAddress(epc.fAddress, function(address) {
@@ -84,6 +85,42 @@
                 $('#b span').attr('id', 'prePackageInfob')
             }
         }
+
+        // ========================================================================== //
+        // Item() is used to parse product info
+        // Seperation step to exit data binding and sort item properties
+        epc.Item = function(product) {
+            var holding = {
+                item: product.item,
+                price: product.price,
+                weight: product.weight,
+                customsInfo: {
+                    description: product.description,
+                    hs_tarrif_number: product.hs_tarrif_number,
+                    origin_country: product.origin_country,
+                    quantity: product.quantity,
+                    value: product.value,
+                    weight: product.weight
+                }
+            }
+            // Adds properties only if they exist
+            if (product.serialNum) {
+                holding.serialNum = product.serialNum
+            }
+            if (product.mfgNum) {
+                holding.mfgNum = product.mfgNum
+            }
+            if (product.itemNum) {
+                holding.itemNum = product.itemNum
+            }
+            if (product.modelNum) {
+                holding.modelNum = product.modelNum
+            }
+            if (product.remarks) {
+                holding.remarks = product.remarks
+            }
+            return holding
+        }
         // ========================================================================== //
         // Adds items to package
         epc.addProduct = function() {
@@ -91,40 +128,7 @@
                 var toastContent = $('<span>Please select a "Product"</span>')
                 Materialize.toast(toastContent, 2000)
             } else {
-                // Seperation step to exit data binding and sort item properties
-                function Item(product) {
-                    var holding = {
-                        item: product.item,
-                        price: product.price,
-                        weight: product.weight,
-                        customsInfo: {
-                            description: product.description,
-                            hs_tarrif_number: product.hs_tarrif_number,
-                            origin_country: product.origin_country,
-                            quantity: product.quantity,
-                            value: product.value,
-                            weight: product.weight
-                        }
-                    }
-                    // Adds properties only if they exist
-                    if (product.serialNum) {
-                        holding.serialNum = product.serialNum
-                    }
-                    if (product.mfgNum) {
-                        holding.mfgNum = product.mfgNum
-                    }
-                    if (product.itemNum) {
-                        holding.itemNum = product.itemNum
-                    }
-                    if (product.modelNum) {
-                        holding.modelNum = product.modelNum
-                    }
-                    if (product.remarks) {
-                        holding.remarks = product.remarks
-                    }
-                    return holding
-                }
-                var item = new Item(epc.item)
+                var item = new epc.Item(epc.item)
                 epc.shipmentItem.itemArray.push(item)
                 epc.customsInfo.customs_items.push(item.customsInfo)
             }
@@ -165,16 +169,34 @@
         epc.premadeBox1 = function() {
           epc.shipmentItem.package = epc.parcels[0]
           $('#b span').attr('id', 'prePackageInfob')
-          epc.shipmentItem.itemArray.push(epc.products[0])
-          epc.shipmentItem.itemArray.push(epc.products[2])
-          epc.shipmentItem.itemArray.push(epc.products[3])
+          // Adds SDR
+          var item = new epc.Item(epc.products[0])
+          epc.shipmentItem.itemArray.push(item)
+          epc.customsInfo.customs_items.push(item.customsInfo)
+          // Adds Connector Kit
+          item = new epc.Item(epc.products[2])
+          epc.shipmentItem.itemArray.push(item)
+          epc.customsInfo.customs_items.push(item.customsInfo)
+          // Adds Interface Cable
+          item = new epc.Item(epc.products[3])
+          epc.shipmentItem.itemArray.push(item)
+          epc.customsInfo.customs_items.push(item.customsInfo)
         }
         epc.premadeBox2 = function() {
           epc.shipmentItem.package = epc.parcels[1]
           $('#b span').attr('id', 'prePackageInfob')
-          epc.shipmentItem.itemArray.push(epc.products[1])
-          epc.shipmentItem.itemArray.push(epc.products[4])
-          epc.shipmentItem.itemArray.push(epc.products[5])
+          // Adds Mounting Plate
+          var item = new epc.Item(epc.products[1])
+          epc.shipmentItem.itemArray.push(item)
+          epc.customsInfo.customs_items.push(item.customsInfo)
+          // Adds 3G Antenna
+          item = new epc.Item(epc.products[4])
+          epc.shipmentItem.itemArray.push(item)
+          epc.customsInfo.customs_items.push(item.customsInfo)
+          // Adds WIFI Antenna
+          item = new epc.Item(epc.products[5])
+          epc.shipmentItem.itemArray.push(item)
+          epc.customsInfo.customs_items.push(item.customsInfo)
         }
         // ========================================================================== //
         // Removes box/products/shipments from respective arrays
@@ -240,6 +262,7 @@
                   function FillCustomItems(productArray) {
                     var holdingArray = []
                     productArray.map(function(item) {
+                      console.log(item)
                       holdingArray.push(item.customsInfo)
                     })
                     return holdingArray
@@ -257,6 +280,7 @@
                   }
                   epc.shpmt.options = epc.thirdParty
                 } else {
+                  console.log(epc.shpmt)
                   easypostFactory.sendShipment(epc.shpmt, function(shipment) {
                     epc.shipment = shipment
                     if (epc.shipment.rates.length > 0) {
@@ -271,7 +295,7 @@
                 }
               }
             }
-
+            console.log(epc.shpmt)
         }
         // ========================================================================== //
         // Purchases specific rate using shipment id and returns lable
@@ -292,7 +316,7 @@
                     tracker: label.tracker,
                     tracking_code: label.tracking_code
                 }
-                epc.labels.push(poLable)
+                epc.po.shipmentInfo.push(poLable)
             })
             rate.purchased = 'Purchased'
         }
