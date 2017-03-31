@@ -14,10 +14,7 @@
                     <input ng-model="epc.tAddress.company" type="text" placeholder="Company/Name">
                 </div>
                 <div class="col s12">
-                    <input ng-model="epc.tAddress.street1" type="text" placeholder="Street 1">
-                </div>
-                <div class="col s12">
-                    <input ng-model="epc.tAddress.street2" type="text" placeholder="Street 2">
+                    <input ng-model="epc.tAddress.street1" type="text" placeholder="Street">
                 </div>
                 <div class="col s6">
                     <input ng-model="epc.tAddress.city" type="text" placeholder="City">
@@ -56,9 +53,6 @@
                 <div class="col s12">
                     <input type="text" ng-model="epc.fAddress.street1">
                 </div>
-                <div class="col s12">
-                    <input type="text" placeholder="Street 2" ng-model="epc.fAddress.street2">
-                </div>
                 <div class="col s6">
                     <input type="text" ng-model="epc.fAddress.city">
                 </div>
@@ -95,10 +89,10 @@
             <!-- **************************************************** -->
             <div class="col s12 premade center">
               <div class="col s5">
-                <a class="waves-effect waves-light btn buttonBackground createGreen" ng-click="epc.premadeBox1()">Premade Box 1</a>
+                <a class="waves-effect waves-light btn buttonBackground createGreen" ng-click="epc.premadeBox1()">SDR Package</a>
               </div>
               <div class="col s5 offset-s1">
-                <a class="waves-effect waves-light btn buttonBackground createGreen" ng-click="epc.premadeBox2()">Premade Box 2</a>
+                <a class="waves-effect waves-light btn buttonBackground createGreen" ng-click="epc.premadeBox2()">MP Package</a>
               </div>
             </div>
 

@@ -20,8 +20,6 @@
         }
 
         pof.updatePO = function(po) {
-            console.log(po)
-            console.log("updating po")
             return $http.put(updateUrl, po)
         }
 

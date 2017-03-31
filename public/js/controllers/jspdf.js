@@ -175,9 +175,9 @@
                 pi.endY = 0
 
                 pi.itemSelect = function(item, yStart, endY) {
+                  console.log(item)
                     switch (item.item) {
                         case "SDR":
-                        console.log(item)
                             var y = yStart,
                                 qty = item.quantity,
                                 price = item.price,

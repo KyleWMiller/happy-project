@@ -41,7 +41,8 @@
         epc.shipmentArray = []
         epc.shipmentItem = {
             package: {},
-            itemArray: []
+            itemArray: [],
+            parcel: null
         }
         epc.firstTime = true
         epc.po = {
@@ -94,6 +95,7 @@
                 item: product.item,
                 price: product.price,
                 weight: product.weight,
+                quantity: product.quantity,
                 customsInfo: {
                     description: product.description,
                     hs_tarrif_number: product.hs_tarrif_number,
@@ -174,29 +176,29 @@
           epc.shipmentItem.itemArray.push(item)
           epc.customsInfo.customs_items.push(item.customsInfo)
           // Adds Connector Kit
-          item = new epc.Item(epc.products[2])
-          epc.shipmentItem.itemArray.push(item)
-          epc.customsInfo.customs_items.push(item.customsInfo)
+          var item2 = new epc.Item(epc.products[2])
+          epc.shipmentItem.itemArray.push(item2)
+          epc.customsInfo.customs_items.push(item2.customsInfo)
           // Adds Interface Cable
-          item = new epc.Item(epc.products[3])
-          epc.shipmentItem.itemArray.push(item)
-          epc.customsInfo.customs_items.push(item.customsInfo)
+          var item3 = new epc.Item(epc.products[3])
+          epc.shipmentItem.itemArray.push(item3)
+          epc.customsInfo.customs_items.push(item3.customsInfo)
         }
         epc.premadeBox2 = function() {
           epc.shipmentItem.package = epc.parcels[1]
           $('#b span').attr('id', 'prePackageInfob')
           // Adds Mounting Plate
-          var item = new epc.Item(epc.products[1])
-          epc.shipmentItem.itemArray.push(item)
-          epc.customsInfo.customs_items.push(item.customsInfo)
+          var item1 = new epc.Item(epc.products[1])
+          epc.shipmentItem.itemArray.push(item1)
+          epc.customsInfo.customs_items.push(item1.customsInfo)
           // Adds 3G Antenna
-          item = new epc.Item(epc.products[4])
-          epc.shipmentItem.itemArray.push(item)
-          epc.customsInfo.customs_items.push(item.customsInfo)
+          var item4 = new epc.Item(epc.products[4])
+          epc.shipmentItem.itemArray.push(item4)
+          epc.customsInfo.customs_items.push(item4.customsInfo)
           // Adds WIFI Antenna
-          item = new epc.Item(epc.products[5])
-          epc.shipmentItem.itemArray.push(item)
-          epc.customsInfo.customs_items.push(item.customsInfo)
+          var item5 = new epc.Item(epc.products[5])
+          epc.shipmentItem.itemArray.push(item5)
+          epc.customsInfo.customs_items.push(item5.customsInfo)
         }
         // ========================================================================== //
         // Removes box/products/shipments from respective arrays
@@ -241,61 +243,63 @@
         epc.createShipment = function(shipment, index) {
             if(shipment.firstTime === true) {
               epc.shpmt.to_address = epc.tAddress
-              epc.shpmt.parcel = shipment.parcel.id
 
-              // Error handeling for To Address
-              if (!epc.tAddress.hasOwnProperty('country')) {
-                var toastContent = $('<span>Please provide a "To Address"</span>')
-                Materialize.toast(toastContent, 2500)
-              }
-
-              // Error handeling for Customs Signer
-              if (epc.shpmt.to_address.country.toLowerCase() !== "usa" && epc.customsInfo.customs_signer === null) {
-                var toastContent = $('<span>Please provide a "Customs Signer"</span>')
+              if(shipment.parcel === null) {
+                var toastContent = $('<span>Please verify package first</span>')
                 Materialize.toast(toastContent, 2500)
               } else {
-                // omits customs info if the to_address is within the US
-                if (epc.shpmt.to_address.country.toLowerCase() === "usa") {
-                  epc.shpmt.customsInfo = null
-                } else {
-                  // Adds items custom info to the customs object
-                  function FillCustomItems(productArray) {
-                    var holdingArray = []
-                    productArray.map(function(item) {
-                      console.log(item)
-                      holdingArray.push(item.customsInfo)
-                    })
-                    return holdingArray
-                  }
-                  var mounties = new FillCustomItems(shipment.itemArray)
-                  epc.customsInfo.customs_items = mounties
-                  epc.shpmt.customsInfo = epc.customsInfo
+                epc.shpmt.parcel = shipment.parcel.id
+                // Error handeling for To Address
+                if (!epc.tAddress.hasOwnProperty('country')) {
+                  var toastContent = $('<span>Please provide a "To Address"</span>')
+                  Materialize.toast(toastContent, 2500)
                 }
 
-                // Add Third Party carrier accounts
-                if (epc.thirdParty.carrier) {
-                  if (!epc.thirdParty.bill_third_party_account || !epc.thirdParty.bill_third_party_country || !epc.thirdParty.bill_third_party_postal_code) {
-                    var toastContent = $('<span>Please complete 3rd party billing info</span>')
-                    Materialize.toast(toastContent, 2500)
-                  }
-                  epc.shpmt.options = epc.thirdParty
+                // Error handeling for Customs Signer
+                if (epc.shpmt.to_address.country.toLowerCase() !== "usa" && epc.customsInfo.customs_signer === null) {
+                  var toastContent = $('<span>Please provide a "Customs Signer"</span>')
+                  Materialize.toast(toastContent, 2500)
                 } else {
-                  console.log(epc.shpmt)
-                  easypostFactory.sendShipment(epc.shpmt, function(shipment) {
-                    epc.shipment = shipment
-                    if (epc.shipment.rates.length > 0) {
-                      epc.shipment.rates.map(function(x) {
-                        x.purchased = "Purchase"
+                  // omits customs info if the to_address is within the US
+                  if (epc.shpmt.to_address.country.toLowerCase() === "usa") {
+                    epc.shpmt.customsInfo = null
+                  } else {
+                    // Adds items custom info to the customs object
+                    function FillCustomItems(productArray) {
+                      var holdingArray = []
+                      productArray.map(function(item) {
+                        holdingArray.push(item.customsInfo)
                       })
-                      epc.rts.push(epc.shipment.rates)
+                      return holdingArray
                     }
-                  })
-                  shipment.package.verification.create = "Created"
-                  shipment.firstTime = false
+                    var mounties = new FillCustomItems(shipment.itemArray)
+                    epc.customsInfo.customs_items = mounties
+                    epc.shpmt.customsInfo = epc.customsInfo
+                  }
+                  // Add Third Party carrier accounts
+                  if (epc.thirdParty.carrier) {
+                    if (!epc.thirdParty.bill_third_party_account || !epc.thirdParty.bill_third_party_country || !epc.thirdParty.bill_third_party_postal_code) {
+                      var toastContent = $('<span>Please complete 3rd party billing info</span>')
+                      Materialize.toast(toastContent, 2500)
+                    }
+                    epc.shpmt.options = epc.thirdParty
+                  } else {
+                    console.log(epc.shpmt)
+                    easypostFactory.sendShipment(epc.shpmt, function(shipment) {
+                      epc.shipment = shipment
+                      if (epc.shipment.rates.length > 0) {
+                        epc.shipment.rates.map(function(x) {
+                          x.purchased = "Purchase"
+                        })
+                        epc.rts.push(epc.shipment.rates)
+                      }
+                    })
+                    shipment.package.verification.create = "Created"
+                    shipment.firstTime = false
+                  }
                 }
               }
             }
-            console.log(epc.shpmt)
         }
         // ========================================================================== //
         // Purchases specific rate using shipment id and returns lable
