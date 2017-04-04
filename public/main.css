@@ -273,6 +273,10 @@ padding: 10px;
 }
 .poNum input[type="text"]{
   font-size: 24px;
+  margin-bottom: 0px !important;
+}
+.poNum h4 {
+  margin-bottom: 0px !important;
 }
 .docRow {
   margin-bottom: 0px;

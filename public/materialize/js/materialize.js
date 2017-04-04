@@ -5853,7 +5853,7 @@ var DAYS_IN_WEEK = 7,
 /**
  * The date picker constructor
  */
-function DatePicker( picker, settings ) {
+function ( picker, settings ) {
 
     var calendar = this,
         element = picker.$node[ 0 ],
