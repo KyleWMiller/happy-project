@@ -4,14 +4,21 @@
             $('select').material_select()
         })
     </script>
-    <div class="col s12" ng-init="pdf.getOnePO(pdf.poNum)">
+
+    <!-- **************************************************** -->
+    <!-- PO tile, also doubles as search box for other POs-->
+    <!-- **************************************************** -->
+    <div ng-init="pdf.getOnePO(pdf.poNum)">
         <div class="row">
-          <div class="poTile tileBackground poNum">
-            <h4 class="grey-text text-darken-2 poNumMod">PO#: </h4>
-            <input type="text" ng-model="pdf.po.poNum" ng-keyup="$event.keyCode == 13 ? pdf.changePOs($state) : null" ng-click="pdf.changePOs($state)">
-          </div>
+            <div class="poTile tileBackground poNum">
+                <h4 class="grey-text text-darken-2">PO#: </h4>
+                <input type="text" ng-model="pdf.po.poNum" ng-keyup="$event.keyCode == 13 ? pdf.changePOs($state) : null" ng-click="pdf.changePOs($state)">
+            </div>
         </div>
 
+        <!-- **************************************************** -->
+        <!-- Contact address tile, first line is Attn field -->
+        <!-- **************************************************** -->
         <div class="row">
             <div class="tileBackground contactTile" ng-controller="countrySelector as cs">
                 <h5 class="grey-text text-darken-2">Contact Info</h5>
@@ -49,14 +56,57 @@
                 </form>
             </div>
 
+            <!-- **************************************************** -->
+            <!-- Quality Assurance tile -->
+            <!-- **************************************************** -->
             <div class="tileBackground pdfInfoTile">
                 <h5 class="grey-text text-darken-2">Quality Assurance Representative</h5>
                 <div class="col s11">
                     <input type="text" ng-model="pdf.qar">
                 </div>
             </div>
+
+            <!-- **************************************************** -->
+            <!-- Datepicker Tile -->
+            <!-- **************************************************** -->
+            <div class="tileBackground dateTile">
+                <script type="text/javascript">
+                    $('.datepicker').pickadate({
+                        selectMonths: true, // Creates a dropdown to control month
+                        selectYears: 1 // Creates a dropdown of 1 years to control year
+                    })
+                    // $('.datepicker').pickadate(new Date())
+                </script>
+                <div>
+                    <h5 class="grey-text text-darken-2">Date Select</h5>
+                </div>
+                <!-- Order Date -->
+                <div class="col s1">
+                    <h6 class="center">Order Date</h6>
+                </div>
+                <div class="col s4">
+                    <input type="date" class="datepicker center" ng-model="pdf.orderDate" placeholder="Select Date">
+                </div>
+                <!-- Ship Date -->
+                <div class="col s1 offset-s1">
+                    <h6 class="center">Ship Date</h6>
+                </div>
+                <div class="col s4">
+                    <input type="date" class="datepicker center" ng-model="pdf.shipDate" placeholder="Select Date">
+                </div>
+
+                <!-- <div class="col s6">
+                  <a class="btn" ng-click="pdf.logDate(pdf.orderDate)">Order</a>
+                </div>
+                <div class="col s6">
+                  <a class="btn" ng-click="pdf.logDate(pdf.shipDate)">Ship</a>
+                </div> -->
+            </div>
         </div>
 
+        <!-- **************************************************** -->
+        <!-- CFC tile -->
+        <!-- **************************************************** -->
         <div class="row">
             <div class="pdfItemTile tileBackground">
                 <h5 class="grey-text text-darken-2">Certificates of Conformence</h5>
@@ -84,6 +134,9 @@
             </div>
         </div>
 
+        <!-- **************************************************** -->
+        <!-- Packing List tile -->
+        <!-- **************************************************** -->
         <div class="row">
             <div class="tileBackground plTile">
                 <div class="col s12">

@@ -172,33 +172,33 @@
           epc.shipmentItem.package = epc.parcels[0]
           $('#b span').attr('id', 'prePackageInfob')
           // Adds SDR
-          var item = new epc.Item(epc.products[0])
-          epc.shipmentItem.itemArray.push(item)
-          epc.customsInfo.customs_items.push(item.customsInfo)
-          // Adds Connector Kit
-          var item2 = new epc.Item(epc.products[2])
-          epc.shipmentItem.itemArray.push(item2)
-          epc.customsInfo.customs_items.push(item2.customsInfo)
-          // Adds Interface Cable
-          var item3 = new epc.Item(epc.products[3])
-          epc.shipmentItem.itemArray.push(item3)
-          epc.customsInfo.customs_items.push(item3.customsInfo)
+          var sdr = new epc.Item(epc.products[0])
+          epc.shipmentItem.itemArray.push(sdr)
+          epc.customsInfo.customs_items.push(sdr.customsInfo)
+          // Adds 3G Antenna
+          var antenna3g = new epc.Item(epc.products[4])
+          epc.shipmentItem.itemArray.push(antenna3g)
+          epc.customsInfo.customs_items.push(antenna3g.customsInfo)
+          // Adds WIFI Antenna
+          var antennawifi = new epc.Item(epc.products[5])
+          epc.shipmentItem.itemArray.push(antennawifi)
+          epc.customsInfo.customs_items.push(antennawifi.customsInfo)
         }
         epc.premadeBox2 = function() {
           epc.shipmentItem.package = epc.parcels[1]
           $('#b span').attr('id', 'prePackageInfob')
           // Adds Mounting Plate
-          var item1 = new epc.Item(epc.products[1])
-          epc.shipmentItem.itemArray.push(item1)
-          epc.customsInfo.customs_items.push(item1.customsInfo)
-          // Adds 3G Antenna
-          var item4 = new epc.Item(epc.products[4])
-          epc.shipmentItem.itemArray.push(item4)
-          epc.customsInfo.customs_items.push(item4.customsInfo)
-          // Adds WIFI Antenna
-          var item5 = new epc.Item(epc.products[5])
-          epc.shipmentItem.itemArray.push(item5)
-          epc.customsInfo.customs_items.push(item5.customsInfo)
+          var mountingplate = new epc.Item(epc.products[1])
+          epc.shipmentItem.itemArray.push(mountingplate)
+          epc.customsInfo.customs_items.push(mountingplate.customsInfo)
+          // Adds Connector Kit
+          var connectkit = new epc.Item(epc.products[2])
+          epc.shipmentItem.itemArray.push(connectkit)
+          epc.customsInfo.customs_items.push(connectkit.customsInfo)
+          // Adds Interface Cable
+          var interfacecable = new epc.Item(epc.products[3])
+          epc.shipmentItem.itemArray.push(interfacecable)
+          epc.customsInfo.customs_items.push(interfacecable.customsInfo)
         }
         // ========================================================================== //
         // Removes box/products/shipments from respective arrays

@@ -14,6 +14,12 @@
         pdf.poNum = $stateParams.poNum
         pdf.qar = "Ryan Lightsey"
         pdf.packingNum = "CI\#00787"
+        pdf.orderDate = null
+        pdf.shipDate = null
+
+        pdf.logDate = function(date) {
+          console.log(date)
+        }
 
         // ========================================================================== //
         pdf.getPOs = function() {
@@ -75,7 +81,7 @@
 
 
             var cfc = new jsPDF();
-            cfc.addImage(imgData, 'JPEG', 15, 15, 60, 30)
+            cfc.addImage(imgData, 'JPEG', 15, 15, 35, 35)
 
             cfc.setFontSize(12)
             cfc.text(190, 23, "Satcom Direct", null, null, 'right')

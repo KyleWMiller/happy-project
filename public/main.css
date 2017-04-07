@@ -17,7 +17,11 @@ input[type=text] {
   padding-left: 15px;
   border-bottom: none !important;
   background-color: rgba(47, 79, 79, 0.6);
-
+}
+input[type=date] {
+  margin: 0 10px 5px 10px;
+  border-bottom: none !important;
+  background-color: rgba(47, 79, 79, 0.6);
 }
 select {
   padding-left: 7px;
@@ -107,7 +111,6 @@ padding: 10px;
 }
 .pdfItemTile input {
   width: 7vw;
-
 }
 .contactTile {
   width: 35vw;
@@ -119,6 +122,13 @@ padding: 10px;
 .pdfInfoTile {
   width: 35vw;
   padding: 15px;
+  margin-bottom: 2vw;
+  display: inline-block;
+}
+.dateTile {
+  width: 35vw;
+  padding: 15px;
+  margin-bottom: 2vw;
   display: inline-block;
 }
 .plTile {
