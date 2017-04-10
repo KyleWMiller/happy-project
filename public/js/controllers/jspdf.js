@@ -283,7 +283,7 @@
             }
 
             var pl = new jsPDF();
-            pl.addImage(imgData, 'JPEG', 15, 15, 60, 30)
+            pl.addImage(imgData, 'JPEG', 15, 15, 35, 35)
 
             pl.setFontSize(12)
             pl.text(190, 23, "Satcom Direct", null, null, 'right')
