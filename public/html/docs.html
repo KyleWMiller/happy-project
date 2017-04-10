@@ -73,26 +73,26 @@
                 <script type="text/javascript">
                     $('.datepicker').pickadate({
                         selectMonths: true, // Creates a dropdown to control month
-                        selectYears: 1 // Creates a dropdown of 1 years to control year
+                        selectYears: 1, // Creates a dropdown of 1 years to control year
+                        format: 'd mmm, yyyy'
                     })
-                    // $('.datepicker').pickadate(new Date())
                 </script>
                 <div>
                     <h5 class="grey-text text-darken-2">Date Select</h5>
                 </div>
                 <!-- Order Date -->
-                <div class="col s1">
+                <div class="col s1 dateLabel1">
                     <h6 class="center">Order Date</h6>
                 </div>
-                <div class="col s4">
-                    <input type="date" class="datepicker center" ng-model="pdf.orderDate" placeholder="Select Date">
+                <div class="col s4 center">
+                    <input type="date" class="datepicker" ng-model="pdf.orderDate" placeholder="Select Date" ng-init="pdf.today()">
                 </div>
                 <!-- Ship Date -->
-                <div class="col s1 offset-s1">
+                <div class="col s1 dateLabel2">
                     <h6 class="center">Ship Date</h6>
                 </div>
-                <div class="col s4">
-                    <input type="date" class="datepicker center" ng-model="pdf.shipDate" placeholder="Select Date">
+                <div class="col s4 center">
+                    <input type="date" class="datepicker" ng-model="pdf.shipDate" placeholder="Select Date" ng-init="pdf.today()">
                 </div>
 
                 <!-- <div class="col s6">

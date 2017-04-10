@@ -288,6 +288,12 @@ padding: 10px;
 .poNum h4 {
   margin-bottom: 0px !important;
 }
+.dateLabel1 {
+  margin-right: 15px;
+}
+.dateLabel2 {
+  margin: 0px 15px 0px 20px;
+}
 .docRow {
   margin-bottom: 0px;
 }

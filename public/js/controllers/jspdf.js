@@ -17,10 +17,6 @@
         pdf.orderDate = null
         pdf.shipDate = null
 
-        pdf.logDate = function(date) {
-          console.log(date)
-        }
-
         // ========================================================================== //
         pdf.getPOs = function() {
             poFactory.getPOs()
@@ -48,8 +44,12 @@
                 monthIndex = date.getMonth(),
                 year = date.getFullYear()
 
-            return months[monthIndex] + " " + day + " " + year
-
+            return day + " " + months[monthIndex] + ", " + year
+        }
+        // Sets today as default date
+        pdf.today = function() {
+          pdf.orderDate = pdf.formateDate(new Date())
+          pdf.shipDate = pdf.formateDate(new Date())
         }
         // ========================================================================== //
         pdf.certificate = function(item) {
@@ -111,8 +111,8 @@
             cfc.text(15, 110, "Reference PO #" + po)
             cfc.setFontType('normal')
             cfc.setFontSize(12)
-            cfc.text(15, 115, "Order Date  : " + pdf.formateDate(new Date()))
-            cfc.text(15, 120, "Ship Date    : " + pdf.formateDate(new Date()))
+            cfc.text(15, 115, "Order Date  : " + pdf.orderDate)
+            cfc.text(15, 120, "Ship Date    : " + pdf.shipDate)
 
             cfc.setFontType('bold')
             cfc.text(15, 130, "Remarks")
@@ -294,7 +294,7 @@
             pl.text(190, 50, "www.satcomdirect.com", null, null, 'right')
 
             pl.setFontType("bold")
-            pl.text(15, 60, "Ship Date:  " + pdf.formateDate(new Date()))
+            pl.text(15, 60, "Ship Date:  " + pdf.shipDate)
             pl.text(80, 60, "Packing List")
             pl.line(107, 61, 140, 61)
             pl.text(110, 60, packingNum)
