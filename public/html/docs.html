@@ -139,13 +139,16 @@
         <!-- **************************************************** -->
         <div class="row">
             <div class="tileBackground plTile">
-                <div class="col s12">
+                <div class="col s6">
                     <h5 class="grey-text text-darken-2">Packing List</h5>
                 </div>
-                <div class="col s3">
+                <div class="col 11">
                     <input type="text" ng-model="pdf.packingNum">
                 </div>
-                <a class="waves-effect waves-light btn buttonBackground col s6 push-s3 updateBlue" ng-click="pdf.packList()">Print Packing List</a>
+                <div class="col s12">
+
+                </div>
+                <a class="waves-effect waves-light btn buttonBackground updateBlue" ng-click="pdf.packList()">Print Packing List</a>
             </div>
         </div>
 
