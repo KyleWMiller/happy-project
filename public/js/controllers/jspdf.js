@@ -147,7 +147,7 @@
             cfc.setFontSize(14)
             cfc.text(16, 225, qar)
             cfc.line(15, 227, 78, 227)
-            cfc.text(146, 225, pdf.formateDate(new Date()))
+            cfc.text(146, 225, pdf.shipDate)
             cfc.line(145, 227, 180, 227)
 
             // cfc.autoPrint()
@@ -181,7 +181,6 @@
                 pi.endY = 0
 
                 pi.itemSelect = function(item, yStart, endY) {
-                  console.log(item)
                     switch (item.item) {
                         case "SDR":
                             var y = yStart,
@@ -276,7 +275,6 @@
                 }
                 itemArray.forEach(function(x) {
                     pdf.itemSelect(x, pi.startY, pi.endY)
-                    console.log(pi.endY)
                     pi.startY = pi.startY + pi.endY + 10
                     pi.endY = 0
                 })

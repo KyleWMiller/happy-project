@@ -19,7 +19,7 @@ input[type=text] {
   background-color: rgba(47, 79, 79, 0.6);
 }
 input[type=date] {
-  margin: 0 10px 5px 10px;
+  /*margin: 0 10px 5px 10px;*/
   border-bottom: none !important;
   background-color: rgba(47, 79, 79, 0.6);
 }
@@ -287,6 +287,21 @@ padding: 10px;
 }
 .poNum h4 {
   margin-bottom: 0px !important;
+}
+.date {
+  position: relative;
+}
+.dog-ear:before,.dog-ear:after {
+  content: '';
+  display: block;
+  right: 0;
+  top: 0;
+  position: absolute;
+  margin-right: -4px;
+}
+.dog-ear:after {
+  border-top: 8px solid rgba(0,0,0,0.3);
+  border-left: 8px solid #FFF;
 }
 .dateLabel1 {
   margin-right: 15px;
