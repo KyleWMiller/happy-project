@@ -132,7 +132,7 @@ padding: 10px;
   display: inline-block;
 }
 .plTile {
-  width: 80vw;
+  width: 45vw;
   padding: 15px;
   display: inline-block;
 }
@@ -292,7 +292,7 @@ padding: 10px;
   position: relative;
 }
 .date:hover {
-  border-bottom: 4px solid #028ABE; 
+  border-bottom: 4px solid #028ABE;
 }
 .dog-ear:before,.dog-ear:after {
   content: '';
