@@ -23,10 +23,7 @@ Happy Ship was created to automate shipping the processes of generating shipping
 
 
 ###Installation 
-----
-
-The project is located on my GitHub acct and is available [here](https://github.com/KyleWMiller/happy-project.git). 
-
+---- 
 `git clone https://github.com/KyleWMiller/happy-project.git`  
 
 I have included the `node_modules` folder to avoid having install packages separately. 
