@@ -2,7 +2,7 @@
 #Happy Ship - Automated Shipping Solution
 ------
 
-## Internal Shipping tool for Satcom Direct
+##Internal Shipping tool for Satcom Direct
 
 Happy Ship was created to automate shipping the processes of generating shipping labels and documentation for purchase orders received by Satcom Direct
 
