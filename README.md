@@ -39,6 +39,7 @@ This is a guide for installing it on an Ubuntu 16.04 system. The default port fo
 ---
 The file containing the API routes are in the `apiRoutes.js` file. 
 
+#####Easypost Routes
 The first step in generating a package label is to create a to and from address. the `/epAddress` route calls the create address function in the node-easypost module and the returned address id is stored for use in the create shipment call.
 
 Next you will need to generate an id for the parcel. `/epParcel` makes the create parcel call to EasyPost and returns the parcel for storage for use in the creatshipment call.
