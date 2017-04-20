@@ -8,6 +8,9 @@
     function pdfController(poFactory, pdfFactory, $http, $stateParams, $filter, $state) {
         var pdf = this
 
+        // ------------------------------------------- //
+        // Variables for local app                     //
+        // ------------------------------------------- //
         pdf.pos = []
         pdf.po = {}
         pdf.sdImg = pdfFactory.sdLogoImg
@@ -16,6 +19,10 @@
         pdf.packingNum = "CI\#00787"
         pdf.orderDate = null
         pdf.shipDate = null
+
+        // ------------------------------------------- //
+        //            HappyShip Methods                //
+        // ------------------------------------------- //
 
         // ========================================================================== //
         pdf.getPOs = function() {
@@ -33,6 +40,7 @@
                 })
         }
         // ========================================================================== //
+        // Used to load a new PO if entered in PO input box
         pdf.changePOs = function() {
           console.log('go')
           $state.go('DocumentsPage', {poNum:pdf.po.poNum})
@@ -53,6 +61,10 @@
         }
         // ========================================================================== //
         pdf.certificate = function(item) {
+
+          // ------------------------------------------- //
+          // Variables for CFC                           //
+          // ------------------------------------------- //
 
             var imgData = pdf.sdImg,
                 consignee = {
@@ -156,6 +168,11 @@
         }
         // ========================================================================== //
         pdf.packList = function() {
+
+          // ------------------------------------------- //
+          // Variables for Packing List                  //
+          // ------------------------------------------- //
+
             var imgData = pdf.sdImg,
                 packingNum = pdf.packingNum,
                 po = pdf.po.poNum,
@@ -180,6 +197,8 @@
                 pi.startY = 140
                 pi.endY = 0
 
+                // Programatically adds the items to packList
+                // uses a start/end variable to space then next item according to the previous item 
                 pi.itemSelect = function(item, yStart, endY) {
                     switch (item.item) {
                         case "SDR":

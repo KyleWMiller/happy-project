@@ -138,6 +138,8 @@
         // ========================================================================== //
         // Add package to shipmentArray
         epc.addPackage = function(shipment) {
+          // Adds weight of all items for total parcel weight
+          // Seperation step to exit databinding
             function Weight() {
                 var weight = 0
                 shipment.itemArray.map(function(w) {
@@ -148,6 +150,7 @@
             var ozs = Weight()
             shipment.package.dimentions.weight = ozs
             ozs = 0
+            // shipment property to prevent clicking addPackage more than once
             shipment.firstTime = true
             var item = angular.copy(shipment)
             epc.shipmentArray.push(item)
@@ -202,18 +205,17 @@
         }
         // ========================================================================== //
         // Removes box/products/shipments from respective arrays
+
         epc.removeBox = function() {
             epc.shipmentItem.package = {}
             $('#prePackageInfob').removeAttr('id')
 
         }
-        // ========================================================================== //
         epc.removeItem = function(index) {
             epc.shipmentItem.itemArray.splice(index, 1)
         }
-        // ========================================================================== //
         epc.removePackage = function(index, items) {
-            // removes package items from po obj
+            // removes package items from po.itemArray
             for (var i = items.length - 1; i >= 0; i--) {
                 epc.po.itemArray.map(function(x) {
                     if (x.item === items[i].item) {
@@ -239,7 +241,7 @@
             })
         }
         // ========================================================================== //
-        // Creates shipment with: verified fromAddress, toAdress, optional customsInfo (consisting of customItem(s)), and a parcel
+        // Creates shipment with: verified fromAddress, toAdress, parcel, and an optional customsInfo (consisting of customItem(s))
         epc.createShipment = function(shipment, index) {
             if(shipment.firstTime === true) {
               epc.shpmt.to_address = epc.tAddress
@@ -264,7 +266,7 @@
                   if (epc.shpmt.to_address.country.toLowerCase() === "usa") {
                     epc.shpmt.customsInfo = null
                   } else {
-                    // Adds items custom info to the customs object
+                    // Adds item's custom info to the customs object
                     function FillCustomItems(productArray) {
                       var holdingArray = []
                       productArray.map(function(item) {
@@ -272,6 +274,7 @@
                       })
                       return holdingArray
                     }
+                    // "O ya think yoor comming over to Cannada EH? Well ok since you asked nicely. Soory for the hold up EH"
                     var mounties = new FillCustomItems(shipment.itemArray)
                     epc.customsInfo.customs_items = mounties
                     epc.shpmt.customsInfo = epc.customsInfo
@@ -325,6 +328,7 @@
             rate.purchased = 'Purchased'
         }
         // ========================================================================== //
+        // Need to add formating for DHL, and UPS
         epc.formatService = function(carrier, service) {
             switch (carrier) {
                 case "USPS":

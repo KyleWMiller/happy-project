@@ -35,7 +35,7 @@
 
         pf.products = [{
                 item: "SDR",
-                serialNum: "834", 
+                serialNum: "834",
                 itemNum: "1233-F-2191-10",
                 price: 28875.00,
                 remarks: "Satcom Direct part number 3-F-2191-10 is equivalent to mfg part number TN1021-100",

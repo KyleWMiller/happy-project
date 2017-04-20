@@ -1,5 +1,4 @@
-macvar
-    apiRouter = require('express').Router(),
+var apiRouter = require('express').Router(),
     ep = require('./bcontroller/easyPost.js'),
     // Data Base Queries
     dbq = require('./bcontroller/db.js')
