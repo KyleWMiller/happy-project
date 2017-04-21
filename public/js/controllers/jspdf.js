@@ -36,7 +36,7 @@
             poFactory.getOnePO(pdf.poNum)
                 .then(function(response) {
                     pdf.po = response.data[0]
-                    pdf.po.contactAddress.attn = "Recieving Department"
+                    pdf.po.contactAddress.attn = "Receiving Department"
                 })
         }
         // ========================================================================== //
@@ -198,7 +198,7 @@
                 pi.endY = 0
 
                 // Programatically adds the items to packList
-                // uses a start/end variable to space then next item according to the previous item 
+                // uses a start/end variable to space then next item according to the previous item
                 pi.itemSelect = function(item, yStart, endY) {
                     switch (item.item) {
                         case "SDR":
