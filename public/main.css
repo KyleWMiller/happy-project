@@ -291,9 +291,9 @@ padding: 10px;
 .date {
   position: relative;
 }
-.date:hover {
+/*.date:hover {
   border-bottom: 4px solid #028ABE;
-}
+}*/
 .dog-ear:before,.dog-ear:after {
   content: '';
   display: block;

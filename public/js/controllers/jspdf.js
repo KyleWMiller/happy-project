@@ -63,7 +63,7 @@
         pdf.certificate = function(item) {
 
           // ------------------------------------------- //
-          // Variables for CFC                           //
+          // Variables for coc                           //
           // ------------------------------------------- //
 
             var imgData = pdf.sdImg,
@@ -92,78 +92,78 @@
             }
 
 
-            var cfc = new jsPDF();
-            cfc.addImage(imgData, 'JPEG', 15, 15, 35, 35)
+            var coc = new jsPDF();
+            coc.addImage(imgData, 'JPEG', 15, 15, 30, 30)
 
-            cfc.setFontSize(12)
-            cfc.text(190, 23, "Satcom Direct", null, null, 'right')
-            cfc.text(190, 30, "1050 Satcom Lane", null, null, 'right')
-            cfc.text(190, 35, "Melbourne, FL", null, null, 'right')
-            cfc.text(190, 40, "32940-7010", null, null, 'right')
-            cfc.text(190, 45, "+1-321-777-3000", null, null, 'right')
-            cfc.text(190, 50, "www.satcomdirect.com", null, null, 'right')
+            coc.setFontSize(12)
+            coc.text(190, 23, "Satcom Direct", null, null, 'right')
+            coc.text(190, 30, "1050 Satcom Lane", null, null, 'right')
+            coc.text(190, 35, "Melbourne, FL", null, null, 'right')
+            coc.text(190, 40, "32940-7010", null, null, 'right')
+            coc.text(190, 45, "+1-321-777-3000", null, null, 'right')
+            coc.text(190, 50, "www.satcomdirect.com", null, null, 'right')
 
 
-            cfc.setFontType('bold')
-            cfc.setFontSize(14)
-            cfc.text(15, 70, "CERTIFICATE OF CONFORMANCE")
+            coc.setFontType('bold')
+            coc.setFontSize(14)
+            coc.text(15, 70, "CERTIFICATE OF CONFORMANCE")
 
-            cfc.setFontType('normal')
-            cfc.setFontSize(12)
-            cfc.text(15, 80, "Consignee:")
-            cfc.setFontType('bold')
-            cfc.text(15, 85, consignee.name)
-            cfc.setFontType('normal')
-            cfc.text(15, 90, consignee.street)
-            cfc.text(15, 95, consignee.area)
-            cfc.text(15, 100, consignee.country)
+            coc.setFontType('normal')
+            coc.setFontSize(12)
+            coc.text(15, 80, "Consignee:")
+            coc.setFontType('bold')
+            coc.text(15, 85, consignee.name)
+            coc.setFontType('normal')
+            coc.text(15, 90, consignee.street)
+            coc.text(15, 95, consignee.area)
+            coc.text(15, 100, consignee.country)
 
-            cfc.setFontType('bold')
-            cfc.setFontSize(14)
-            cfc.text(15, 110, "Reference PO #" + po)
-            cfc.setFontType('normal')
-            cfc.setFontSize(12)
-            cfc.text(15, 115, "Order Date  : " + pdf.orderDate)
-            cfc.text(15, 120, "Ship Date    : " + pdf.shipDate)
+            coc.setFontType('bold')
+            coc.setFontSize(14)
+            coc.text(15, 110, "Reference PO #" + po)
+            coc.setFontType('normal')
+            coc.setFontSize(12)
+            coc.text(15, 115, "Order Date  : " + pdf.orderDate)
+            coc.text(15, 120, "Ship Date    : " + pdf.shipDate)
 
-            cfc.setFontType('bold')
-            cfc.text(15, 130, "Remarks")
+            coc.setFontType('bold')
+            coc.text(15, 130, "Remarks")
 
-            cfc.setFontType('normal')
-            cfc.text(25, 137, "Item")
-            cfc.text(57, 137, "Qty")
-            cfc.text(75, 137, "Description")
-            cfc.text(150, 137, "Serial Number")
-            cfc.line(23, 139, 180, 139)
-            cfc.text(25, 145, itemNum)
-            cfc.text(59, 145, qty)
-            cfc.text(77, 145, description)
-            cfc.text(152, 145, serial)
+            coc.setFontType('normal')
+            coc.text(25, 137, "Item")
+            coc.text(57, 137, "Qty")
+            coc.text(75, 137, "Description")
+            coc.text(150, 137, "Serial Number")
+            coc.line(23, 139, 180, 139)
+            coc.text(25, 145, itemNum)
+            coc.text(59, 145, qty)
+            coc.text(77, 145, description)
+            coc.text(152, 145, serial)
 
-            cfc.text(15, 155, "Concession")
-            cfc.line(15, 156, 37, 156)
+            coc.text(15, 155, "Concession")
+            coc.line(15, 156, 37, 156)
             if (remarks) {
-                cfc.text(17, 162, "Remarks:")
-                cfc.text(17, 167, remarks)
+                coc.text(17, 162, "Remarks:")
+                coc.text(17, 167, remarks)
             }
 
-            cfc.text(15, 175, "Manufactured Products")
-            cfc.line(15, 176, 59, 176)
-            cfc.text(17, 182, "Satcom Direct certifies that all articles, in the quantity as called for on the above purchase")
-            cfc.text(17, 187, "order, comply with the requirements, specifications and drawings listed on that order. Products")
-            cfc.text(17, 192, "delivered are fabricated from materials that comply with Satcom Direct standards and with")
-            cfc.text(17, 197, "workmanship that meets or exceeds Satcom Direct practices and procedures.")
+            coc.text(15, 175, "Manufactured Products")
+            coc.line(15, 176, 59, 176)
+            coc.text(17, 182, "Satcom Direct certifies that all articles, in the quantity as called for on the above purchase")
+            coc.text(17, 187, "order, comply with the requirements, specifications and drawings listed on that order. Products")
+            coc.text(17, 192, "delivered are fabricated from materials that comply with Satcom Direct standards and with")
+            coc.text(17, 197, "workmanship that meets or exceeds Satcom Direct practices and procedures.")
 
-            cfc.text(15, 215, "Quality Assurance Representative")
-            cfc.text(145, 215, "Date")
-            cfc.setFontSize(14)
-            cfc.text(16, 225, qar)
-            cfc.line(15, 227, 78, 227)
-            cfc.text(146, 225, pdf.shipDate)
-            cfc.line(145, 227, 180, 227)
+            coc.text(15, 215, "Quality Assurance Representative")
+            coc.text(145, 215, "Date")
+            coc.setFontSize(14)
+            coc.text(16, 225, qar)
+            coc.line(15, 227, 78, 227)
+            coc.text(146, 225, pdf.shipDate)
+            coc.line(145, 227, 180, 227)
 
-            // cfc.autoPrint()
-            cfc.save(po + description + '.pdf')
+            // coc.autoPrint()
+            coc.save(po + description + '.pdf')
 
         }
         // ========================================================================== //
@@ -200,6 +200,7 @@
                 // Programatically adds the items to packList
                 // uses a start/end variable to space then next item according to the previous item
                 pi.itemSelect = function(item, yStart, endY) {
+                    console.log(item)
                     switch (item.item) {
                         case "SDR":
                             var y = yStart,
@@ -279,7 +280,7 @@
                             break
                         case "WIFI Antenna":
                             var y = yStart,
-                                itemNum = "100-10210-01",
+                                itemNum = "100-1021-50",
                                 qty = item.quantity,
                                 price = item.price,
                                 total = price * qty,
