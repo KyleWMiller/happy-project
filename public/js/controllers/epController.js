@@ -46,10 +46,12 @@
         }
         epc.firstTime = true
         epc.po = {
-            poNum: "8375309",
+            poNum: '',
             contactAddress: epc.tAddress,
             shipmentInfo: [],
-            itemArray: []
+            itemArray: [],
+            shipDate: '',
+            orderDate: ''
         }
 
         // -------------------------------------------- //
@@ -287,7 +289,6 @@
                     }
                     epc.shpmt.options = epc.thirdParty
                   } else {
-                    console.log(epc.shpmt)
                     easypostFactory.sendShipment(epc.shpmt, function(shipment) {
                       epc.shipment = shipment
                       if (epc.shipment.rates.length > 0) {
@@ -351,14 +352,19 @@
         }
         // ========================================================================== //
         epc.savePO = function() {
-            if (epc.labels.length === epc.rts.length) {
+            if(epc.po.poNum) {
+              if (epc.labels.length === epc.rts.length) {
                 easypostFactory.storePO(epc.po)
                 $state.go('DocumentsPage', {
-                    poNum: epc.po.poNum
+                  poNum: epc.po.poNum
                 })
-            } else {
+              } else {
                 var toastContent = $('<span>Please purchase rates for all packages</span>')
                 Materialize.toast(toastContent, 2500)
+              }
+            } else {
+              var toastContent = $('<span>Please provide a "PO#"</span>')
+              Materialize.toast(toastContent, 2500)
             }
         }
     }

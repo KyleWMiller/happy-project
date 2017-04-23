@@ -9,7 +9,9 @@ var mongoose = require('mongoose'),
         poNum: String,
         contactAddress: Object,
         itemArray: Array,
-        shipmentInfo: Array
+        shipmentInfo: Array,
+        shipDate: String,
+        orderDate: String
     })
 
 module.exports = {

@@ -14,6 +14,7 @@
         pdf.pos = []
         pdf.po = {}
         pdf.sdImg = pdfFactory.sdLogoImg
+        pdf.footer = pdfFactory.plFooter
         pdf.poNum = $stateParams.poNum
         pdf.qar = "Ryan Lightsey"
         pdf.packingNum = "CI\#00787"
@@ -37,12 +38,14 @@
                 .then(function(response) {
                     pdf.po = response.data[0]
                     pdf.po.contactAddress.attn = "Receiving Department"
+                    pdf.po.orderDate = pdf.po.orderDate || pdf.formateDate(new Date())
+                    pdf.po.shipDate = pdf.po.shipDate || pdf.formateDate(new Date())
+
                 })
         }
         // ========================================================================== //
         // Used to load a new PO if entered in PO input box
         pdf.changePOs = function() {
-          console.log('go')
           $state.go('DocumentsPage', {poNum:pdf.po.poNum})
         }
         // ========================================================================== //
@@ -55,10 +58,9 @@
             return day + " " + months[monthIndex] + ", " + year
         }
         // Sets today as default date
-        pdf.today = function() {
-          pdf.orderDate = pdf.formateDate(new Date())
-          pdf.shipDate = pdf.formateDate(new Date())
-        }
+        // pdf.today = function() {
+        //   console.log(pdf.po)
+        // }
         // ========================================================================== //
         pdf.certificate = function(item) {
 
@@ -82,12 +84,12 @@
                 serial = "",
                 remarks = "",
                 qar = pdf.qar
-            if (item.serialNum) {
+            if(item.serialNum) {
                 serial = item.serialNum
             } else {
                 serial = "N/A"
             }
-            if (item.remarks) {
+            if(item.remarks) {
                 remarks = item.remarks
             }
 
@@ -123,8 +125,8 @@
             coc.text(15, 110, "Reference PO #" + po)
             coc.setFontType('normal')
             coc.setFontSize(12)
-            coc.text(15, 115, "Order Date  : " + pdf.orderDate)
-            coc.text(15, 120, "Ship Date    : " + pdf.shipDate)
+            coc.text(15, 115, "Order Date  : " + pdf.po.orderDate)
+            coc.text(15, 120, "Ship Date    : " + pdf.po.shipDate)
 
             coc.setFontType('bold')
             coc.text(15, 130, "Remarks")
@@ -144,9 +146,11 @@
             coc.line(15, 156, 37, 156)
             if (remarks) {
                 coc.text(17, 162, "Remarks:")
+                coc.setFontSize(11)
                 coc.text(17, 167, remarks)
             }
 
+            coc.setFontSize(12)
             coc.text(15, 175, "Manufactured Products")
             coc.line(15, 176, 59, 176)
             coc.text(17, 182, "Satcom Direct certifies that all articles, in the quantity as called for on the above purchase")
@@ -154,12 +158,18 @@
             coc.text(17, 192, "delivered are fabricated from materials that comply with Satcom Direct standards and with")
             coc.text(17, 197, "workmanship that meets or exceeds Satcom Direct practices and procedures.")
 
+            if(item.item = "SDR") {
+                coc.text(163, 197, "Tests reports")
+                coc.text(17, 202, "and/or inspection records pertaining to this Certificate of Compliance are on file and available")
+                coc.text(17, 207, "on request.")
+            }
+
             coc.text(15, 215, "Quality Assurance Representative")
             coc.text(145, 215, "Date")
             coc.setFontSize(14)
             coc.text(16, 225, qar)
             coc.line(15, 227, 78, 227)
-            coc.text(146, 225, pdf.shipDate)
+            coc.text(146, 225, pdf.po.shipDate)
             coc.line(145, 227, 180, 227)
 
             // coc.autoPrint()
@@ -174,6 +184,7 @@
           // ------------------------------------------- //
 
             var imgData = pdf.sdImg,
+                footer = pdf.footer,
                 packingNum = pdf.packingNum,
                 po = pdf.po.poNum,
                 consignee = {
@@ -200,14 +211,14 @@
                 // Programatically adds the items to packList
                 // uses a start/end variable to space then next item according to the previous item
                 pi.itemSelect = function(item, yStart, endY) {
-                    console.log(item)
+                    // console.log(item)
                     switch (item.item) {
                         case "SDR":
                             var y = yStart,
                                 qty = item.quantity,
                                 price = item.price,
                                 total = price * qty,
-                                pn = "12233-F-2191-10",
+                                pn = item.itemNum,
                                 mpn = "TN-1021-100",
                                 sn = item.serialNum,
                                 line1 = pl.text(17, y, "Satcom Direct Router"),
@@ -228,12 +239,12 @@
                                 qty = item.quantity,
                                 price = item.price,
                                 total = price * qty,
-                                itemNum = "Item#: MT1-SDR-900",
+                                itemNum = item.itemNum,
                                 line1 = pl.text(17, y, "CNX to SDR Mounting Plate"),
                                 line2 = pl.text(111, y, qty + ""),
                                 line3 = pl.text(131, y, $filter('currency')(price)),
                                 line4 = pl.text(161, y, $filter('currency')(price)),
-                                line5 = pl.text(17, y + 5, itemNum)
+                                line5 = pl.text(17, y + 5, "Item#: " + itemNum)
 
                             pi.endY = 5
 
@@ -241,7 +252,7 @@
                             break
                         case "Connector Kit":
                             var y = yStart,
-                                itemNum = "100-1021-01",
+                                itemNum = item.itemNum,
                                 qty = item.quantity,
                                 price = item.price,
                                 total = price * qty,
@@ -254,7 +265,7 @@
                             break
                         case "Interface Cable":
                             var y = yStart,
-                                itemNum = "SD-IFRTF-900",
+                                itemNum = item.itemNum,
                                 qty = item.quantity,
                                 price = item.price,
                                 total = price * qty,
@@ -267,7 +278,7 @@
                             break
                         case "3G Antenna":
                             var y = yStart,
-                                itemNum = "100-1021-30",
+                                itemNum = item.itemNum,
                                 qty = item.quantity,
                                 price = item.price,
                                 total = price * qty,
@@ -280,7 +291,7 @@
                             break
                         case "WIFI Antenna":
                             var y = yStart,
-                                itemNum = "100-1021-50",
+                                itemNum = item.itemNum,
                                 qty = item.quantity,
                                 price = item.price,
                                 total = price * qty,
@@ -296,9 +307,12 @@
                 itemArray.forEach(function(x) {
                     pdf.itemSelect(x, pi.startY, pi.endY)
                     pi.startY = pi.startY + pi.endY + 10
+                    console.log(pi.startY)
                     pi.endY = 0
                 })
             }
+
+
 
             var pl = new jsPDF();
             pl.addImage(imgData, 'JPEG', 15, 15, 35, 35)
@@ -312,7 +326,7 @@
             pl.text(190, 50, "www.satcomdirect.com", null, null, 'right')
 
             pl.setFontType("bold")
-            pl.text(15, 60, "Ship Date:  " + pdf.shipDate)
+            pl.text(15, 60, "Ship Date:  " + pdf.po.shipDate)
             pl.text(80, 60, "Packing List")
             pl.line(107, 61, 140, 61)
             pl.text(110, 60, packingNum)
@@ -344,10 +358,12 @@
 
             pl.setFontSize(11)
             pl.setFontType("bold")
-            pl.text(15, 270, qar)
-            pl.text(15, 274, "Satcom Direct Inc.")
-            pl.text(15, 278, "321-777-3000")
-            pl.text(15, 282, "SDR@satcomdirect.com")
+            pl.text(15, 255, qar)
+            pl.text(15, 259, "Satcom Direct Inc.")
+            pl.text(15, 263, "321-777-3000")
+            pl.text(15, 267, "SDR@satcomdirect.com")
+
+            pl.addImage(footer, 'JPEG', 16, 270, 179, 20)
 
 
             // pl.autoPrint()

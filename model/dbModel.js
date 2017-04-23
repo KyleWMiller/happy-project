@@ -11,7 +11,9 @@ var mongoose = require('mongoose'),
       poNum: String,
       contactAddress: Object,
       shipmentInfo: Array,
-      itemArray: Array
+      itemArray: Array,
+      shipDate: String,
+      orderDate: String
     })
 
 
