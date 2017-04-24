@@ -63,7 +63,7 @@
         // }
         // ========================================================================== //
         pdf.certificate = function(item) {
-
+          var cert = this
           // ------------------------------------------- //
           // Variables for coc                           //
           // ------------------------------------------- //
@@ -91,6 +91,13 @@
             }
             if(item.remarks) {
                 remarks = item.remarks
+            }
+            cert.sdCheck = function(item) {
+              if(item === "SDR") {
+                coc.text(163, 197, "Tests reports")
+                coc.text(17, 202, "and/or inspection records pertaining to this Certificate of Compliance are on file and available")
+                coc.text(17, 207, "on request.")
+              }
             }
 
 
@@ -158,19 +165,15 @@
             coc.text(17, 192, "delivered are fabricated from materials that comply with Satcom Direct standards and with")
             coc.text(17, 197, "workmanship that meets or exceeds Satcom Direct practices and procedures.")
 
-            if(item.item = "SDR") {
-                coc.text(163, 197, "Tests reports")
-                coc.text(17, 202, "and/or inspection records pertaining to this Certificate of Compliance are on file and available")
-                coc.text(17, 207, "on request.")
-            }
+            cert.sdCheck(description)
 
-            coc.text(15, 215, "Quality Assurance Representative")
-            coc.text(145, 215, "Date")
+            coc.text(15, 220, "Quality Assurance Representative")
+            coc.text(145, 220, "Date")
             coc.setFontSize(14)
-            coc.text(16, 225, qar)
-            coc.line(15, 227, 78, 227)
-            coc.text(146, 225, pdf.po.shipDate)
-            coc.line(145, 227, 180, 227)
+            coc.text(16, 230, qar)
+            coc.line(15, 232, 78, 232)
+            coc.text(146, 230, pdf.po.shipDate)
+            coc.line(145, 232, 180, 232)
 
             // coc.autoPrint()
             coc.save(po + description + '.pdf')
@@ -201,7 +204,10 @@
             // Update PO info in DB
             poFactory.updatePO(pdf.po)
 
-
+            // ========================================================================== //
+            // ------------------------------------------- //
+            // Logic for adding items dynamically          //
+            // ------------------------------------------- //
             pdf.printItems = function(itemArray) {
                 var pi = this
 
@@ -311,9 +317,8 @@
                     pi.endY = 0
                 })
             }
-
-
-
+            // ========================================================================== //
+            //  Packing list
             var pl = new jsPDF();
             pl.addImage(imgData, 'JPEG', 15, 15, 35, 35)
 
