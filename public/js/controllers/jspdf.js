@@ -313,14 +313,13 @@
                 itemArray.forEach(function(x) {
                     pdf.itemSelect(x, pi.startY, pi.endY)
                     pi.startY = pi.startY + pi.endY + 10
-                    console.log(pi.startY)
                     pi.endY = 0
                 })
             }
             // ========================================================================== //
             //  Packing list
             var pl = new jsPDF();
-            pl.addImage(imgData, 'JPEG', 15, 15, 35, 35)
+            pl.addImage(imgData, 'JPEG', 15, 15, 30, 30)
 
             pl.setFontSize(12)
             pl.text(190, 23, "Satcom Direct", null, null, 'right')
@@ -368,7 +367,18 @@
             pl.text(15, 263, "321-777-3000")
             pl.text(15, 267, "SDR@satcomdirect.com")
 
-            pl.addImage(footer, 'JPEG', 16, 270, 179, 20)
+            pl.line(16, 270, 179, 270)
+            pl.line(98, 270, 98, 283)
+            pl.setFontSize(7)
+            pl.setFont("Lucida Console", "Monaco", "monospace")
+            pl.text(93, 278, "1050 Satcom Lane | Melbourne, FL 32940 USA", null, null, 'right')
+            pl.text(93, 281, "phone: 321.777.3000 | toll-free: 888.449.9003 | fax: 321.777.3702", null, null, 'right')
+            pl.text(102, 278, "201 N. Union Street, Suite 370 | Alexandria, VA 22314 USA")
+            pl.text(102, 281, "phone: 703.549.3009 | toll-free: 866.549.3009 | fax: 703.549.3008")
+            pl.setTextColor('#00AEEF')
+            pl.text(93, 275, "Satcom Direct Headquarters", null, null, 'right')
+            pl.text(102, 275, "Satcom Direct Communications, Inc.")
+            // pl.addImage(footer, 'JPEG', 16, 270, 179, 20)
 
 
             // pl.autoPrint()
