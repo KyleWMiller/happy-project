@@ -378,7 +378,6 @@
             pl.setTextColor('#00AEEF')
             pl.text(93, 275, "Satcom Direct Headquarters", null, null, 'right')
             pl.text(102, 275, "Satcom Direct Communications, Inc.")
-            // pl.addImage(footer, 'JPEG', 16, 270, 179, 20)
 
 
             // pl.autoPrint()
