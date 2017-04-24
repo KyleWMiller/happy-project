@@ -362,6 +362,8 @@
 
             pl.setFontSize(11)
             pl.setFontType("bold")
+            pl.text(15, 251, "Shipped By:")
+            pl.setFontType("normal")
             pl.text(15, 255, qar)
             pl.text(15, 259, "Satcom Direct Inc.")
             pl.text(15, 263, "321-777-3000")
