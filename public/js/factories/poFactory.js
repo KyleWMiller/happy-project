@@ -15,7 +15,7 @@
         }
 
         pof.getOnePO = function(poNum) {
-            var updatedpoUrl = `${poUrl}/${poNum}`
+            var updatedpoUrl = poUrl + "/" + poNum
             return $http.get(updatedpoUrl)
         }
 
