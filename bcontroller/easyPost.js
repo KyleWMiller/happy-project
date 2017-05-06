@@ -9,7 +9,6 @@ let apiKey = "SXMggE7i1n5Eq6CAlXQNYw",
 
 module.exports = {
     // verifyAddress sends the user's input to the EasyPost API and returns it to the Angular controller
-
     verifyAddress: (req, res) => {
         console.log('request to verify address recieved')
         let add = req.body

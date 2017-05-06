@@ -16,10 +16,10 @@ var express = require("express"),
     path = require('path'),
     port = process.env.PORT || 3000
 apiRoutes = require('./apiRoutes.js'),
+
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
     // 		DataBase
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
-
     mongoose = require('mongoose'),
     // Mongoose is used for backend validation of information going to MongoDB
       // Local DB link
@@ -30,8 +30,9 @@ apiRoutes = require('./apiRoutes.js'),
     mongoose.connect(databaseURL, function(err) {
       if (err) {
         console.log(err)
+      } else {
+        console.log('connected to db')
       }
-      console.log('connected to db')
     })
 
 app.use(logger('dev'))

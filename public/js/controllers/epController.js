@@ -355,9 +355,7 @@
             if(epc.po.poNum) {
               if (epc.labels.length === epc.rts.length) {
                 easypostFactory.storePO(epc.po)
-                $state.go('DocumentsPage', {
-                  poNum: epc.po.poNum
-                })
+                $state.go('DocumentsPage', {poNum: epc.po.poNum})
               } else {
                 var toastContent = $('<span>Please purchase rates for all packages</span>')
                 Materialize.toast(toastContent, 2500)

@@ -35,7 +35,7 @@
         }
 
         ef.buyRate = function(rateid, shipmentid, callback) {
-            var updatedBuyUrl = `${buyUrl}/${shipmentid}`
+            var updatedBuyUrl = buyUrl + "/" + shipmentid
             var rate = JSON.stringify({
                 id: rateid
             })
