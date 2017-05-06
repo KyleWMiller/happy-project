@@ -37,6 +37,7 @@
             poFactory.getOnePO(pdf.poNum)
                 .then(function(response) {
                     pdf.po = response.data[0]
+                    console.log(pdf.po)
                     pdf.po.contactAddress.attn = "Receiving Department"
                     pdf.po.orderDate = pdf.po.orderDate || pdf.formateDate(new Date())
                     pdf.po.shipDate = pdf.po.shipDate || pdf.formateDate(new Date())
