@@ -17,6 +17,7 @@
         pdf.footer = pdfFactory.plFooter
         pdf.poNum = $stateParams.poNum
         pdf.qar = "Ryan Lightsey"
+        pdf.qarNum = "321-777-3000"
         pdf.packingNum = "CI\#00787"
         pdf.orderDate = null
         pdf.shipDate = null
@@ -37,7 +38,6 @@
             poFactory.getOnePO(pdf.poNum)
                 .then(function(response) {
                     pdf.po = response.data[0]
-                    console.log(pdf.po)
                     pdf.po.contactAddress.attn = "Receiving Department"
                     pdf.po.orderDate = pdf.po.orderDate || pdf.formateDate(new Date())
                     pdf.po.shipDate = pdf.po.shipDate || pdf.formateDate(new Date())
@@ -103,7 +103,7 @@
 
 
             var coc = new jsPDF();
-            coc.addImage(imgData, 'JPEG', 15, 15, 30, 30)
+            coc.addImage(imgData, 'JPEG', 15, 15, 55, 22)
 
             coc.setFontSize(12)
             coc.text(190, 23, "Satcom Direct", null, null, 'right')
@@ -200,7 +200,8 @@
                     phone: pdf.po.contactAddress.phone,
                     country: pdf.po.contactAddress.country
                 },
-                qar = pdf.qar
+                qar = pdf.qar,
+                qarNum = pdf.qarNum
 
             // Update PO info in DB
             poFactory.updatePO(pdf.po)
@@ -320,7 +321,7 @@
             // ========================================================================== //
             //  Packing list
             var pl = new jsPDF();
-            pl.addImage(imgData, 'JPEG', 15, 15, 30, 30)
+            pl.addImage(imgData, 'JPEG', 15, 15, 50, 50)
 
             pl.setFontSize(12)
             pl.text(190, 23, "Satcom Direct", null, null, 'right')
@@ -367,7 +368,7 @@
             pl.setFontType("normal")
             pl.text(15, 255, qar)
             pl.text(15, 259, "Satcom Direct Inc.")
-            pl.text(15, 263, "321-777-3000")
+            pl.text(15, 263, qarNum)
             pl.text(15, 267, "SDR@satcomdirect.com")
 
             pl.line(16, 270, 179, 270)
