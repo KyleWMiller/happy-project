@@ -321,7 +321,7 @@
             // ========================================================================== //
             //  Packing list
             var pl = new jsPDF();
-            pl.addImage(imgData, 'JPEG', 15, 15, 50, 50)
+            pl.addImage(imgData, 'JPEG', 15, 15, 50, 22)
 
             pl.setFontSize(12)
             pl.text(190, 23, "Satcom Direct", null, null, 'right')
