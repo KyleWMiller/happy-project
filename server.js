@@ -12,7 +12,7 @@ var express = require("express"),
     logger = require('morgan'),
     // cors allows for cross origin recourse sharing (CORS)
     cors = require('cors'),
-    // path allows provides utilities for working with local file and directory paths
+    // path allows/provides utilities for working with local file and directory paths
     path = require('path'),
     port = process.env.PORT || 3000
 apiRoutes = require('./apiRoutes.js'),
