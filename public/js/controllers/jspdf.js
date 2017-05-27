@@ -103,7 +103,7 @@
 
 
             var coc = new jsPDF();
-            coc.addImage(imgData, 'JPEG', 15, 15, 55, 22)
+            coc.addImage(imgData, 'JPEG', 15, 15, 47, 18)
 
             coc.setFontSize(12)
             coc.text(190, 23, "Satcom Direct", null, null, 'right')
@@ -321,7 +321,7 @@
             // ========================================================================== //
             //  Packing list
             var pl = new jsPDF();
-            pl.addImage(imgData, 'JPEG', 15, 15, 50, 22)
+            pl.addImage(imgData, 'JPEG', 15, 15, 47, 18)
 
             pl.setFontSize(12)
             pl.text(190, 23, "Satcom Direct", null, null, 'right')
