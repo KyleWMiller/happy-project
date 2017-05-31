@@ -108,6 +108,9 @@
                 }
             }
             // Adds properties only if they exist
+            if(product.item2) {
+              holding.item2 = product.item2
+            }
             if (product.serialNum) {
                 holding.serialNum = product.serialNum
             }

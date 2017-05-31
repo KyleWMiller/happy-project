@@ -35,6 +35,7 @@
 
         pf.products = [{
                 item: "SDR",
+                item2: "Satcom Direct Router",
                 serialNum: "834",
                 itemNum: "1233-F-2191-10",
                 price: 28875.00,

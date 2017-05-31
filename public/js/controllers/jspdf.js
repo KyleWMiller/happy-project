@@ -16,7 +16,7 @@
         pdf.sdImg = pdfFactory.sdLogoImg
         pdf.footer = pdfFactory.plFooter
         pdf.poNum = $stateParams.poNum
-        pdf.qar = "Ryan Lightsey"
+        pdf.qar = "Josh Dymond"
         pdf.qarNum = "321-777-3000"
         pdf.packingNum = "CI\#00787"
         pdf.orderDate = null
@@ -81,7 +81,7 @@
                 po = pdf.po.poNum,
                 itemNum = item.itemNum,
                 qty = "1",
-                description = item.item,
+                description = item.item2 || item.item,
                 serial = "",
                 remarks = "",
                 qar = pdf.qar
