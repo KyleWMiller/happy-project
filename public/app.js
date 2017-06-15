@@ -1,10 +1,10 @@
 (function() {
   'use strict';
 
-  angular.module('happyApp', ['ui.router', 'epControllers', 'epFactory', 'prodFactory', 'countrySelect', 'jsPDF', 'docFactory', 'historyFactory'])
+  angular.module('happyApp', ['ui.router', 'epController', 'epFactory', 'prodFactory', 'countrySelect', 'jsPDF', 'docFactory', 'historyFactory'])
     .config(MainRouter)
     .directive('realTimeCurrency', realTimeCurrency)
-    .directive('disableClick', disableClick)
+    // .directive('ear', ear)
 
   function MainRouter($stateProvider, $urlRouterProvider) {
 
@@ -18,13 +18,18 @@
         url: '/Docs/:poNum',
         templateUrl: '/html/docs.html'
       })
-    $stateProvider
-      .state('HistoryPage', {
-        url: '/Hist',
-        templateUrl: '/html/po.html'
-      })
+    // Does not exist yet, but built for a db crawling window
+    // $stateProvider
+    //   .state('HistoryPage', {
+    //     url: '/Hist',
+    //     templateUrl: '/html/po.html'
+    //   })
 
     $urlRouterProvider.otherwise('/')
+  }
+
+  function sharable(){
+
   }
 
   function realTimeCurrency($filter, $locale) {
@@ -41,6 +46,7 @@
         return input.selectionStart
       } else if (document.selection) {
         // Curse you IE
+        // HAHA
         input.focus()
         var selection = document.selection.createRange()
         selection.moveStart('character', input.value ? -input.value.length : 0)
@@ -59,6 +65,7 @@
         input.setSelectionRange(pos, pos)
       } else if (input.createTextRange) {
         // Curse you IE
+        // ROFL
         var range = input.createTextRange()
         range.collapse(true)
         range.moveEnd('character', pos)
@@ -94,13 +101,23 @@
     }
   }
 
-  function disableClick() {
-    return {
-      restrict: 'A',
-      priority: 1000,    // setting higher priority to let this directive execute before ngClick
-      compile: function(element, attr) {
-        attr.ngClick = null;
-      }
-    }
-  }
+  // function ear() {
+  //   return {
+  //     restrict: 'A',
+  //     scope: {
+  //       rates: '='
+  //     },
+  //     link: function link(element, attr, scope, transcludeFn){
+  //       console.log("added")
+  //       attr[0].addEventListener('click',function(event){
+  //         var el = event.target
+  //         console.log(el)
+  //         console.log("scope",scope)
+  //         console.log(scope.rates)
+  //         // sessionStorage.setItem('rates',JSON.stringify(easypostController.rts))
+  //       })
+  //     }
+  //   }
+  // }
+
 }());
