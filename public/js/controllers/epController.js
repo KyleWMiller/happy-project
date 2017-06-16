@@ -387,22 +387,17 @@
               x.addEventListener('blur', function(event) {
                 var el = event.target
                 findForm(el)
-                console.log(parentForm)
                 switch (x.id) {
                   case "poForm":
-                    console.log(`event added to ${x.id}`, epc.po.poNum)
                     sessionStorage.setItem("poNum", epc.po.poNum)
                     break
                   case "toForm":
-                    console.log(`event added to ${x.id}`)
                     sessionStorage.setItem("toAddress", JSON.stringify(epc.tAddress))
                     break
                   case "customsForm":
-                    console.log(`event added to ${x.id}`)
                     sessionStorage.setItem("customs", JSON.stringify(epc.customsInfo.customs_signer))
                     break
                   case "3rdForm":
-                    console.log(`event added to ${x.id}`)
                     sessionStorage.setItem("3rd", JSON.stringify(epc.thirdParty))
                     break
                   default:

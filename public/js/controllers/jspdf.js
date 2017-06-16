@@ -206,6 +206,9 @@
             // Update PO info in DB
             poFactory.updatePO(pdf.po)
 
+            // Clear sessionStorage for next order
+            sessionStorage.clear()
+
             // ========================================================================== //
             // ------------------------------------------- //
             // Logic for adding items dynamically          //

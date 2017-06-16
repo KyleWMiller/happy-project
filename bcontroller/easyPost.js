@@ -1,7 +1,7 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
-//                    Easy Post                      //
+//       All API call used in epController.js        //
+// used for interfacing with easyPost and storing POs//
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
-
 
 let apiKey = "SXMggE7i1n5Eq6CAlXQNYw",
     easypost = require('node-easypost')(apiKey),

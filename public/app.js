@@ -4,7 +4,6 @@
   angular.module('happyApp', ['ui.router', 'epController', 'epFactory', 'prodFactory', 'countrySelect', 'jsPDF', 'docFactory', 'historyFactory'])
     .config(MainRouter)
     .directive('realTimeCurrency', realTimeCurrency)
-    // .directive('ear', ear)
 
   function MainRouter($stateProvider, $urlRouterProvider) {
 
@@ -100,24 +99,5 @@
       }
     }
   }
-
-  // function ear() {
-  //   return {
-  //     restrict: 'A',
-  //     scope: {
-  //       rates: '='
-  //     },
-  //     link: function link(element, attr, scope, transcludeFn){
-  //       console.log("added")
-  //       attr[0].addEventListener('click',function(event){
-  //         var el = event.target
-  //         console.log(el)
-  //         console.log("scope",scope)
-  //         console.log(scope.rates)
-  //         // sessionStorage.setItem('rates',JSON.stringify(easypostController.rts))
-  //       })
-  //     }
-  //   }
-  // }
 
 }());

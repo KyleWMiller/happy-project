@@ -1,7 +1,7 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
-//                    Easy Post                      //
+//           All API calls used in jsPDF.js          //
+//            used to retrieve info from db
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
-  // currently not en use use for template for future db calls
 
 var dbq = require('../model/epModel.js')
 
