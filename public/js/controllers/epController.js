@@ -46,7 +46,7 @@
       }
       epc.firstTime = true
       epc.po = {
-        poNum: (sessionStorage.getItem('poNum')) || '',
+        poNum: sessionStorage.getItem('poNum') || '',
         contactAddress: epc.tAddress,
         shipmentInfo: [],
         itemArray: [],
@@ -61,7 +61,7 @@
       epc.parcel = []
       epc.shipment = {}
       epc.rate = {}
-      epc.labels = []
+      epc.labels = JSON.parse(sessionStorage.getItem("labels")) || []
 
       // ------------------------------------------- //
       //            HappyShip Methods                //
@@ -312,6 +312,7 @@
       epc.purchase = function(rateID, shipmentID, rate) {
         easypostFactory.buyRate(rateID, shipmentID, function(label) {
           epc.labels.push(label)
+          window.sessionStorage.setItem("labels", JSON.stringify(epc.labels))
           var poLable = {
             buyerAddress: label.buyer_address,
             created_at: label.created_at,
