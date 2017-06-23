@@ -48,6 +48,7 @@
 
         ef.storePO = function(purchaseOrder) {
             return $http.post(poUrl, purchaseOrder)
+            console.log("saving")
         }
 
         return ef

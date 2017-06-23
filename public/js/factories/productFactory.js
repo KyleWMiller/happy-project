@@ -38,7 +38,7 @@
                 item2: "Satcom Direct Router",
                 serialNum: "834",
                 itemNum: "1233-F-2191-10",
-                price: 28875.00,
+                price: 30350.00,
                 remarks: "Satcom Direct part number 1233-F-2191-10 is equivalent to manufacturer's part number TN1021-100",
                 description: "Satcom Direct Router",
                 hs_tarrif_number: "851762",

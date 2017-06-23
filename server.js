@@ -40,7 +40,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extended: true
 }))
-app.use(cors())
+app.use(cors())//TODO make cors availible only to angular frontend
 app.use('/api/v1', apiRoutes)
 app.use(express.static(path.join(__dirname, './public')))
     // http://localhost:3000/api/v1/'./public/*'

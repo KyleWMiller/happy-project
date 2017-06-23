@@ -91,7 +91,6 @@ module.exports = {
       console.log('storing po')
 
       let purchaseOrder = req.body
-
       let po = new db.PO(purchaseOrder)
       po.save({
         purchaseOrder
