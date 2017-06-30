@@ -11,10 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "cors": "^2.8.3",
     "express": "^4.14.0",
     "mongoose": "^4.6.5",
     "morgan": "^1.7.0",
     "node-easypost": "^2.1.1",
+    "nodemon": "^1.11.0",
     "path": "^0.12.7"
   },
   "devDependencies": {},
