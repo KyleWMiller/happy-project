@@ -12,6 +12,10 @@ var express = require("express"),
   logger = require('morgan'),
   // cors allows for cross origin recourse sharing (CORS)
   cors = require('cors'),
+  corsOptions = {
+    origin: '',
+    optionsSuccessStatus: 200,
+  },
   // path allows/provides utilities for working with local file and directory paths
   path = require('path'),
   apiRoutes = require('./apiRoutes.js'),
@@ -40,6 +44,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true
 }))
+// add corsOptions object once this project has a more permanent home
 app.use(cors()) //TODO make cors availible only to angular frontend
 app.use('/api/v1', apiRoutes)
 app.use(express.static(path.join(__dirname, './public')))
