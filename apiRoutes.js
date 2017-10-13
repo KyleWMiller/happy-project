@@ -7,7 +7,7 @@ var apiRouter = require('express').Router(),
 
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
-//                 Easy Post routes                  //
+//                Happy Ship routes                  //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 
 
